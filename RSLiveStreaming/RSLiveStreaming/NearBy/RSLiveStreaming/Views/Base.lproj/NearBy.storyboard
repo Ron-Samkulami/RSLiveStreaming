@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Lty-Ml-v3K">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Near By View Controller-->
+        <scene sceneID="yAx-Tx-oJP">
+            <objects>
+                <viewController id="8ed-JR-2R9" customClass="NearByViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="k7f-NS-5TN">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="FFP-UJ-6T5"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="aL3-SR-cT1"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Y6e-Tc-8sP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1970" y="-623"/>
+        </scene>
+        <!--附近-->
+        <scene sceneID="E5e-Hy-iOH">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Lty-Ml-v3K" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="附近" image="location" id="gc3-X5-Va7"/>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="HNj-yc-kzW"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Eg0-W7-JU4">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="8ed-JR-2R9" kind="relationship" relationship="rootViewController" id="9zz-dx-6Nz"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="c8g-bg-xOR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="367" y="-597"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="location" width="30" height="30"/>
+    </resources>
+</document>

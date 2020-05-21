@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="vuu-dk-cUs">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--My Follow View Controller-->
+        <scene sceneID="hSP-kB-7YP">
+            <objects>
+                <viewController id="ech-Si-6m7" customClass="MyFollowViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="auW-vL-deK">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="M58-2n-mJu"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Md8-CC-nXR"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iJ4-hY-Pui" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2016" y="124"/>
+        </scene>
+        <!--关注-->
+        <scene sceneID="DhZ-bN-qpN">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="vuu-dk-cUs" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="关注" image="heart_red" id="Ydi-RT-G8O"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="lrl-Ka-3Lb">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="ech-Si-6m7" kind="relationship" relationship="rootViewController" id="dfL-1Q-qHU"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="t7S-YR-W36" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="367" y="124"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="heart_red" width="30" height="30"/>
+    </resources>
+</document>
