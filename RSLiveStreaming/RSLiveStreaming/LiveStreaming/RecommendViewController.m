@@ -20,16 +20,18 @@
     
     //创建collectionView
     //calculate size of cell
-    CGRect screenBounds = [UIScreen mainScreen].bounds;
-    CGFloat cellWidth = (screenBounds.size.width - 30) / 2;
+//    CGRect screenBounds = [UIScreen mainScreen].bounds;
+    CGFloat screenW = [UIScreen mainScreen].bounds.size.width;
+    CGFloat cellWidth = (screenW - 15) / 2;
     
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
     layout.scrollDirection = UICollectionViewScrollDirectionVertical;
     layout.headerReferenceSize = CGSizeMake(cellWidth * 2, 50);
 //    layout.sectionHeadersPinToVisibleBounds = YES;
     layout.itemSize = CGSizeMake(cellWidth,cellWidth * 4 / 3);
-    layout.minimumLineSpacing = 10;
-    layout.sectionInset = UIEdgeInsetsMake(0, 10, 0, 10);
+    layout.minimumLineSpacing = 5;
+    layout.minimumInteritemSpacing = 5;
+    layout.sectionInset = UIEdgeInsetsMake(0, 5, 0, 5);
     
     UICollectionView *collection = [[UICollectionView alloc] initWithFrame:self.view.frame collectionViewLayout:layout];
     collection.backgroundColor = [UIColor whiteColor];
@@ -69,9 +71,33 @@
     return cell;
 }
 #pragma mark - CollectionView Delegate
+
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     
 }
+/*
+//两个cell之间的间距
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
+    return 5;
+}
+
+//两行cell之间的间距
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
+    return 5;
+}
+
+//定义每个Cell的大小
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    CGSize size = CGSizeMake(80,80);
+    return size;
+}
+
+//定义每个Section的四边间距
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
+    return UIEdgeInsetsMake(15, 15, 5, 15);     //分别为上、左、下、右
+}
+*/
+
 
 /*
  #pragma mark - Navigation
