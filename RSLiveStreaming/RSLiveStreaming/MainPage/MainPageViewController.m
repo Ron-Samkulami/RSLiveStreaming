@@ -106,8 +106,7 @@
     newView.navigationItem.title = @"Content";
     newView.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"right_title" style:UIBarButtonItemStylePlain target:self action:nil];
     //push新的viewController
-    self.hidesBottomBarWhenPushed = YES;            //跳转后隐藏bottomBar
-//    self.tabBarController.tabBar.hidden = YES;
+    self.tabBarController.tabBar.hidden = YES;                      //跳转后隐藏bottomBar
     [self.navigationController pushViewController:newView animated:YES];
     
 }
