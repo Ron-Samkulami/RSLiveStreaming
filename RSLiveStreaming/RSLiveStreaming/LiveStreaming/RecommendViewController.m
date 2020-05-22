@@ -7,7 +7,9 @@
 //
 
 #import "RecommendViewController.h"
-
+#define ItemMargin 5
+#define CellId @"cellId"
+#define HeaderViewId @"headerViewId"
 @interface RecommendViewController () <UICollectionViewDataSource,UICollectionViewDelegate>
 
 @end
@@ -19,28 +21,28 @@
     // Do any additional setup after loading the view.
     
     //创建collectionView
-    //calculate size of cell
-//    CGRect screenBounds = [UIScreen mainScreen].bounds;
     CGFloat screenW = [UIScreen mainScreen].bounds.size.width;
-    CGFloat cellWidth = (screenW - 15) / 2;
+    CGFloat cellWidth = (screenW - ItemMargin * 3) / 2;
     
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
     layout.scrollDirection = UICollectionViewScrollDirectionVertical;
-    layout.headerReferenceSize = CGSizeMake(cellWidth * 2, 50);
-//    layout.sectionHeadersPinToVisibleBounds = YES;
-    layout.itemSize = CGSizeMake(cellWidth,cellWidth * 4 / 3);
-    layout.minimumLineSpacing = 5;
-    layout.minimumInteritemSpacing = 5;
-    layout.sectionInset = UIEdgeInsetsMake(0, 5, 0, 5);
+    layout.itemSize = CGSizeMake(cellWidth,cellWidth * 4 / 3);                                      //item尺寸
+    layout.minimumLineSpacing = 5;                                                                  //行间距
+    layout.minimumInteritemSpacing = ItemMargin;                                                    //item间距
+    layout.sectionInset = UIEdgeInsetsMake(ItemMargin, ItemMargin, ItemMargin, ItemMargin);         //section四周边距
+    layout.headerReferenceSize = CGSizeMake(cellWidth * 2, 50);                 //header尺寸
+//    layout.sectionHeadersPinToVisibleBounds = YES;                              //header悬浮
     
     UICollectionView *collection = [[UICollectionView alloc] initWithFrame:self.view.frame collectionViewLayout:layout];
+    collection.autoresizingMask = UIViewAutoresizingFlexibleHeight;             //collectionView高度适配父视图
     collection.backgroundColor = [UIColor whiteColor];
     collection.showsVerticalScrollIndicator = NO;
-//    collection.bounces = NO;
-    collection.dataSource = self;
-    collection.delegate = self;                 //代理属性
-    //注册cell
-    [collection registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"cellid"];
+    
+    collection.dataSource = self;                                               //数据源和代理
+    collection.delegate = self;
+    
+    [collection registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:CellId];       //注册cell
+    [collection registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:HeaderViewId];
     [self.view addSubview:collection];
     
 }
@@ -60,15 +62,22 @@
     if (section == 0) {
         return 4;
     } else if (section == 1) {
-        return 6;
+        return 8;
     }
     return 10;
 }
 
 - (nonnull __kindof UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cellid" forIndexPath:indexPath];
+    
+    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellId forIndexPath:indexPath];
     cell.backgroundColor = [UIColor systemGray2Color];
     return cell;
+}
+
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
+    UIView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:HeaderViewId forIndexPath:indexPath];
+    headerView.backgroundColor = [UIColor systemGrayColor];
+    return (UICollectionReusableView *)headerView;
 }
 #pragma mark - CollectionView Delegate
 

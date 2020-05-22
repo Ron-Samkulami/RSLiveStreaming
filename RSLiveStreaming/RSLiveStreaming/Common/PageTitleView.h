@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#define RSScrollLineH 2
-#define RSScreenW [UIScreen mainScreen].bounds.size.width
-#define RSScreenH [UIScreen mainScreen].bounds.size.height
+#define kScrollLineH 2
+#define kScreenW [UIScreen mainScreen].bounds.size.width
+#define kScreenH [UIScreen mainScreen].bounds.size.height
 
 NS_ASSUME_NONNULL_BEGIN
 @class PageTitleView;

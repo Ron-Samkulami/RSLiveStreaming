@@ -37,34 +37,26 @@
     /*
      set contentView
      */
-    //计算contentView的frame值
-    CGFloat statusBarHeight = 0;                                            //获取状态栏、导航栏及tabbar的高度
-    if (@available(iOS 13.0, *)) {
-        UIStatusBarManager *statusBarManager = [UIApplication sharedApplication].windows.firstObject.windowScene.statusBarManager;
-        statusBarHeight = statusBarManager.statusBarFrame.size.height;
-    }
-    else {
-        statusBarHeight = [UIApplication sharedApplication].statusBarFrame.size.height;
-    }
-    CGFloat navHeight = self.navigationController.navigationBar.frame.size.height;
-    CGFloat tabBarHeight = [[UITabBarController alloc] init].tabBar.frame.size.height;
     
-    CGFloat contentH = RSScreenH - statusBarHeight - navHeight- tabBarHeight;   //计算contentFrame
-    CGRect contentFrame = CGRectMake(0, navHeight , RSScreenW , contentH );
-    //NSLog(@"statusbar---%lf    navheight---%lf",statusBarHeight,navHeight);
+    CGFloat contentH = kScreenH - kNavBarHeight - kTabBarHeight - kBottomSafeHeight;    //再减去 kStatusBarHeight 会使iPhone8小屏幕底下出现空白
+    CGRect contentFrame = CGRectMake(0, kStatusBarHeight , kScreenW , contentH );       //若y值加上navigationBar的高度，会使页contentView面下移
+    
+//    NSLog(@"RSScreenH---%lf contentH---%lf ",kScreenH,contentH);
+//    NSLog(@"statusbar---%lf navheight---%d tabBarHeight---%lf toolBarHeight---%lf ",kStatusBarHeight,kNavBarHeight,kTabBarHeight,self.navigationController.toolbar.frame.size.height);
     
     //创建当前Tab页面的子控制器集合
     NSMutableArray *VCS = [[NSMutableArray alloc] init];
     [VCS addObject:[[RecommendViewController alloc] init]];
     [VCS addObject:[[HotspotViewController alloc] init]];
+    
     //创建contentView
     PageContentView *contentView = [[PageContentView alloc] initWithFrame:contentFrame withChildVCS:VCS withParentVC:self];   
-    //contentView.backgroundColor = [UIColor redColor];
+//    contentView.backgroundColor = [UIColor redColor];
     contentView.delegate = self;
     [contentView setTag:202];
     [self.view addSubview:contentView];
     
-//    [self.navigationController.navigationBar setShadowImage:[UIImage new]];     //去掉navigationBar的分割线
+
 }
 
 #pragma mark - PageTitleViewDelegate

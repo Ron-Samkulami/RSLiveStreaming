@@ -56,7 +56,7 @@ RSRGBVlaues hilightRGB = {129,216,209};         //高亮样式RGB值
             label.text = title;
             label.textColor = [UIColor colorWithRed:normalRGB.RValue / 255 green:normalRGB.GValue /255 blue:normalRGB.BValue /255 alpha:1];
             label.textAlignment = NSTextAlignmentCenter;
-            label.frame = CGRectMake(labelWidth * index, 0, labelWidth, frame.size.height - RSScrollLineH);
+            label.frame = CGRectMake(labelWidth * index, 0, labelWidth, frame.size.height - kScrollLineH);
             
             [scrollView addSubview:label];
             [self.titleLabels addObject:label];
@@ -79,7 +79,7 @@ RSRGBVlaues hilightRGB = {129,216,209};         //高亮样式RGB值
         //设置scrollLine的颜色，与UITabBar.appearance.tintColor（AppDelegate中）相同
         scrollLine.backgroundColor = [UIColor colorWithRed:129 * 1.0 / 255 green:216 * 1.0 / 255 blue:209 * 1.0 /255 alpha:1];
 //        scrollLine.backgroundColor = [UIColor colorWithRed:hilightRGB.RValue / 255 green:hilightRGB.GValue /255 blue:hilightRGB.BValue /255 alpha:1];
-        scrollLine.frame = CGRectMake(firstLabel.frame.origin.x, scrollView.frame.origin.y + scrollView.frame.size.height  - RSScrollLineH, labelWidth, RSScrollLineH);
+        scrollLine.frame = CGRectMake(firstLabel.frame.origin.x, scrollView.frame.origin.y + scrollView.frame.size.height  - kScrollLineH, labelWidth, kScrollLineH);
         [scrollLine setTag:300];
         [self addSubview:scrollLine];
     }

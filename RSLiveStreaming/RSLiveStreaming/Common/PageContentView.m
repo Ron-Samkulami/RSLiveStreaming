@@ -30,7 +30,7 @@
             [parentVC addChildViewController:childVC];
         }
       
-        UICollectionView *collectionView = [self createCollectionViewWithFrame:frame];
+        UICollectionView *collectionView = [self collectionViewWithFrame:frame];
         [collectionView setTag:200];            //controller中设置的tag不能和这里的tag相同
         collectionView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
         [self addSubview:collectionView];
@@ -40,7 +40,7 @@
 }
 
 //创建collectionView
-- (UICollectionView *)createCollectionViewWithFrame:(CGRect)frame {
+- (UICollectionView *)collectionViewWithFrame:(CGRect)frame {
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
     layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     layout.sectionHeadersPinToVisibleBounds = NO;
@@ -52,6 +52,7 @@
     collectionView.showsHorizontalScrollIndicator = NO;
     collectionView.pagingEnabled = YES;
     collectionView.bounces = NO;
+//    collectionView.backgroundColor = [UIColor redColor];
     collectionView.dataSource = self;
     collectionView.delegate = self;
     [collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"contentId"];
