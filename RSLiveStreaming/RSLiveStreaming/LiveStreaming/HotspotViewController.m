@@ -7,8 +7,9 @@
 //
 
 #import "HotspotViewController.h"
+#import "RSLiveHubCell.h"
 
-@interface HotspotViewController ()
+@interface HotspotViewController () <UICollectionViewDataSource,UICollectionViewDelegate>
 
 @end
 
@@ -18,12 +19,46 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    CGFloat screenW = [UIScreen mainScreen].bounds.size.width;
+    CGFloat cellWidth = (screenW - ItemMargin * 3) / 2;
     
+    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+    layout.scrollDirection = UICollectionViewScrollDirectionVertical;
+    layout.itemSize = CGSizeMake(cellWidth,cellWidth * 4 / 3);                                      //item尺寸
+    layout.minimumLineSpacing = 5;                                                                  //行间距
+    layout.minimumInteritemSpacing = ItemMargin;                                                    //item间距
+    layout.sectionInset = UIEdgeInsetsMake(ItemMargin, ItemMargin, ItemMargin, ItemMargin);         //section四周边距
+
+    UICollectionView *collection = [[UICollectionView alloc] initWithFrame:self.view.frame collectionViewLayout:layout];
+    collection.autoresizingMask = UIViewAutoresizingFlexibleHeight;         //collectionView高度适配父视图
+    collection.backgroundColor = [UIColor whiteColor];
+    collection.showsVerticalScrollIndicator = NO;
+    collection.dataSource = self;                                           //数据源和代理
+    collection.delegate = self;
+    [collection registerClass:[RSLiveHubCell class] forCellWithReuseIdentifier:CellId];             //注册cell
     
-    
+    [self.view addSubview:collection];
     
 }
 
+#pragma mark - CollectionView DataSource
+- (NSInteger)collectionView:(nonnull UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return 20;
+}
+
+- (nonnull __kindof UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
+    
+    RSLiveHubCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellId forIndexPath:indexPath];
+    cell.backgroundColor = [UIColor systemGray2Color];
+    cell.contentView.backgroundColor = [UIColor yellowColor];
+    //设置圆角和边线
+    cell.layer.cornerRadius = 10.0f;
+    cell.layer.borderWidth = 1.0f;
+    cell.layer.borderColor = [UIColor redColor].CGColor;
+    cell.layer.masksToBounds = YES;
+//    cell.clipsToBounds = YES; //子view不出格
+    return cell;
+}
 /*
 #pragma mark - Navigation
 

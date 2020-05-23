@@ -7,9 +7,10 @@
 //
 
 #import "RecommendViewController.h"
-#define ItemMargin 5
-#define CellId @"cellId"
-#define HeaderViewId @"headerViewId"
+#import "RSLiveHubCell.h"
+
+
+
 @interface RecommendViewController () <UICollectionViewDataSource,UICollectionViewDelegate>
 
 @end
@@ -31,11 +32,11 @@
     layout.minimumInteritemSpacing = ItemMargin;                                                    //item间距
     layout.sectionInset = UIEdgeInsetsMake(ItemMargin, ItemMargin, ItemMargin, ItemMargin);         //section四周边距
     layout.headerReferenceSize = CGSizeMake(cellWidth * 2, 50);                 //header尺寸
-//    layout.sectionHeadersPinToVisibleBounds = YES;                              //header悬浮
+    //    layout.sectionHeadersPinToVisibleBounds = YES;                              //header悬浮
     
     UICollectionView *collection = [[UICollectionView alloc] initWithFrame:self.view.frame collectionViewLayout:layout];
     collection.autoresizingMask = UIViewAutoresizingFlexibleHeight;             //collectionView高度适配父视图
-    collection.backgroundColor = [UIColor whiteColor];
+    collection.backgroundColor = [UIColor whiteColor];                          //底色为白色
     collection.showsVerticalScrollIndicator = NO;
     
     collection.dataSource = self;                                               //数据源和代理
@@ -71,6 +72,16 @@
     
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellId forIndexPath:indexPath];
     cell.backgroundColor = [UIColor systemGray2Color];
+    
+    //设置圆角和阴影
+    cell.layer.cornerRadius = 10.0f;
+    cell.layer.borderWidth = 1.0f;
+    cell.layer.borderColor = [UIColor clearColor].CGColor;
+    cell.layer.masksToBounds = YES;
+//    cell.clipsToBounds = YES;
+    
+
+    
     return cell;
 }
 
@@ -78,34 +89,48 @@
     UIView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:HeaderViewId forIndexPath:indexPath];
     headerView.backgroundColor = [UIColor systemGrayColor];
     return (UICollectionReusableView *)headerView;
+    /*
+     UICollectionReusableView *supplementaryView;
+     if ([kind isEqualToString:UICollectionElementKindSectionHeader]){
+     RSHeaderView *view = (RSHeaderView *)[collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:reuseIdentifierHeader forIndexPath:indexPath];
+     view.headerLabel.text = [NSString stringWithFormat:@"这是header:%ld",indexPath.section];
+     supplementaryView = view;
+     }
+     else if ([kind isEqualToString:UICollectionElementKindSectionFooter]){
+     RSFooterView *view = (RSFooterView *)[collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:reuseIdentifierFooter forIndexPath:indexPath];
+     view.footerLabel.text = [NSString stringWithFormat:@"这是Footer:%ld",indexPath.section];
+     supplementaryView = view;
+     }
+     return supplementaryView;
+     */
 }
 #pragma mark - CollectionView Delegate
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    
+    NSLog(@"点击了item：%@",indexPath);
 }
 /*
-//两个cell之间的间距
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
-    return 5;
-}
-
-//两行cell之间的间距
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
-    return 5;
-}
-
-//定义每个Cell的大小
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    CGSize size = CGSizeMake(80,80);
-    return size;
-}
-
-//定义每个Section的四边间距
-- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
-    return UIEdgeInsetsMake(15, 15, 5, 15);     //分别为上、左、下、右
-}
-*/
+ //两个cell之间的间距
+ - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
+ return 5;
+ }
+ 
+ //两行cell之间的间距
+ - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
+ return 5;
+ }
+ 
+ //定义每个Cell的大小
+ - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+ CGSize size = CGSizeMake(80,80);
+ return size;
+ }
+ 
+ //定义每个Section的四边间距
+ - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
+ return UIEdgeInsetsMake(15, 15, 5, 15);     //分别为上、左、下、右
+ }
+ */
 
 
 /*
