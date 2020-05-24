@@ -9,7 +9,9 @@
 #import "NearByViewController.h"
 #import "PageTitleView.h"
 #import "PageContentView.h"
-#import "RecommendViewController.h"
+#import "PeopleViewController.h"
+#import "LiveBroadcastViewController.h"
+#import "DynamicViewController.h"
 
 @interface NearByViewController () <PageTitleViewDelegate,PageContentViewDelegate>
 @property (nonatomic,strong) NSArray *childVCS;
@@ -46,12 +48,9 @@
     
     //创建collectionView的子页面
     NSMutableArray *VCS = [[NSMutableArray alloc] init];
-    [VCS addObject:[[RecommendViewController alloc] init]];
-    for (int i = 0; i < titleArray.count - 1; i++) {
-        UIViewController *vc = [[UIViewController alloc] init];
-        vc.view.backgroundColor = [UIColor colorWithRed:arc4random_uniform(255) * 1.0 / 255 green:arc4random_uniform(255) * 1.0 / 255 blue:arc4random_uniform(255) * 1.0 / 255 alpha:1];
-        [VCS addObject:vc];
-    }
+    [VCS addObject:[[PeopleViewController alloc] init]];
+    [VCS addObject:[[LiveBroadcastViewController alloc] init]];
+    [VCS addObject:[[DynamicViewController alloc] init]];
     
     //创建collectionView
     PageContentView *contentView = [[PageContentView alloc] initWithFrame:contentFrame withChildVCS:VCS withParentVC:self];

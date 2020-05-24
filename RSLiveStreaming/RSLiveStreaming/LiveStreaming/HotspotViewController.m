@@ -19,8 +19,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    CGFloat screenW = [UIScreen mainScreen].bounds.size.width;
-    CGFloat cellWidth = (screenW - ItemMargin * 3) / 2;
     
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
     layout.scrollDirection = UICollectionViewScrollDirectionVertical;
@@ -48,15 +46,14 @@
 
 - (nonnull __kindof UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
     
-    RSLiveHubCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellId forIndexPath:indexPath];
-    cell.backgroundColor = [UIColor systemGray2Color];
-    cell.contentView.backgroundColor = [UIColor yellowColor];
+    RSLiveHubCell *cell = (RSLiveHubCell *)[collectionView dequeueReusableCellWithReuseIdentifier:CellId forIndexPath:indexPath];
+
     //设置圆角和边线
     cell.layer.cornerRadius = 10.0f;
     cell.layer.borderWidth = 1.0f;
-    cell.layer.borderColor = [UIColor redColor].CGColor;
-    cell.layer.masksToBounds = YES;
-//    cell.clipsToBounds = YES; //子view不出格
+    cell.layer.borderColor = [UIColor clearColor].CGColor;
+    cell.layer.masksToBounds = YES;     //子view不出格
+//    cell.clipsToBounds = YES;
     return cell;
 }
 /*

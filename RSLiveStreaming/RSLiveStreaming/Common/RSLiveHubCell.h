@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+
 #define ItemMargin 5
+#define cellWidth ([UIScreen mainScreen].bounds.size.width - ItemMargin * 3) / 2
 #define CellId @"cellId"
 #define HeaderViewId @"headerViewId"
 

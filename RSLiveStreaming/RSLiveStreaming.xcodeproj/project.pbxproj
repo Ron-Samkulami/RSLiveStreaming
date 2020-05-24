@@ -10,6 +10,9 @@
 		E44421E72476B3740056098A /* RecommendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E44421E62476B3740056098A /* RecommendViewController.m */; };
 		E44421ED2476FC6C0056098A /* HotspotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E44421EC2476FC6C0056098A /* HotspotViewController.m */; };
 		E4570D2F24796B2500610AD9 /* RSLiveHubCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4570D2E24796B2500610AD9 /* RSLiveHubCell.m */; };
+		E4570D322479A87100610AD9 /* DynamicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4570D312479A87100610AD9 /* DynamicViewController.m */; };
+		E4570D352479A88300610AD9 /* PeopleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4570D342479A88300610AD9 /* PeopleViewController.m */; };
+		E4570D382479A8CA00610AD9 /* LiveBroadcastViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4570D372479A8CA00610AD9 /* LiveBroadcastViewController.m */; };
 		E4AD15212471329B001B5848 /* PageContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AD15202471329B001B5848 /* PageContentView.m */; };
 		E4B903F5246D3ED7008025FA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E4B903F4246D3ED7008025FA /* AppDelegate.m */; };
 		E4B903F8246D3ED7008025FA /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E4B903F7246D3ED7008025FA /* SceneDelegate.m */; };
@@ -39,6 +42,12 @@
 		E44421EC2476FC6C0056098A /* HotspotViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HotspotViewController.m; sourceTree = "<group>"; };
 		E4570D2D24796B2500610AD9 /* RSLiveHubCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSLiveHubCell.h; sourceTree = "<group>"; };
 		E4570D2E24796B2500610AD9 /* RSLiveHubCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSLiveHubCell.m; sourceTree = "<group>"; };
+		E4570D302479A87100610AD9 /* DynamicViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DynamicViewController.h; sourceTree = "<group>"; };
+		E4570D312479A87100610AD9 /* DynamicViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DynamicViewController.m; sourceTree = "<group>"; };
+		E4570D332479A88300610AD9 /* PeopleViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PeopleViewController.h; sourceTree = "<group>"; };
+		E4570D342479A88300610AD9 /* PeopleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PeopleViewController.m; sourceTree = "<group>"; };
+		E4570D362479A8CA00610AD9 /* LiveBroadcastViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LiveBroadcastViewController.h; sourceTree = "<group>"; };
+		E4570D372479A8CA00610AD9 /* LiveBroadcastViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LiveBroadcastViewController.m; sourceTree = "<group>"; };
 		E4AD151F2471329B001B5848 /* PageContentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PageContentView.h; sourceTree = "<group>"; };
 		E4AD15202471329B001B5848 /* PageContentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PageContentView.m; sourceTree = "<group>"; };
 		E4B903F0246D3ED7008025FA /* RSLiveStreaming.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RSLiveStreaming.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -174,6 +183,12 @@
 				E4B90464246FE465008025FA /* NearBy.storyboard */,
 				E4B90412246D4E80008025FA /* NearByViewController.h */,
 				E4B90413246D4E80008025FA /* NearByViewController.m */,
+				E4570D332479A88300610AD9 /* PeopleViewController.h */,
+				E4570D342479A88300610AD9 /* PeopleViewController.m */,
+				E4570D362479A8CA00610AD9 /* LiveBroadcastViewController.h */,
+				E4570D372479A8CA00610AD9 /* LiveBroadcastViewController.m */,
+				E4570D302479A87100610AD9 /* DynamicViewController.h */,
+				E4570D312479A87100610AD9 /* DynamicViewController.m */,
 			);
 			path = NearBy;
 			sourceTree = "<group>";
@@ -289,7 +304,10 @@
 				E4B90417246D4E8C008025FA /* MessagesViewController.m in Sources */,
 				E4B90411246D4E2B008025FA /* MainPageViewController.m in Sources */,
 				E4B9047A24700551008025FA /* PageTitleView.m in Sources */,
+				E4570D322479A87100610AD9 /* DynamicViewController.m in Sources */,
 				E4B903F5246D3ED7008025FA /* AppDelegate.m in Sources */,
+				E4570D382479A8CA00610AD9 /* LiveBroadcastViewController.m in Sources */,
+				E4570D352479A88300610AD9 /* PeopleViewController.m in Sources */,
 				E4570D2F24796B2500610AD9 /* RSLiveHubCell.m in Sources */,
 				E4B9041D246D4F6D008025FA /* MyFollowViewController.m in Sources */,
 				E44421E72476B3740056098A /* RecommendViewController.m in Sources */,
