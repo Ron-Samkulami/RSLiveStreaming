@@ -36,7 +36,7 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:ID];
     }
-    cell.backgroundColor = [UIColor systemGray3Color];
+    cell.backgroundColor = [UIColor systemGray6Color];
     return cell;
 }
 /*

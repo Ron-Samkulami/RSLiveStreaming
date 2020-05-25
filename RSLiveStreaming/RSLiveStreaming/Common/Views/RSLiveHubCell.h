@@ -15,8 +15,10 @@
 
 
 NS_ASSUME_NONNULL_BEGIN
-
+@class LiveHub;
 @interface RSLiveHubCell : UICollectionViewCell
+
+@property (nonatomic,strong) LiveHub *liveHubModel;
 
 @end
 

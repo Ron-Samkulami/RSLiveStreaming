@@ -11,6 +11,7 @@
 
 
 
+
 @interface RecommendViewController () <UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
 
 @end
@@ -40,7 +41,8 @@
     collection.dataSource = self;                                               //数据源和代理
     collection.delegate = self;
     
-    [collection registerClass:[RSLiveHubCell class] forCellWithReuseIdentifier:CellId];       //注册cell
+    [collection registerNib:[UINib nibWithNibName:@"RSLiveHubCell" bundle:nil] forCellWithReuseIdentifier:CellId];
+//    [collection registerClass:[RSLiveHubCell class] forCellWithReuseIdentifier:CellId];       //注册cell
     [collection registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:HeaderViewId];
     [self.view addSubview:collection];
     
@@ -70,7 +72,14 @@
 
 //cell
 - (nonnull __kindof UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
+    //有三组不同的数据
+    NSLog(@"%ld",indexPath.item);
     
+    //获取数据模型
+//    RSLiveHub *liveHub == self.liveHubs[indexPath.item];
+
+    //创建单元格
+//    RSLiveHubCell *cell = [RSLiveHubCell liveHutCellWithTableView:tableView];
     RSLiveHubCell *cell = (RSLiveHubCell *)[collectionView dequeueReusableCellWithReuseIdentifier:CellId forIndexPath:indexPath];
     //设置圆角和阴影
     cell.layer.cornerRadius = 10.0f;
@@ -78,6 +87,11 @@
     cell.layer.borderColor = [UIColor clearColor].CGColor;
     cell.layer.masksToBounds = YES;
 
+    
+    
+    //把模型数据设置给单元格
+//    cell.liveHubModel = liveHub;
+    //返回单元格
     return cell;
 }
 

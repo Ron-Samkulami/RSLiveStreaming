@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7EB0AA7F4E2042653E2DC189 /* libPods-RSLiveStreaming.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BE1EDAE3DF595DDF3A22E3E1 /* libPods-RSLiveStreaming.a */; };
+		E443CCBE247C0610004304A1 /* LiveHub.m in Sources */ = {isa = PBXBuildFile; fileRef = E443CCBD247C0610004304A1 /* LiveHub.m */; };
+		E443CCD2247C5100004304A1 /* RSLiveHubCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E443CCD1247C5100004304A1 /* RSLiveHubCell.xib */; };
+		E443CCD5247C51CC004304A1 /* NSArray+NSDictionary+Ex.m in Sources */ = {isa = PBXBuildFile; fileRef = E443CCD4247C51CC004304A1 /* NSArray+NSDictionary+Ex.m */; };
+		E443CCD8247C5220004304A1 /* RSNetworkTools.m in Sources */ = {isa = PBXBuildFile; fileRef = E443CCD7247C5220004304A1 /* RSNetworkTools.m */; };
 		E44421E72476B3740056098A /* RecommendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E44421E62476B3740056098A /* RecommendViewController.m */; };
 		E44421ED2476FC6C0056098A /* HotspotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E44421EC2476FC6C0056098A /* HotspotViewController.m */; };
 		E4570D2F24796B2500610AD9 /* RSLiveHubCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4570D2E24796B2500610AD9 /* RSLiveHubCell.m */; };
@@ -36,6 +41,16 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1A2037C2AE39CF015687F5BE /* Pods-RSLiveStreaming.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RSLiveStreaming.release.xcconfig"; path = "Target Support Files/Pods-RSLiveStreaming/Pods-RSLiveStreaming.release.xcconfig"; sourceTree = "<group>"; };
+		984A3DE5E8136943C00C4B2E /* Pods-RSLiveStreaming.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RSLiveStreaming.debug.xcconfig"; path = "Target Support Files/Pods-RSLiveStreaming/Pods-RSLiveStreaming.debug.xcconfig"; sourceTree = "<group>"; };
+		BE1EDAE3DF595DDF3A22E3E1 /* libPods-RSLiveStreaming.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RSLiveStreaming.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E443CCBC247C0610004304A1 /* LiveHub.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LiveHub.h; sourceTree = "<group>"; };
+		E443CCBD247C0610004304A1 /* LiveHub.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LiveHub.m; sourceTree = "<group>"; };
+		E443CCD1247C5100004304A1 /* RSLiveHubCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RSLiveHubCell.xib; sourceTree = "<group>"; };
+		E443CCD3247C51CC004304A1 /* NSArray+NSDictionary+Ex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+NSDictionary+Ex.h"; sourceTree = "<group>"; };
+		E443CCD4247C51CC004304A1 /* NSArray+NSDictionary+Ex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+NSDictionary+Ex.m"; sourceTree = "<group>"; };
+		E443CCD6247C5220004304A1 /* RSNetworkTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSNetworkTools.h; sourceTree = "<group>"; };
+		E443CCD7247C5220004304A1 /* RSNetworkTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSNetworkTools.m; sourceTree = "<group>"; };
 		E44421E52476B3740056098A /* RecommendViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RecommendViewController.h; sourceTree = "<group>"; };
 		E44421E62476B3740056098A /* RecommendViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RecommendViewController.m; sourceTree = "<group>"; };
 		E44421EB2476FC6C0056098A /* HotspotViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HotspotViewController.h; sourceTree = "<group>"; };
@@ -87,13 +102,42 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7EB0AA7F4E2042653E2DC189 /* libPods-RSLiveStreaming.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		E4AD166124742D06001B5848 /* Common */ = {
+		B05E5E65B52D7C9CA43B6561 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				984A3DE5E8136943C00C4B2E /* Pods-RSLiveStreaming.debug.xcconfig */,
+				1A2037C2AE39CF015687F5BE /* Pods-RSLiveStreaming.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		E443CC85247BA6C3004304A1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BE1EDAE3DF595DDF3A22E3E1 /* libPods-RSLiveStreaming.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E443CCD9247C56C3004304A1 /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				E443CCD6247C5220004304A1 /* RSNetworkTools.h */,
+				E443CCD7247C5220004304A1 /* RSNetworkTools.m */,
+				E443CCD3247C51CC004304A1 /* NSArray+NSDictionary+Ex.h */,
+				E443CCD4247C51CC004304A1 /* NSArray+NSDictionary+Ex.m */,
+			);
+			path = Tools;
+			sourceTree = "<group>";
+		};
+		E443CCDA247C56D4004304A1 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				E4B9047824700551008025FA /* PageTitleView.h */,
@@ -102,6 +146,16 @@
 				E4AD15202471329B001B5848 /* PageContentView.m */,
 				E4570D2D24796B2500610AD9 /* RSLiveHubCell.h */,
 				E4570D2E24796B2500610AD9 /* RSLiveHubCell.m */,
+				E443CCD1247C5100004304A1 /* RSLiveHubCell.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		E4AD166124742D06001B5848 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				E443CCDA247C56D4004304A1 /* Views */,
+				E443CCD9247C56C3004304A1 /* Tools */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -111,6 +165,8 @@
 			children = (
 				E4B903F2246D3ED7008025FA /* RSLiveStreaming */,
 				E4B903F1246D3ED7008025FA /* Products */,
+				E443CC85247BA6C3004304A1 /* Frameworks */,
+				B05E5E65B52D7C9CA43B6561 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -166,6 +222,8 @@
 		E4B90473247003F4008025FA /* LiveStreaming */ = {
 			isa = PBXGroup;
 			children = (
+				E443CCBC247C0610004304A1 /* LiveHub.h */,
+				E443CCBD247C0610004304A1 /* LiveHub.m */,
 				E4B90462246FE3F6008025FA /* LiveStreaming.storyboard */,
 				E4B90418246D4EB4008025FA /* LiveStreamingViewController.h */,
 				E4B90419246D4EB4008025FA /* LiveStreamingViewController.m */,
@@ -230,6 +288,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E4B9040C246D3ED9008025FA /* Build configuration list for PBXNativeTarget "RSLiveStreaming" */;
 			buildPhases = (
+				E462D643F99430EBF3410481 /* [CP] Check Pods Manifest.lock */,
 				E4B903EC246D3ED7008025FA /* Sources */,
 				E4B903ED246D3ED7008025FA /* Frameworks */,
 				E4B903EE246D3ED7008025FA /* Resources */,
@@ -282,6 +341,7 @@
 			files = (
 				E4B90468246FE4A1008025FA /* Messages.storyboard in Resources */,
 				E4B90406246D3ED9008025FA /* LaunchScreen.storyboard in Resources */,
+				E443CCD2247C5100004304A1 /* RSLiveHubCell.xib in Resources */,
 				E4B9046B246FE4CA008025FA /* MyFollow.storyboard in Resources */,
 				E4B90463246FE3F6008025FA /* LiveStreaming.storyboard in Resources */,
 				E4B9046D246FE4F2008025FA /* MainPage.storyboard in Resources */,
@@ -292,6 +352,31 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		E462D643F99430EBF3410481 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-RSLiveStreaming-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		E4B903EC246D3ED7008025FA /* Sources */ = {
@@ -304,17 +389,20 @@
 				E4B90417246D4E8C008025FA /* MessagesViewController.m in Sources */,
 				E4B90411246D4E2B008025FA /* MainPageViewController.m in Sources */,
 				E4B9047A24700551008025FA /* PageTitleView.m in Sources */,
+				E443CCBE247C0610004304A1 /* LiveHub.m in Sources */,
 				E4570D322479A87100610AD9 /* DynamicViewController.m in Sources */,
 				E4B903F5246D3ED7008025FA /* AppDelegate.m in Sources */,
 				E4570D382479A8CA00610AD9 /* LiveBroadcastViewController.m in Sources */,
 				E4570D352479A88300610AD9 /* PeopleViewController.m in Sources */,
 				E4570D2F24796B2500610AD9 /* RSLiveHubCell.m in Sources */,
+				E443CCD8247C5220004304A1 /* RSNetworkTools.m in Sources */,
 				E4B9041D246D4F6D008025FA /* MyFollowViewController.m in Sources */,
 				E44421E72476B3740056098A /* RecommendViewController.m in Sources */,
 				E4B903F8246D3ED7008025FA /* SceneDelegate.m in Sources */,
 				E4B9041A246D4EB4008025FA /* LiveStreamingViewController.m in Sources */,
 				E4B90401246D3ED7008025FA /* RSLiveStreaming.xcdatamodeld in Sources */,
 				E4B90414246D4E80008025FA /* NearByViewController.m in Sources */,
+				E443CCD5247C51CC004304A1 /* NSArray+NSDictionary+Ex.m in Sources */,
 				E4B90470246FF1B5008025FA /* MainController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -469,6 +557,7 @@
 		};
 		E4B9040D246D3ED9008025FA /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 984A3DE5E8136943C00C4B2E /* Pods-RSLiveStreaming.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -486,6 +575,7 @@
 		};
 		E4B9040E246D3ED9008025FA /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1A2037C2AE39CF015687F5BE /* Pods-RSLiveStreaming.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
