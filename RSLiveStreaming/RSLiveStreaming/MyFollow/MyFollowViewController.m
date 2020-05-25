@@ -12,6 +12,7 @@
 
 @interface MyFollowViewController () <PageTitleViewDelegate,PageContentViewDelegate>
 @property (nonatomic,strong) NSArray *childVCS;
+@property (nonatomic,strong) PageContentView *contentView;
 
 @end
 
@@ -55,15 +56,16 @@
     //创建collectionView
     PageContentView *contentView = [[PageContentView alloc] initWithFrame:contentFrame withChildVCS:VCS withParentVC:self];
     contentView.delegate = self;
-    [contentView setTag:202];
-    [self.view addSubview:contentView];
+  
+    self.contentView = contentView;
+    [self.view addSubview:self.contentView];
     
     
 }
 
 #pragma mark - PageTitleViewDelegate
 - (void)contentViewScrollWithTitleView:(PageTitleView *)pageTitleView selectedIndex:(NSInteger)index {
-    [[self.view viewWithTag:202] scrollToPageAtIndex:index];
+    [self.contentView scrollToPageAtIndex:index];
 }
 
 #pragma mark - PageContentViewDelegate

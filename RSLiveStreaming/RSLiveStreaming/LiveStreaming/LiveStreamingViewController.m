@@ -14,6 +14,7 @@
 
 @interface LiveStreamingViewController () <PageTitleViewDelegate,PageContentViewDelegate>
 @property (nonatomic,strong) NSArray *childVCS;
+@property (nonatomic,strong) PageContentView *contentView;
 
 @end
 
@@ -53,8 +54,9 @@
     PageContentView *contentView = [[PageContentView alloc] initWithFrame:contentFrame withChildVCS:VCS withParentVC:self];   
 //    contentView.backgroundColor = [UIColor redColor];
     contentView.delegate = self;
-    [contentView setTag:202];
-    [self.view addSubview:contentView];
+
+    self.contentView = contentView;
+    [self.view addSubview:self.contentView];
     
 
 }
@@ -63,7 +65,7 @@
 - (void)contentViewScrollWithTitleView:(PageTitleView *)pageTitleView selectedIndex:(NSInteger)index {
     //PageContentView *contentView = [self.view viewWithTag:202];
     //[contentView scrollToPageAtIndex:index];
-    [[self.view viewWithTag:202] scrollToPageAtIndex:index];
+    [self.contentView scrollToPageAtIndex:index];
 }
 
 #pragma mark - PageContentViewDelegate

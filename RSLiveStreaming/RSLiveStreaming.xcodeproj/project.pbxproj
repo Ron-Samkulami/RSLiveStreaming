@@ -126,17 +126,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		E443CCD9247C56C3004304A1 /* Tools */ = {
-			isa = PBXGroup;
-			children = (
-				E443CCD6247C5220004304A1 /* RSNetworkTools.h */,
-				E443CCD7247C5220004304A1 /* RSNetworkTools.m */,
-				E443CCD3247C51CC004304A1 /* NSArray+NSDictionary+Ex.h */,
-				E443CCD4247C51CC004304A1 /* NSArray+NSDictionary+Ex.m */,
-			);
-			path = Tools;
-			sourceTree = "<group>";
-		};
 		E443CCDA247C56D4004304A1 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -154,8 +143,11 @@
 		E4AD166124742D06001B5848 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				E443CCD6247C5220004304A1 /* RSNetworkTools.h */,
+				E443CCD7247C5220004304A1 /* RSNetworkTools.m */,
+				E443CCD3247C51CC004304A1 /* NSArray+NSDictionary+Ex.h */,
+				E443CCD4247C51CC004304A1 /* NSArray+NSDictionary+Ex.m */,
 				E443CCDA247C56D4004304A1 /* Views */,
-				E443CCD9247C56C3004304A1 /* Tools */,
 			);
 			path = Common;
 			sourceTree = "<group>";

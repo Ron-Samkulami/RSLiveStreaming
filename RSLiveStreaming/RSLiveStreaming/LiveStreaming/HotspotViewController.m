@@ -40,10 +40,15 @@
     
     self.collectionView = collection;
     [self.view addSubview:self.collectionView];
-    
+    self.collectionView.refreshControl = [[UIRefreshControl alloc] init];
+    self.collectionView.refreshControl.tintColor = [UIColor grayColor];
+    self.collectionView.refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@"下拉刷新"];
+    [self.collectionView.refreshControl addTarget:self action:@selector(refreshData) forControlEvents:UIControlEventValueChanged];
+    //self.collectionView.alwaysBounceVertical = YES;     //collectionView填不满屏幕时也可刷新
+    [self.collectionView addSubview:self.collectionView.refreshControl];
     
     //获取网络数据
-    [self refreshData];
+    [self getData];
 }
 
 #pragma mark - CollectionView DataSource
@@ -69,6 +74,19 @@
 }
 
 - (void)refreshData {
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
+//        [self.collectionView reloadData];
+        
+        if ([self.collectionView.refreshControl isRefreshing]) {
+            
+            [self.collectionView.refreshControl endRefreshing];
+        }
+    });
+}
+
+
+- (void)getData {
     dispatch_async(dispatch_get_global_queue(0,0), ^{
         //获取数据
         //    [[RSNetworkTools sharedManager] GET:@"http://baseapi.busi.inke.cn/live/LiveHotList" parameters:nil headers:nil progress:^(NSProgress * _Nonnull downloadProgress) {
@@ -111,21 +129,20 @@
             //NSLog(@"类型：%@",[responseJSON class]);         //二进制文件转成字典
             
             NSArray *dataDicts = [responseJSON valueForKey:@"data"];    //获取第三个key的value
-            //NSLog(@"%@",dataDicts);
+            NSLog(@"%@",dataDicts);
             NSMutableArray *arrayModels = [NSMutableArray array];
             for (NSDictionary *dict in dataDicts) {
                 LiveHub *model = [LiveHub liveHubWithDict:dict];
                 [arrayModels addObject:model];
             }
             self.liveHubs = arrayModels;                    //将获取到的数据转成模型
-            [self.collectionView reloadData];
+            [self.collectionView reloadData];               //更新UI
             
             
         }] resume];
         
-        
     });
-    
+    [self.collectionView.refreshControl endRefreshing];
     
 }
 
