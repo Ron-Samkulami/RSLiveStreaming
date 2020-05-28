@@ -21,7 +21,10 @@
     if (index == self.currentSelectedItem) {
         if (index != 4) {       //“我的”页面不用刷新数据
             NSLog(@"mainController: 重复点击,执行刷新数据任务");
-            NSLog(@"%@",[self.childViewControllers[index] class]);
+            NSLog(@"%@",self.childViewControllers[index].childViewControllers[0].childViewControllers);
+            
+            
+            //设置代理，刷新数据
         }
         return;                 //重复点击不执行动画
     }
@@ -62,5 +65,6 @@
     // Pass the selected object to the new view controller.
 }
 */
+
 
 @end

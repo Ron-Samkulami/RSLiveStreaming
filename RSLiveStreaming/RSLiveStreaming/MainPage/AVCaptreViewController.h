@@ -1,8 +1,8 @@
 //
-//  MainController.h
+//  AVCaptreViewController.h
 //  RSLiveStreaming
 //
-//  Created by Ron_Samkulami on 2020/5/16.
+//  Created by Ron_Samkulami on 2020/5/27.
 //  Copyright © 2020 Ron_Samkulami. All rights reserved.
 //
 
@@ -10,9 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface MainController : UITabBarController
-
-
+@interface AVCaptreViewController : UIViewController
 
 @end
 

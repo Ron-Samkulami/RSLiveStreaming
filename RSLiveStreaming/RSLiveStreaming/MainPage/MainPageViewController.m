@@ -7,34 +7,7 @@
 //
 
 #import "MainPageViewController.h"
-
-#pragma mark - 测试使用的类
-//viewDidLoad中使用的类，用来了解UIView的生命周期
-@interface TestView : UIView
-@end
-
-@implementation TestView
-- (instancetype)init{
-    self = [super init];
-    if (self) {
-    
-    }
-    return self;
-}
-- (void)willMoveToSuperview:(UIView *)newSuperview{
-    [super willMoveToSuperview:newSuperview];
-}
-- (void)didMoveToSuperview{
-    [super didMoveToSuperview];
-}
-- (void)willMoveToWindow:(UIWindow *)newWindow{
-    [super willMoveToWindow:newWindow];
-}
-- (void)didMoveToWindow{
-    [super didMoveToWindow];
-}
-
-@end
+#import "AVCaptreViewController.h"
 
 #pragma mark - MainPageViewController
 @interface MainPageViewController ()
@@ -50,26 +23,11 @@
     }
     return self;
 }
-- (void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    self.tabBarController.tabBar.hidden = NO;
-    self.navigationItem.title = @"";    //应该改为隐藏效果
-    
-}
-- (void)viewDidAppear:(BOOL)animated{
-    [super viewDidAppear:animated];
-}
-- (void)viewWillDisappear:(BOOL)animated{
-    [super viewWillDisappear:animated];
-}
-- (void)viewDidDisappear:(BOOL)animated{
-    [super viewDidDisappear:animated];
-}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
     
     //覆盖navigationBar的分割线，并使navigationBar的背景显示为白色
     [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
@@ -84,13 +42,14 @@
     
     
     //测试:页面跳转
-    TestView *view1 = [[TestView alloc] init];
-    view1.backgroundColor = [UIColor blackColor];
-    view1.frame = CGRectMake(150, 150, 100, 100);
-    [self.view addSubview:view1];
+    UIButton *testBtn = [[UIButton alloc] init];
+    testBtn.backgroundColor = [UIColor greenColor];
+    testBtn.frame = CGRectMake(150, 150, 120, 40);
+    [testBtn setTitle:@"TestPush" forState:UIControlStateNormal];
+    testBtn.titleLabel.textColor = [UIColor blackColor];
+    [self.view addSubview:testBtn];
     UITapGestureRecognizer *tapOnView = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(pushController)];
-    [view1 addGestureRecognizer:tapOnView];
-    
+    [testBtn addGestureRecognizer:tapOnView];
 }
 
 
@@ -101,15 +60,43 @@
 
 //测试:push页面跳转
 - (void)pushController{
-    UIViewController *newView = [[UIViewController alloc] init];
-    newView.view.backgroundColor = [UIColor whiteColor];
-    newView.navigationItem.title = @"Content";
-    newView.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"right_title" style:UIBarButtonItemStylePlain target:self action:nil];
+    AVCaptreViewController *newView = [[AVCaptreViewController alloc] init];
+    newView.view.backgroundColor = [UIColor blueColor];
+    
+//    newView.navigationItem.title = @"Content";
+//    newView.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"right_title" style:UIBarButtonItemStylePlain target:self action:nil];
+    
+
     //push新的viewController
     self.tabBarController.tabBar.hidden = YES;                      //跳转后隐藏bottomBar
     [self.navigationController pushViewController:newView animated:YES];
     
+    //以下写在newView的viewWillAppear方法中，隐藏导航栏并保持返回手势pop
+//    [newView.navigationController setNavigationBarHidden:YES animated:YES];
+//    newView.navigationController.interactivePopGestureRecognizer.delegate = newView;
+//    newView.navigationController.interactivePopGestureRecognizer.enabled = YES;
+    
 }
+
+#pragma mark - Life Circle
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.tabBarController.tabBar.hidden = NO;
+    self.navigationController.navigationBarHidden = NO;
+//    self.navigationItem.title = @"";    //应该改为隐藏效果
+    
+}
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+}
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+}
+- (void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
+}
+
+
 /*
 #pragma mark - Navigation
 
