@@ -26,7 +26,7 @@
     set titleView
     */
     NSArray *titleArray = @[@"消息",@"动态"];
-    PageTitleView *titleView = [[PageTitleView alloc] initWithFrame:CGRectMake(0, 0, 250, 44) andTitles:titleArray labelWidth:80];
+    PageTitleView *titleView = [[PageTitleView alloc] initWithFrame:CGRectMake(0, 0, 250, 44) andTitles:titleArray labelWidth:50];
     titleView.delegate = self;
     UIBarButtonItem *titleItem = [[UIBarButtonItem alloc] initWithCustomView:titleView];
     self.navigationItem.leftBarButtonItem = titleItem;

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -15,7 +15,16 @@
 		E443CCE0247D57DD004304A1 /* LiveAddr.m in Sources */ = {isa = PBXBuildFile; fileRef = E443CCDE247D57DD004304A1 /* LiveAddr.m */; };
 		E443CCE9247D8D4D004304A1 /* LiveRoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E443CCE8247D8D4D004304A1 /* LiveRoomViewController.m */; };
 		E443CD12247E3C57004304A1 /* AVCaptreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E443CD10247E3C57004304A1 /* AVCaptreViewController.m */; };
-		E443CEAE247FCB0F004304A1 /* RSLikesView.m in Sources */ = {isa = PBXBuildFile; fileRef = E443CEAD247FCB0F004304A1 /* RSLikesView.m */; };
+		E443CF0C2480F08F004304A1 /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = E443CF0B2480F08F004304A1 /* libresolv.tbd */; };
+		E443CF0E2480F0A9004304A1 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = E443CF0D2480F0A9004304A1 /* libc++.tbd */; };
+		E443CF102480F0D2004304A1 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = E443CF0F2480F0D2004304A1 /* libsqlite3.tbd */; };
+		E443CF122480F0E2004304A1 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = E443CF112480F0E2004304A1 /* libsqlite3.0.tbd */; };
+		E443D00724810EC5004304A1 /* TRTCCdnPlayerConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = E443D00524810EC5004304A1 /* TRTCCdnPlayerConfig.m */; };
+		E443D00A24811012004304A1 /* TRTCCdnPlayerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E443D00824811012004304A1 /* TRTCCdnPlayerManager.m */; };
+		E443D00C248115A8004304A1 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E443D00B248115A8004304A1 /* Metal.framework */; };
+		E443D00E248115BD004304A1 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E443D00D248115BD004304A1 /* CoreMedia.framework */; };
+		E443D010248115DD004304A1 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E443D00F248115DD004304A1 /* AssetsLibrary.framework */; };
+		E443D01324811662004304A1 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = E443D01224811662004304A1 /* File.swift */; };
 		E44421E72476B3740056098A /* RecommendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E44421E62476B3740056098A /* RecommendViewController.m */; };
 		E44421ED2476FC6C0056098A /* HotspotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E44421EC2476FC6C0056098A /* HotspotViewController.m */; };
 		E4570D2F24796B2500610AD9 /* RSLiveHubCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4570D2E24796B2500610AD9 /* RSLiveHubCell.m */; };
@@ -61,8 +70,19 @@
 		E443CCE8247D8D4D004304A1 /* LiveRoomViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LiveRoomViewController.m; sourceTree = "<group>"; };
 		E443CD0F247E3C57004304A1 /* AVCaptreViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AVCaptreViewController.h; sourceTree = "<group>"; };
 		E443CD10247E3C57004304A1 /* AVCaptreViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AVCaptreViewController.m; sourceTree = "<group>"; };
-		E443CEAC247FCB0F004304A1 /* RSLikesView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSLikesView.h; sourceTree = "<group>"; };
-		E443CEAD247FCB0F004304A1 /* RSLikesView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSLikesView.m; sourceTree = "<group>"; };
+		E443CF0B2480F08F004304A1 /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
+		E443CF0D2480F0A9004304A1 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		E443CF0F2480F0D2004304A1 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		E443CF112480F0E2004304A1 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		E443D00524810EC5004304A1 /* TRTCCdnPlayerConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRTCCdnPlayerConfig.m; sourceTree = "<group>"; };
+		E443D00624810EC5004304A1 /* TRTCCdnPlayerConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRTCCdnPlayerConfig.h; sourceTree = "<group>"; };
+		E443D00824811012004304A1 /* TRTCCdnPlayerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRTCCdnPlayerManager.m; sourceTree = "<group>"; };
+		E443D00924811012004304A1 /* TRTCCdnPlayerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRTCCdnPlayerManager.h; sourceTree = "<group>"; };
+		E443D00B248115A8004304A1 /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
+		E443D00D248115BD004304A1 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		E443D00F248115DD004304A1 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		E443D01124811661004304A1 /* RSLiveStreaming-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RSLiveStreaming-Bridging-Header.h"; sourceTree = "<group>"; };
+		E443D01224811662004304A1 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		E44421E52476B3740056098A /* RecommendViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RecommendViewController.h; sourceTree = "<group>"; };
 		E44421E62476B3740056098A /* RecommendViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RecommendViewController.m; sourceTree = "<group>"; };
 		E44421EB2476FC6C0056098A /* HotspotViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HotspotViewController.h; sourceTree = "<group>"; };
@@ -114,6 +134,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E443D010248115DD004304A1 /* AssetsLibrary.framework in Frameworks */,
+				E443D00E248115BD004304A1 /* CoreMedia.framework in Frameworks */,
+				E443D00C248115A8004304A1 /* Metal.framework in Frameworks */,
+				E443CF122480F0E2004304A1 /* libsqlite3.0.tbd in Frameworks */,
+				E443CF102480F0D2004304A1 /* libsqlite3.tbd in Frameworks */,
+				E443CF0E2480F0A9004304A1 /* libc++.tbd in Frameworks */,
+				E443CF0C2480F08F004304A1 /* libresolv.tbd in Frameworks */,
 				7EB0AA7F4E2042653E2DC189 /* libPods-RSLiveStreaming.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -133,6 +160,13 @@
 		E443CC85247BA6C3004304A1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E443D00F248115DD004304A1 /* AssetsLibrary.framework */,
+				E443D00D248115BD004304A1 /* CoreMedia.framework */,
+				E443D00B248115A8004304A1 /* Metal.framework */,
+				E443CF112480F0E2004304A1 /* libsqlite3.0.tbd */,
+				E443CF0F2480F0D2004304A1 /* libsqlite3.tbd */,
+				E443CF0D2480F0A9004304A1 /* libc++.tbd */,
+				E443CF0B2480F08F004304A1 /* libresolv.tbd */,
 				BE1EDAE3DF595DDF3A22E3E1 /* libPods-RSLiveStreaming.a */,
 			);
 			name = Frameworks;
@@ -167,8 +201,6 @@
 			isa = PBXGroup;
 			children = (
 				E4B90462246FE3F6008025FA /* LiveStreaming.storyboard */,
-				E443CEAC247FCB0F004304A1 /* RSLikesView.h */,
-				E443CEAD247FCB0F004304A1 /* RSLikesView.m */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -184,6 +216,10 @@
 				E44421EC2476FC6C0056098A /* HotspotViewController.m */,
 				E443CCE7247D8D4D004304A1 /* LiveRoomViewController.h */,
 				E443CCE8247D8D4D004304A1 /* LiveRoomViewController.m */,
+				E443D00624810EC5004304A1 /* TRTCCdnPlayerConfig.h */,
+				E443D00524810EC5004304A1 /* TRTCCdnPlayerConfig.m */,
+				E443D00924811012004304A1 /* TRTCCdnPlayerManager.h */,
+				E443D00824811012004304A1 /* TRTCCdnPlayerManager.m */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -238,6 +274,8 @@
 				E4B90407246D3ED9008025FA /* Info.plist */,
 				E4B90408246D3ED9008025FA /* main.m */,
 				E4B903FF246D3ED7008025FA /* RSLiveStreaming.xcdatamodeld */,
+				E443D01224811662004304A1 /* File.swift */,
+				E443D01124811661004304A1 /* RSLiveStreaming-Bridging-Header.h */,
 			);
 			path = RSLiveStreaming;
 			sourceTree = "<group>";
@@ -328,6 +366,7 @@
 				E4B903EC246D3ED7008025FA /* Sources */,
 				E4B903ED246D3ED7008025FA /* Frameworks */,
 				E4B903EE246D3ED7008025FA /* Resources */,
+				3246CE4EE57DAE3D72B3330E /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -349,6 +388,7 @@
 				TargetAttributes = {
 					E4B903EF246D3ED7008025FA = {
 						CreatedOnToolsVersion = 11.4.1;
+						LastSwiftMigration = 1140;
 					};
 				};
 			};
@@ -390,6 +430,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		3246CE4EE57DAE3D72B3330E /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-RSLiveStreaming/Pods-RSLiveStreaming-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-RSLiveStreaming/Pods-RSLiveStreaming-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-RSLiveStreaming/Pods-RSLiveStreaming-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		E462D643F99430EBF3410481 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -420,6 +477,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E4B90409246D3ED9008025FA /* main.m in Sources */,
+				E443D00724810EC5004304A1 /* TRTCCdnPlayerConfig.m in Sources */,
 				E44421ED2476FC6C0056098A /* HotspotViewController.m in Sources */,
 				E4AD15212471329B001B5848 /* PageContentView.m in Sources */,
 				E4B90417246D4E8C008025FA /* MessagesViewController.m in Sources */,
@@ -427,10 +485,12 @@
 				E4B9047A24700551008025FA /* PageTitleView.m in Sources */,
 				E443CCE9247D8D4D004304A1 /* LiveRoomViewController.m in Sources */,
 				E443CCBE247C0610004304A1 /* LiveHub.m in Sources */,
+				E443D01324811662004304A1 /* File.swift in Sources */,
 				E4570D322479A87100610AD9 /* DynamicViewController.m in Sources */,
 				E4B903F5246D3ED7008025FA /* AppDelegate.m in Sources */,
 				E4570D382479A8CA00610AD9 /* LiveBroadcastViewController.m in Sources */,
 				E4570D352479A88300610AD9 /* PeopleViewController.m in Sources */,
+				E443D00A24811012004304A1 /* TRTCCdnPlayerManager.m in Sources */,
 				E4570D2F24796B2500610AD9 /* RSLiveHubCell.m in Sources */,
 				E443CCD8247C5220004304A1 /* RSNetworkTools.m in Sources */,
 				E4B9041D246D4F6D008025FA /* MyFollowViewController.m in Sources */,
@@ -442,7 +502,6 @@
 				E443CCE0247D57DD004304A1 /* LiveAddr.m in Sources */,
 				E4B90414246D4E80008025FA /* NearByViewController.m in Sources */,
 				E443CCD5247C51CC004304A1 /* NSArray+NSDictionary+Ex.m in Sources */,
-				E443CEAE247FCB0F004304A1 /* RSLikesView.m in Sources */,
 				E4B90470246FF1B5008025FA /* MainController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -539,7 +598,7 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				OTHER_LDFLAGS = "-all_load";
+				OTHER_LDFLAGS = "";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -591,7 +650,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				OTHER_LDFLAGS = "-all_load";
+				OTHER_LDFLAGS = "";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -602,9 +661,12 @@
 			baseConfigurationReference = 984A3DE5E8136943C00C4B2E /* Pods-RSLiveStreaming.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = VB27T8S5Y8;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -626,6 +688,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.ron.RSLive;
 				PRODUCT_NAME = RSLive;
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "RSLiveStreaming/RSLiveStreaming-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -635,9 +700,12 @@
 			baseConfigurationReference = 1A2037C2AE39CF015687F5BE /* Pods-RSLiveStreaming.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = VB27T8S5Y8;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -659,6 +727,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.ron.RSLive;
 				PRODUCT_NAME = RSLive;
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "RSLiveStreaming/RSLiveStreaming-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

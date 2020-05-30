@@ -13,6 +13,7 @@
 #import "LiveAddr.h"
 #import "LiveRoomViewController.h"
 
+
 @interface HotspotViewController () <UICollectionViewDataSource,UICollectionViewDelegate>
 @property (nonatomic,strong) NSArray *liveHubs;             //保存返回的热门主播列表
 @property (nonatomic,strong) NSArray *liveAddrs;            //保存获取到的直播地址
@@ -185,15 +186,16 @@
         NSString *hlsURL = liveAddr.hls_stream_addr;
         NSString *rtmpURL = liveAddr.rtmp_stream_addr;
         NSLog(@"%@\r\t%@\r\t%@\r",streamURL,hlsURL,rtmpURL);
+        //push新的viewController
+         LiveRoomViewController *liveRoomVC = [[LiveRoomViewController alloc] init];
+        //liveRoomVC.liveUrl =   //在获取热门主播列表时，将所有的URL也转成模型存储起来
+        self.tabBarController.tabBar.hidden = YES;                                   //跳转后隐藏bottomBar
+        [self.navigationController pushViewController:liveRoomVC animated:YES];
+        //    liveRoomVC.liveUrl =
     });
     
     
-    //push新的viewController
-    LiveRoomViewController *liveRoomVC = [[LiveRoomViewController alloc] init];
-//    liveRoomVC.liveUrl =   //在获取热门主播列表时，将所有的URL也转成模型存储起来
-    self.tabBarController.tabBar.hidden = YES;                                   //跳转后隐藏bottomBar
-    [self.navigationController pushViewController:liveRoomVC animated:YES];
-//    liveRoomVC.liveUrl =
+    
     
 //    [self.navigationController presentViewController:newView animated:YES completion:^{
 //        NSLog(@"Modal方式弹出房间界面");

@@ -8,12 +8,22 @@
 
 #import <UIKit/UIKit.h>
 
+
+
+
+#define FULL_SCREEN_PLAY_VIDEO_VIEW     10000
+
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface LiveRoomViewController : UIViewController
 
-@property (nonatomic, strong)NSString * liveUrl;
-@property (nonatomic, strong)NSString * imageUrl;
+//@property (nonatomic, strong)NSString * liveUrl;
+//@property (nonatomic, strong)NSString * imageUrl;
+@property (nonatomic, strong) UIView  *videoParentView;
+
+
+
 
 @end
 
