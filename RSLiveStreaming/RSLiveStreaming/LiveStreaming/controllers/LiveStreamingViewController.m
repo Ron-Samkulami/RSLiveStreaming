@@ -52,7 +52,6 @@
     
     //创建contentView
     PageContentView *contentView = [[PageContentView alloc] initWithFrame:contentFrame withChildVCS:VCS withParentVC:self];   
-//    contentView.backgroundColor = [UIColor redColor];
     contentView.delegate = self;
 
     self.contentView = contentView;

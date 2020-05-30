@@ -18,8 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface LiveRoomViewController : UIViewController
 
-//@property (nonatomic, strong)NSString * liveUrl;
-//@property (nonatomic, strong)NSString * imageUrl;
+@property (nonatomic, strong)NSString * liveUrl;
+@property (nonatomic, strong)NSString * imageUrl;
 @property (nonatomic, strong) UIView  *videoParentView;
 
 

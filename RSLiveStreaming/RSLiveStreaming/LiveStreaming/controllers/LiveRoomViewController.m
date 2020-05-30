@@ -33,9 +33,7 @@
     
     // Do any additional setup after loading the view.
 
-//    NSURL *url = [[NSURL alloc] initWithString:@"rtmp://wswebpull.inke.cn/live/1590656275055553?msUid=&auth_version=1&from=h5&ts=1590666440&md5sum=e83d"];
-    
-   
+
     //视频画面父view
     _videoParentView = [[UIView alloc] initWithFrame:self.view.frame];
     _videoParentView.backgroundColor = [UIColor systemPinkColor];
@@ -43,16 +41,9 @@
     [self.view addSubview:_videoParentView];
     [_videoParentView setHidden:YES];
     
-
     self.cdnPlayer = [[TRTCCdnPlayerManager alloc] initWithContainerView:_videoParentView delegate:self];
-//    self.config = [[TRTCCdnPlayerConfig alloc] init];
-//    self.player = [[TXLivePlayer alloc] init];
-//    [self.player setupVideoWidget:CGRectZero containView:_videoParentView insertIndex:0];
-//    self.player.delegate = self;
-    
-    
-    
 
+    
     [self loadingView];
 }
    
@@ -64,7 +55,7 @@
 - (void)loadingView
 {
     _backImage = [[UIImageView alloc] initWithFrame:self.view.bounds];
-    [_backImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://img.ikstatic.cn/MTU5MDA2MjI2MDQyOCMgMjEjanBn.jpg"]]];
+    [_backImage sd_setImageWithURL:[NSURL URLWithString:self.imageUrl]];
     UIVisualEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
     UIVisualEffectView *visualEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
     visualEffectView.frame = _backImage.bounds;
@@ -87,30 +78,27 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-//    [self.navigationController setNavigationBarHidden:YES];     //隐藏导航栏
+    [self.navigationController setNavigationBarHidden:YES];     //隐藏导航栏
+    self.tabBarController.tabBar.hidden = YES;
     self.navigationController.interactivePopGestureRecognizer.delegate = self;  //保持返回手势pop
     self.navigationController.interactivePopGestureRecognizer.enabled = YES;
-    
-//    [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
-//    [self.player startPlay:@"https://wswebpull.inke.cn/live/1590754981482078.flv?msUid=&auth_version=1&from=h5&ts=1590755886&md5sum=b1d2" type:PLAY_TYPE_LIVE_FLV];
-    [self.cdnPlayer startPlay:@"https://wswebpull.inke.cn/live/1590765655944165.flv?msUid=&auth_version=1&from=h5&ts=1590770582&md5sum=bda4"];
+
+    [self.cdnPlayer startPlay:self.liveUrl];
 
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
-//    [self.player stopPlay];
-    [self.cdnPlayer stopPlay];
-    
+    [self.navigationController setNavigationBarHidden:NO];  //必须在这里设置不隐藏，否则会消失
+//    [self.cdnPlayer stopPlay];
 }
 
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    
+    [self.cdnPlayer stopPlay];
+}
 #pragma mark - methods
-
-
-
-
 
 
 - (void)onPlayEvent:(int)EvtID withParam:(NSDictionary *)param {
@@ -120,7 +108,7 @@
 //        [self toastTip:(NSString *) param[EVT_MSG]];
     } else if (EvtID == PLAY_EVT_PLAY_END) {
 //        [self toggleCdnPlay];
-        NSLog(@"直播，网络断连,且经多次重连抢救无效,可以放弃治疗,更多重试请自行重启播放");
+        NSLog(@"结束直播");
     }
 }
 
@@ -140,48 +128,48 @@
  }
  */
 
-- (void)encodeWithCoder:(nonnull NSCoder *)coder {
-    //
-}
-
-- (void)traitCollectionDidChange:(nullable UITraitCollection *)previousTraitCollection {
-    //
-}
-
-- (void)preferredContentSizeDidChangeForChildContentContainer:(nonnull id<UIContentContainer>)container {
-    //
-}
-
-- (CGSize)sizeForChildContentContainer:(nonnull id<UIContentContainer>)container withParentContainerSize:(CGSize)parentSize {
-    return parentSize;
-}
-
-- (void)systemLayoutFittingSizeDidChangeForChildContentContainer:(nonnull id<UIContentContainer>)container {
-    //
-}
-
-- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(nonnull id<UIViewControllerTransitionCoordinator>)coordinator {
-    //
-}
-
-- (void)willTransitionToTraitCollection:(nonnull UITraitCollection *)newCollection withTransitionCoordinator:(nonnull id<UIViewControllerTransitionCoordinator>)coordinator {
-    //
-}
-
-- (void)didUpdateFocusInContext:(nonnull UIFocusUpdateContext *)context withAnimationCoordinator:(nonnull UIFocusAnimationCoordinator *)coordinator {
-    //
-}
-
-- (void)setNeedsFocusUpdate {
-    //
-}
-
-- (BOOL)shouldUpdateFocusInContext:(nonnull UIFocusUpdateContext *)context {
-    return NO;
-}
-
-- (void)updateFocusIfNeeded {
-    //
-}
+//- (void)encodeWithCoder:(nonnull NSCoder *)coder {
+//    //
+//}
+//
+//- (void)traitCollectionDidChange:(nullable UITraitCollection *)previousTraitCollection {
+//    //
+//}
+//
+//- (void)preferredContentSizeDidChangeForChildContentContainer:(nonnull id<UIContentContainer>)container {
+//    //
+//}
+//
+//- (CGSize)sizeForChildContentContainer:(nonnull id<UIContentContainer>)container withParentContainerSize:(CGSize)parentSize {
+//    return parentSize;
+//}
+//
+//- (void)systemLayoutFittingSizeDidChangeForChildContentContainer:(nonnull id<UIContentContainer>)container {
+//    //
+//}
+//
+//- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(nonnull id<UIViewControllerTransitionCoordinator>)coordinator {
+//    //
+//}
+//
+//- (void)willTransitionToTraitCollection:(nonnull UITraitCollection *)newCollection withTransitionCoordinator:(nonnull id<UIViewControllerTransitionCoordinator>)coordinator {
+//    //
+//}
+//
+//- (void)didUpdateFocusInContext:(nonnull UIFocusUpdateContext *)context withAnimationCoordinator:(nonnull UIFocusAnimationCoordinator *)coordinator {
+//    //
+//}
+//
+//- (void)setNeedsFocusUpdate {
+//    //
+//}
+//
+//- (BOOL)shouldUpdateFocusInContext:(nonnull UIFocusUpdateContext *)context {
+//    return NO;
+//}
+//
+//- (void)updateFocusIfNeeded {
+//    //
+//}
 
 @end
