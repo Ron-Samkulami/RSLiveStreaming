@@ -16,14 +16,27 @@
 
 @interface HotspotViewController () <UICollectionViewDataSource,UICollectionViewDelegate>
 @property (nonatomic,strong) NSArray *liveList;             //保存返回的热门主播列表
-//@property (nonatomic,strong) NSArray *liveAddrs;            //保存点击的直播间拉流地址（flv,hls,rtmp）
-@property (nonatomic,strong) LiveAddr *liveAddr;            //保存点击的直播间拉流地址（flv,hls,rtmp）
-@property (nonatomic,copy) NSString *currentLiveImageUrl;
-//@property (nonatomic,strong) NSDictionary *allRoomAddrs;
+//@property (nonatomic,strong) LiveAddr *liveAddr;                    //保存点击的直播间拉流地址（flv,hls,rtmp）
+@property (nonatomic,strong) NSMutableDictionary *coverImageUrls;        //保存所有直播间背景图url
+@property (nonatomic,strong) NSMutableDictionary *liveAddrs;             //保存所有直播流url
 @property (nonatomic,strong) UICollectionView *collectionView;
 @end
 
 @implementation HotspotViewController
+#pragma mark - LazyLoad
+- (NSMutableDictionary *)coverImageUrls {
+    if (_coverImageUrls == nil) {
+        _coverImageUrls = [[NSMutableDictionary alloc] initWithCapacity:30];
+    }
+    return _coverImageUrls;
+}
+
+- (NSMutableDictionary *)liveAddrs {
+    if (_liveAddrs == nil) {
+        _liveAddrs = [[NSMutableDictionary alloc] initWithCapacity:30];
+    }
+    return _liveAddrs;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -54,10 +67,11 @@
     //self.collectionView.alwaysBounceVertical = YES;     //collectionView填不满屏幕时也可刷新
     [self.collectionView addSubview:self.collectionView.refreshControl];
     
+    
     //获取网络数据
-    dispatch_async(dispatch_get_global_queue(0,0), ^{
-        [self getLiveList];
-    });
+//    dispatch_async(dispatch_get_global_queue(0,0), ^{
+        [self getData];
+//    });
 }
 
 #pragma mark - CollectionView DataSource
@@ -85,7 +99,6 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     LiveHub *liveHub = self.liveList[indexPath.item];                       //获取数据模型
     NSNumber *uid = [NSNumber numberWithInt:[liveHub.uid intValue]];        //获取uid
-    NSLog(@"%@",uid);
     [self pushLivePageWithUid:uid];
     
     
@@ -94,7 +107,7 @@
 #pragma mark - Get/Refresh Data
 - (void)refreshData {
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self getLiveList];
+        [self getData];
         if ([self.collectionView.refreshControl isRefreshing]) {
             [self.collectionView.refreshControl endRefreshing];
         }
@@ -102,7 +115,11 @@
 }
 
 
-- (void)getLiveList {
+- (void)getData {
+    //先清空已有的数据
+    [self.coverImageUrls removeAllObjects];
+    [self.liveAddrs removeAllObjects];
+    
     //获取热门主播列表：http://baseapi.busi.inke.cn/live/LiveHotList
     AFHTTPSessionManager *manager = [RSNetworkTools sharedManager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
@@ -111,7 +128,6 @@
     [manager GET:URLString parameters:nil headers:nil progress:^(NSProgress * _Nonnull downloadProgress) {
         //progress process
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSLog(@"GET:%@",responseObject);
         NSError *myError;
         id responseJSON = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingAllowFragments error:&myError];
         if (myError) {
@@ -119,23 +135,37 @@
             return;
         }
         NSArray *dataDicts = [responseJSON valueForKey:@"data"];    //获取第三个key的value
-        NSLog(@"%@",dataDicts);
         NSMutableArray *arrayModels = [NSMutableArray array];
         for (NSDictionary *dict in dataDicts) {
             LiveHub *model = [LiveHub liveHubWithDict:dict];
             [arrayModels addObject:model];
         }
         self.liveList = arrayModels;                    //将获取到的数据转成模型
+        
+        
+        //获取直播间地址
+        //根据每个uid ,获取图片及直播间地址
+        //先清空已有的数据
+        [self.coverImageUrls removeAllObjects];
+        [self.liveAddrs removeAllObjects];
+        
+        for ( LiveHub *liveHub in self.liveList) {
+            NSNumber *uid = [NSNumber numberWithInt:[liveHub.uid intValue]];
+            [self getLiveAddrAndCoverImageWithUid:uid];
+        }
         [self.collectionView reloadData];               //更新UI
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         //failure process
     }];
+    
+    
+    
+    
 }
 
 - (void)getLiveAddrAndCoverImageWithUid:(NSNumber *)uid {
     //获取单个主播地址：http://baseapi.busi.inke.cn/live/LiveInfo?channel_id=&uid=71167152&liveid=&_t=
-    NSLog(@"根据主播uid：%@获取直播间地址数据",uid);
     AFHTTPSessionManager *manager = [RSNetworkTools sharedManager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     NSString *URLString = @"http://baseapi.busi.inke.cn/live/LiveInfo";
@@ -155,8 +185,8 @@
         NSArray *dataDicts = [responseJSON valueForKey:@"data"];            //获取第三个key的value
         //获取直播间主播信息
         NSDictionary *liveInfoDicts = [dataDicts valueForKey:@"live_info"];
-        self.currentLiveImageUrl = [liveInfoDicts valueForKey:@"cover_img"];
-        
+        NSString *coverImageUrl = [liveInfoDicts valueForKey:@"cover_img"];
+        [self.coverImageUrls setValue:coverImageUrl forKey:[NSString stringWithFormat:@"%@",uid]];      //根据uid增加键值对
         //获取直播间拉流地址
         //        NSArray *liveAddrDicts = [dataDicts valueForKey:@"live_addr"];      //__NSSingleObjectArrayI，包含三个不同协议的流媒体网络地址
         //        NSMutableArray *addrSet = [NSMutableArray array];
@@ -167,8 +197,9 @@
         //        self.liveAddrs = addrSet;                                        //将获取到的数据转成模型，并保存到数组中
         
         NSArray *liveAddrDicts = [dataDicts valueForKey:@"live_addr"];
-        LiveAddr *addrModel = [LiveAddr liveAddrWithDict:liveAddrDicts[0]];
-        self.liveAddr = addrModel;
+        LiveAddr *addrModel = [LiveAddr liveAddrWithDict:liveAddrDicts[0]];         //单元素数组，获取第一个元素（包含三个地址的字典）
+        [self.liveAddrs setValue:addrModel forKey:[NSString stringWithFormat:@"%@",uid]];
+        
         
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -178,32 +209,19 @@
 
 //跳转到直播页面
 - (void)pushLivePageWithUid:(NSNumber *)uid{
-    dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        //获取直播地址
-        [self getLiveAddrAndCoverImageWithUid:uid];
-        //回到主线程刷新UI
-        dispatch_async(dispatch_get_main_queue(), ^{
-            
-            //        LiveAddr *liveAddr = self.liveAddrs[0];
-            //        NSString *streamURL = liveAddr.stream_addr;                           //获取直播URL
-            //        NSString *hlsURL = liveAddr.hls_stream_addr;
-            //        NSString *rtmpURL = liveAddr.rtmp_stream_addr;
-            //        NSLog(@"%@\r\t%@\r\t%@\r",streamURL,hlsURL,rtmpURL);
-            
-            //push新的viewController
-            LiveRoomViewController *liveRoomVC = [[LiveRoomViewController alloc] init];
-            liveRoomVC.liveUrl = self.liveAddr.stream_addr;
-            liveRoomVC.imageUrl = self.currentLiveImageUrl;
-            //        self.tabBarController.tabBar.hidden = YES;                                   //跳转后隐藏bottomBar
-            [self.navigationController pushViewController:liveRoomVC animated:YES];
-        });
-    });
-    //    [self.navigationController presentViewController:newView animated:YES completion:^{
-    //        NSLog(@"Modal方式弹出房间界面");
-    //    }];
-    
-    
-    
+
+    LiveAddr *liveAddr = [self.liveAddrs valueForKey:[NSString stringWithFormat:@"%@",uid]];
+    NSString *imageUrl = [self.coverImageUrls valueForKey:[NSString stringWithFormat:@"%@",uid]];
+    if (!(liveAddr && imageUrl)) {
+        NSLog(@"数据未获取到");
+        return;
+    }
+    LiveRoomViewController *liveRoomVC = [[LiveRoomViewController alloc] init];
+    liveRoomVC.liveUrl = liveAddr.stream_addr;
+    liveRoomVC.imageUrl = imageUrl;
+    //        self.tabBarController.tabBar.hidden = YES;                                   //跳转后隐藏bottomBar
+    [self.navigationController pushViewController:liveRoomVC animated:YES];
+
 }
 
 #pragma mark - Life Circle

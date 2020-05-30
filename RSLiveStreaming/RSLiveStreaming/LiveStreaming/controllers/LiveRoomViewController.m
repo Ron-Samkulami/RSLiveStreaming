@@ -19,7 +19,7 @@
 //@property (nonatomic, strong) TRTCCdnPlayerConfig *config;
 //@property (nonatomic, strong) TXLivePlayer *player;
 @property (strong, nonatomic) UIImageView *backImage;
-
+@property (nonatomic, strong) UIView  *videoParentView;
 
 
 @end
@@ -32,21 +32,34 @@
     [super viewDidLoad];
     
     // Do any additional setup after loading the view.
-
-
+    
+    
     //视频画面父view
     _videoParentView = [[UIView alloc] initWithFrame:self.view.frame];
     _videoParentView.backgroundColor = [UIColor systemPinkColor];
     _videoParentView.tag = FULL_SCREEN_PLAY_VIDEO_VIEW;
     [self.view addSubview:_videoParentView];
-    [_videoParentView setHidden:YES];
+    //    [_videoParentView setHidden:YES];
     
     self.cdnPlayer = [[TRTCCdnPlayerManager alloc] initWithContainerView:_videoParentView delegate:self];
-
+    //    self.config = [[TRTCCdnPlayerConfig alloc] init];
+    //    self.player = [[TXLivePlayer alloc] init];
+    //
+    //    [self.player showVideoDebugLog:self.config.isDebugOn];
+    //    [self.player setRenderRotation:self.config.orientation];
+    //    [self.player setRenderMode:self.config.renderMode];
+    //    [self.player.config setCacheTime:5.0];
+    //    [self updatePlayerCache];
+    //
+    //    [self.player setupVideoWidget:self.view.frame containView:_videoParentView insertIndex:0];
+    //    self.player.delegate = self;
+    
+    self.cdnPlayer.config.cacheType = TRTCCdnPlayerCacheTypeFast;
+    
     
     [self loadingView];
 }
-   
+
 #pragma mark --------
 
 
@@ -56,6 +69,9 @@
 {
     _backImage = [[UIImageView alloc] initWithFrame:self.view.bounds];
     [_backImage sd_setImageWithURL:[NSURL URLWithString:self.imageUrl]];
+    _backImage.contentMode = UIViewContentModeScaleAspectFill;
+    _backImage.clipsToBounds = YES;
+    //添加蒙版
     UIVisualEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
     UIVisualEffectView *visualEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
     visualEffectView.frame = _backImage.bounds;
@@ -74,7 +90,7 @@
 
 #pragma mark - Life Circle
 
-        
+
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -82,32 +98,34 @@
     self.tabBarController.tabBar.hidden = YES;
     self.navigationController.interactivePopGestureRecognizer.delegate = self;  //保持返回手势pop
     self.navigationController.interactivePopGestureRecognizer.enabled = YES;
-
+    
     [self.cdnPlayer startPlay:self.liveUrl];
-
+//    [self.player startPlay:self.liveUrl type:PLAY_TYPE_VOD_FLV];
+    
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [self.navigationController setNavigationBarHidden:NO];  //必须在这里设置不隐藏，否则会消失
-//    [self.cdnPlayer stopPlay];
+    //    [self.cdnPlayer stopPlay];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
     
     [self.cdnPlayer stopPlay];
+//    [self.player stopPlay];
 }
 #pragma mark - methods
 
 
 - (void)onPlayEvent:(int)EvtID withParam:(NSDictionary *)param {
     if (EvtID == PLAY_ERR_NET_DISCONNECT) {
-//        [self toggleCdnPlay];
+        //        [self toggleCdnPlay];
         NSLog(@"直播，网络断连,且经多次重连抢救无效,可以放弃治疗,更多重试请自行重启播放");
-//        [self toastTip:(NSString *) param[EVT_MSG]];
+        //        [self toastTip:(NSString *) param[EVT_MSG]];
     } else if (EvtID == PLAY_EVT_PLAY_END) {
-//        [self toggleCdnPlay];
+        //        [self toggleCdnPlay];
         NSLog(@"结束直播");
     }
 }

@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong)NSString * liveUrl;
 @property (nonatomic, strong)NSString * imageUrl;
-@property (nonatomic, strong) UIView  *videoParentView;
+
 
 
 

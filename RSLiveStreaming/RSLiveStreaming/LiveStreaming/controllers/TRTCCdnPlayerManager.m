@@ -27,6 +27,7 @@
         self.config = [[TRTCCdnPlayerConfig alloc] init];
         self.player = [[TXLivePlayer alloc] init];
         [self.player setupVideoWidget:CGRectZero containView:view insertIndex:0];
+//        [self.player setupVideoWidget:view.frame containView:view insertIndex:0];
         self.player.delegate = delegate;
     }
     return self;
