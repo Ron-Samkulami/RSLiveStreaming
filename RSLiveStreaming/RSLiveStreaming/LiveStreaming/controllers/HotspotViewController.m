@@ -15,14 +15,19 @@
 
 
 @interface HotspotViewController () <UICollectionViewDataSource,UICollectionViewDelegate>
+
 @property (nonatomic,strong) NSMutableArray *liveList;             //保存返回的热门主播列表
 //@property (nonatomic,strong) LiveAddr *liveAddr;                    //保存点击的直播间拉流地址（flv,hls,rtmp）
 @property (nonatomic,strong) NSMutableDictionary *coverImageUrls;        //保存所有直播间背景图url
 @property (nonatomic,strong) NSMutableDictionary *liveAddrs;             //保存所有直播流url
 @property (nonatomic,strong) UICollectionView *collectionView;
+
 @end
 
+
 @implementation HotspotViewController
+
+
 #pragma mark - LazyLoad
 - (NSMutableDictionary *)coverImageUrls {
     if (_coverImageUrls == nil) {
@@ -40,7 +45,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
     
     //创建collectionView
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
@@ -69,9 +73,9 @@
     
     
     //获取网络数据
-//    dispatch_async(dispatch_get_global_queue(0,0), ^{
-        [self getData];
-//    });
+    //    dispatch_async(dispatch_get_global_queue(0,0), ^{
+    [self getData];
+    //    });
 }
 
 #pragma mark - CollectionView DataSource
@@ -106,20 +110,16 @@
 
 #pragma mark - Get/Refresh Data
 - (void)refreshData {
+    [self getData];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self getData];
         if ([self.collectionView.refreshControl isRefreshing]) {
             [self.collectionView.refreshControl endRefreshing];
         }
     });
 }
 
-
 - (void)getData {
-    //先清空已有的数据
-    [self.liveList removeAllObjects];
-    [self.coverImageUrls removeAllObjects];
-    [self.liveAddrs removeAllObjects];
+    
     
     //获取热门主播列表：http://baseapi.busi.inke.cn/live/LiveHotList
     AFHTTPSessionManager *manager = [RSNetworkTools sharedManager];
@@ -136,13 +136,16 @@
             return;
         }
         NSArray *dataDicts = [responseJSON valueForKey:@"data"];    //获取第三个key的value
+        //先清空已有的数据
+        [self.liveList removeAllObjects];
+        
         NSMutableArray *arrayModels = [NSMutableArray array];
         for (NSDictionary *dict in dataDicts) {
             LiveHub *model = [LiveHub liveHubWithDict:dict];
             [arrayModels addObject:model];
         }
         self.liveList = arrayModels;                    //将获取到的数据转成模型
-        
+        [self.collectionView reloadData];               //更新UI
         
         //获取直播间地址
         //根据每个uid ,获取图片及直播间地址
@@ -154,11 +157,11 @@
             NSNumber *uid = [NSNumber numberWithInt:[liveHub.uid intValue]];
             [self getLiveAddrAndCoverImageWithUid:uid];
         }
-        [self.collectionView reloadData];               //更新UI
         
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        //failure process
-    }];
+        
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            //failure process
+        }];
     
     
     
@@ -189,14 +192,6 @@
         NSString *coverImageUrl = [liveInfoDicts valueForKey:@"cover_img"];
         [self.coverImageUrls setValue:coverImageUrl forKey:[NSString stringWithFormat:@"%@",uid]];      //根据uid增加键值对
         //获取直播间拉流地址
-        //        NSArray *liveAddrDicts = [dataDicts valueForKey:@"live_addr"];      //__NSSingleObjectArrayI，包含三个不同协议的流媒体网络地址
-        //        NSMutableArray *addrSet = [NSMutableArray array];
-        //        for (NSDictionary *dict in liveAddrDicts) {
-        //            LiveAddr *model = [LiveAddr liveAddrWithDict:dict];
-        //            [addrSet addObject:model];
-        //        }
-        //        self.liveAddrs = addrSet;                                        //将获取到的数据转成模型，并保存到数组中
-        
         NSArray *liveAddrDicts = [dataDicts valueForKey:@"live_addr"];
         LiveAddr *addrModel = [LiveAddr liveAddrWithDict:liveAddrDicts[0]];         //单元素数组，获取第一个元素（包含三个地址的字典）
         [self.liveAddrs setValue:addrModel forKey:[NSString stringWithFormat:@"%@",uid]];
@@ -210,7 +205,7 @@
 
 //跳转到直播页面
 - (void)pushLivePageWithUid:(NSNumber *)uid{
-
+    
     LiveAddr *liveAddr = [self.liveAddrs valueForKey:[NSString stringWithFormat:@"%@",uid]];
     NSString *imageUrl = [self.coverImageUrls valueForKey:[NSString stringWithFormat:@"%@",uid]];
     if (!(liveAddr && imageUrl)) {
@@ -222,10 +217,11 @@
     liveRoomVC.imageUrl = imageUrl;
     //        self.tabBarController.tabBar.hidden = YES;                                   //跳转后隐藏bottomBar
     [self.navigationController pushViewController:liveRoomVC animated:NO];
-
+    
 }
 
 #pragma mark - Life Circle
+
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
