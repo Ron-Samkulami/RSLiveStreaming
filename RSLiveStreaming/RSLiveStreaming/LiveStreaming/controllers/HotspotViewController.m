@@ -15,7 +15,7 @@
 
 
 @interface HotspotViewController () <UICollectionViewDataSource,UICollectionViewDelegate>
-@property (nonatomic,strong) NSArray *liveList;             //保存返回的热门主播列表
+@property (nonatomic,strong) NSMutableArray *liveList;             //保存返回的热门主播列表
 //@property (nonatomic,strong) LiveAddr *liveAddr;                    //保存点击的直播间拉流地址（flv,hls,rtmp）
 @property (nonatomic,strong) NSMutableDictionary *coverImageUrls;        //保存所有直播间背景图url
 @property (nonatomic,strong) NSMutableDictionary *liveAddrs;             //保存所有直播流url
@@ -117,6 +117,7 @@
 
 - (void)getData {
     //先清空已有的数据
+    [self.liveList removeAllObjects];
     [self.coverImageUrls removeAllObjects];
     [self.liveAddrs removeAllObjects];
     
@@ -220,7 +221,7 @@
     liveRoomVC.liveUrl = liveAddr.stream_addr;
     liveRoomVC.imageUrl = imageUrl;
     //        self.tabBarController.tabBar.hidden = YES;                                   //跳转后隐藏bottomBar
-    [self.navigationController pushViewController:liveRoomVC animated:YES];
+    [self.navigationController pushViewController:liveRoomVC animated:NO];
 
 }
 

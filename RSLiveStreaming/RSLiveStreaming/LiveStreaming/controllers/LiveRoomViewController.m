@@ -10,16 +10,15 @@
 
 #import <UIImageView+WebCache.h>
 #import <TXLivePlayer.h>
-#import "TRTCCdnPlayerManager.h"
+
 
 @interface LiveRoomViewController () <UIGestureRecognizerDelegate,TXLivePlayListener>
 
 
-@property (strong, nonatomic, nullable) TRTCCdnPlayerManager *cdnPlayer; //直播观众的CDN拉流播放页面
-//@property (nonatomic, strong) TRTCCdnPlayerConfig *config;
-//@property (nonatomic, strong) TXLivePlayer *player;
+
 @property (strong, nonatomic) UIImageView *backImage;
 @property (nonatomic, strong) UIView  *videoParentView;
+@property (nonatomic, strong) TXLivePlayer *txLivePlayer;
 
 
 @end
@@ -30,39 +29,23 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    [self loadingView];
     // Do any additional setup after loading the view.
     
-    
-    //视频画面父view
     _videoParentView = [[UIView alloc] initWithFrame:self.view.frame];
-    _videoParentView.backgroundColor = [UIColor systemPinkColor];
-    _videoParentView.tag = FULL_SCREEN_PLAY_VIDEO_VIEW;
     [self.view addSubview:_videoParentView];
-    //    [_videoParentView setHidden:YES];
+    _txLivePlayer = [[TXLivePlayer alloc] init];
+    [_txLivePlayer setupVideoWidget:CGRectZero containView:_videoParentView insertIndex:0];
+//    [_txLivePlayer startPlay:self.liveUrl type:PLAY_TYPE_LIVE_FLV];
     
-    self.cdnPlayer = [[TRTCCdnPlayerManager alloc] initWithContainerView:_videoParentView delegate:self];
-    //    self.config = [[TRTCCdnPlayerConfig alloc] init];
-    //    self.player = [[TXLivePlayer alloc] init];
-    //
-    //    [self.player showVideoDebugLog:self.config.isDebugOn];
-    //    [self.player setRenderRotation:self.config.orientation];
-    //    [self.player setRenderMode:self.config.renderMode];
-    //    [self.player.config setCacheTime:5.0];
-    //    [self updatePlayerCache];
-    //
-    //    [self.player setupVideoWidget:self.view.frame containView:_videoParentView insertIndex:0];
-    //    self.player.delegate = self;
-    
-    self.cdnPlayer.config.cacheType = TRTCCdnPlayerCacheTypeFast;
+    _txLivePlayer.delegate = self;
     
     
-    [self loadingView];
+
+    
 }
 
 #pragma mark --------
-
-
 
 // 加载图
 - (void)loadingView
@@ -78,8 +61,8 @@
     [_backImage addSubview:visualEffectView];
     [self.view addSubview:_backImage];
     
-}
 
+}
 
 
 - (void)didReceiveMemoryWarning {
@@ -99,34 +82,44 @@
     self.navigationController.interactivePopGestureRecognizer.delegate = self;  //保持返回手势pop
     self.navigationController.interactivePopGestureRecognizer.enabled = YES;
     
-    [self.cdnPlayer startPlay:self.liveUrl];
-//    [self.player startPlay:self.liveUrl type:PLAY_TYPE_VOD_FLV];
+    [_txLivePlayer startPlay:self.liveUrl type:PLAY_TYPE_LIVE_FLV];
     
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [self.navigationController setNavigationBarHidden:NO];  //必须在这里设置不隐藏，否则会消失
-    //    [self.cdnPlayer stopPlay];
+    
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
     
-    [self.cdnPlayer stopPlay];
-//    [self.player stopPlay];
+//    [self.cdnPlayer stopPlay];
+
+    
+    // 停止播放
+    [_txLivePlayer stopPlay];
+    [_txLivePlayer removeVideoWidget]; // 记得销毁view控件
 }
-#pragma mark - methods
+#pragma mark - Listener
 
 
 - (void)onPlayEvent:(int)EvtID withParam:(NSDictionary *)param {
     if (EvtID == PLAY_ERR_NET_DISCONNECT) {
-        //        [self toggleCdnPlay];
         NSLog(@"直播，网络断连,且经多次重连抢救无效,可以放弃治疗,更多重试请自行重启播放");
-        //        [self toastTip:(NSString *) param[EVT_MSG]];
+        //直播可能已经结束，显示直播主页
     } else if (EvtID == PLAY_EVT_PLAY_END) {
-        //        [self toggleCdnPlay];
+        //    [self toggleCdnPlay];
         NSLog(@"结束直播");
+    } else if (EvtID == PLAY_EVT_PLAY_BEGIN) {
+        [UIView animateWithDuration:0.2 animations:^{
+            self.backImage.alpha = 0.3;
+        } completion:^(BOOL finished) {
+//            self.backImage.hidden = YES;
+            self.backImage.alpha = 0.1;
+        }];
+    
     }
 }
 
