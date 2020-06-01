@@ -180,7 +180,8 @@
     [super viewWillAppear:animated];
     
     //隐藏导航栏
-//    [self.navigationController setNavigationBarHidden:YES animated:YES];
+
+    [self.navigationController setNavigationBarHidden:YES];
     //保持返回手势pop
     self.navigationController.interactivePopGestureRecognizer.delegate = self;
     self.navigationController.interactivePopGestureRecognizer.enabled = YES;

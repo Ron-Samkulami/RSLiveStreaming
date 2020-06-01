@@ -73,9 +73,9 @@
     
     
     //获取网络数据
-    //    dispatch_async(dispatch_get_global_queue(0,0), ^{
+//    dispatch_async(dispatch_get_global_queue(0,0), ^{
     [self getData];
-    //    });
+//    });
 }
 
 #pragma mark - CollectionView DataSource
@@ -224,6 +224,7 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+//    [self getData];
     
 }
 

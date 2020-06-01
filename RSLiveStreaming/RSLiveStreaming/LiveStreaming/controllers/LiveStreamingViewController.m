@@ -11,40 +11,55 @@
 #import "PageContentView.h"
 #import "RecommendViewController.h"
 #import "HotspotViewController.h"
+#import "AVCaptreViewController.h"
 
 @interface LiveStreamingViewController () <PageTitleViewDelegate,PageContentViewDelegate>
 @property (nonatomic,strong) NSArray *childVCS;
 @property (nonatomic,strong) PageContentView *contentView;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *startLiveBtn;
+
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *searchBtn;
 
 @end
 
 @implementation LiveStreamingViewController
+- (IBAction)searchAnchor:(id)sender {
+    NSLog(@"查找主播");
+}
+
+- (IBAction)startLive:(id)sender {
+    NSLog(@"开启直播");
+    AVCaptreViewController *newView = [[AVCaptreViewController alloc] init];
+    newView.view.backgroundColor = [UIColor blueColor];
+
+    //push新的viewController
+    self.tabBarController.tabBar.hidden = YES;                          //跳转后隐藏bottomBar
+    [self.navigationController pushViewController:newView animated:YES];
+    
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    /*
-     set titleView
-     */
+    //set titleView
     NSArray *titleArray = @[@"推荐",@"热门"];
     PageTitleView *titleView = [[PageTitleView alloc] initWithFrame:CGRectMake(0, 0, 250, 44) andTitles:titleArray labelWidth:50];
     titleView.delegate = self;
     UIBarButtonItem *titleItem = [[UIBarButtonItem alloc] initWithCustomView:titleView];
     self.navigationItem.leftBarButtonItem = titleItem;
-    //    [self.navigationItem.leftBarButtonItem.customView setTag:102];
     [self.navigationController.navigationBar setShadowImage:[UIImage new]];     //去掉navigationBar的分割线
+    //rightBarbuttonItem
     
-    /*
-     set contentView
-     */
+    self.searchBtn.tintColor = [UIColor colorWithRed:129 * 1.0 / 255 green:216 * 1.0 / 255 blue:209 * 1.0 /255 alpha:1];
+    self.startLiveBtn.tintColor = [UIColor colorWithRed:129 * 1.0 / 255 green:216 * 1.0 / 255 blue:209 * 1.0 /255 alpha:1];
+
     
-    CGFloat contentH = kScreenH - kNavBarHeight - kTabBarHeight - kBottomSafeHeight;    //再减去 kStatusBarHeight 会使iPhone8小屏幕底下出现空白
-    CGRect contentFrame = CGRectMake(0, kStatusBarHeight , kScreenW , contentH );       //若y值加上navigationBar的高度，会使页contentView面下移
     
-//    NSLog(@"RSScreenH---%lf contentH---%lf ",kScreenH,contentH);
-//    NSLog(@"statusbar---%lf navheight---%d tabBarHeight---%lf toolBarHeight---%lf ",kStatusBarHeight,kNavBarHeight,kTabBarHeight,self.navigationController.toolbar.frame.size.height);
-    
+    //set contentView
+    CGFloat contentH = kScreenH - kNavBarHeight - kTabBarHeight - kBottomSafeHeight;  //再减去 kStatusBarHeight会使iPhone8小屏幕底下出现空白
+    CGRect contentFrame = CGRectMake(0, kStatusBarHeight , kScreenW , contentH );     //若y值加上navigationBar的高度，会使页contentView面下移
     //创建当前Tab页面的子控制器集合
     NSMutableArray *VCS = [[NSMutableArray alloc] init];
     [VCS addObject:[[RecommendViewController alloc] init]];
@@ -53,12 +68,12 @@
     //创建contentView
     PageContentView *contentView = [[PageContentView alloc] initWithFrame:contentFrame withChildVCS:VCS withParentVC:self];   
     contentView.delegate = self;
-
     self.contentView = contentView;
     [self.view addSubview:self.contentView];
     
 
 }
+
 
 #pragma mark - PageTitleViewDelegate
 - (void)contentViewScrollWithTitleView:(PageTitleView *)pageTitleView selectedIndex:(NSInteger)index {

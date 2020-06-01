@@ -17,8 +17,26 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="ALA-CQ-17R"/>
                     </view>
-                    <navigationItem key="navigationItem" leftItemsSupplementBackButton="YES" id="FqO-EB-r3K"/>
-                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" leftItemsSupplementBackButton="YES" id="FqO-EB-r3K">
+                        <rightBarButtonItems>
+                            <barButtonItem image="startLive" id="dA2-hm-PpS">
+                                <connections>
+                                    <action selector="startLive:" destination="9CZ-Y9-bZj" id="94N-6A-hez"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem image="search" id="4qs-gu-fLq">
+                                <connections>
+                                    <action selector="searchAnchor:" destination="9CZ-Y9-bZj" id="UmI-mS-bob"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="searchBtn" destination="4qs-gu-fLq" id="Nh7-ZU-Ucz"/>
+                        <outlet property="startLiveBtn" destination="dA2-hm-PpS" id="rlL-vy-daa"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kL0-ev-7CI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -46,6 +64,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="search" width="20" height="20"/>
+        <image name="startLive" width="30" height="30"/>
         <image name="video" width="30" height="30"/>
     </resources>
 </document>

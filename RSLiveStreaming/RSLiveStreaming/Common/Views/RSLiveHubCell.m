@@ -37,7 +37,13 @@
     [self.imgView sd_setImageWithURL:[NSURL URLWithString:liveHubModel.image2]];
     self.nickLabel.text = liveHubModel.nick;
     self.cityLabel.text = liveHubModel.city;
-    self.onlineCountLabel.text = [NSString stringWithFormat:@"%@",liveHubModel.online_users];
+    int count = [liveHubModel.online_users intValue];
+    if (count > 9999) {
+        self.onlineCountLabel.text = [NSString stringWithFormat:@"%.01f万",(count / 1000) * 0.1];
+    } else {
+       self.onlineCountLabel.text = [NSString stringWithFormat:@"%d",count];
+    }
+    
 }
 
 @end
