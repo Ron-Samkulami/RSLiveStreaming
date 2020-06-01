@@ -10,6 +10,9 @@
 //推荐页面
 #import <UIKit/UIKit.h>
 
+#define btnMargin 15
+#define superViewW [UIScreen mainScreen].bounds.size.width
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface RecommendViewController : UIViewController

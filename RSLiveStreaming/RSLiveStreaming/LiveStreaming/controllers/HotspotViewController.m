@@ -87,14 +87,14 @@
 
 - (nonnull __kindof UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
     
-    LiveHub *liveHub = self.liveList[indexPath.item];       //获取数据模型
-    RSLiveHubCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellId forIndexPath:indexPath];    //创建单元格
-    
+    RSLiveHubCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellId forIndexPath:indexPath];            //创建单元格
     cell.layer.cornerRadius = 10.0f;            //设置圆角和边线
     cell.layer.borderWidth = 1.0f;
     cell.layer.borderColor = [UIColor clearColor].CGColor;
     cell.layer.masksToBounds = YES;             //子view不出格
-    cell.liveHubModel = liveHub;
+    if (indexPath.item < self.liveList.count) {
+        cell.liveHubModel = self.liveList[self.liveList.count - indexPath.item - 1];      //获取数据模型并赋值
+    }
     return cell;
 }
 
@@ -136,14 +136,14 @@
             return;
         }
         NSArray *dataDicts = [responseJSON valueForKey:@"data"];    //获取第三个key的value
-        //先清空已有的数据
-        [self.liveList removeAllObjects];
         
         NSMutableArray *arrayModels = [NSMutableArray array];
         for (NSDictionary *dict in dataDicts) {
             LiveHub *model = [LiveHub liveHubWithDict:dict];
             [arrayModels addObject:model];
         }
+        
+        [self.liveList removeAllObjects];               //先清空已有的数据
         self.liveList = arrayModels;                    //将获取到的数据转成模型
         [self.collectionView reloadData];               //更新UI
         

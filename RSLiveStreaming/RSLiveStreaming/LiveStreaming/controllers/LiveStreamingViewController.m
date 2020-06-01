@@ -50,8 +50,8 @@
     UIBarButtonItem *titleItem = [[UIBarButtonItem alloc] initWithCustomView:titleView];
     self.navigationItem.leftBarButtonItem = titleItem;
     [self.navigationController.navigationBar setShadowImage:[UIImage new]];     //去掉navigationBar的分割线
-    //rightBarbuttonItem
     
+    //rightBarbuttonItem
     self.searchBtn.tintColor = [UIColor colorWithRed:129 * 1.0 / 255 green:216 * 1.0 / 255 blue:209 * 1.0 /255 alpha:1];
     self.startLiveBtn.tintColor = [UIColor colorWithRed:129 * 1.0 / 255 green:216 * 1.0 / 255 blue:209 * 1.0 /255 alpha:1];
 
@@ -76,15 +76,14 @@
 
 
 #pragma mark - PageTitleViewDelegate
+
 - (void)contentViewScrollWithTitleView:(PageTitleView *)pageTitleView selectedIndex:(NSInteger)index {
-    //PageContentView *contentView = [self.view viewWithTag:202];
-    //[contentView scrollToPageAtIndex:index];
     [self.contentView scrollToPageAtIndex:index];
 }
 
 #pragma mark - PageContentViewDelegate
+
 - (void)titleViewScrollWithContentView:(PageContentView *)pageContentView progress:(CGFloat)progress sourceIndex:(NSInteger)sourceIndex targetIndex:(NSInteger)targetIndex {
-    //PageTitleView *titleView = self.navigationItem.leftBarButtonItem.customView;
     [self.navigationItem.leftBarButtonItem.customView scrollTitleWithProgress:progress sourceIndex:sourceIndex targetIndex:targetIndex];
 }
 

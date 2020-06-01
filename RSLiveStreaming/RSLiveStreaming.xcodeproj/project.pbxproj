@@ -30,6 +30,8 @@
 		E4570D352479A88300610AD9 /* PeopleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4570D342479A88300610AD9 /* PeopleViewController.m */; };
 		E4570D382479A8CA00610AD9 /* LiveBroadcastViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4570D372479A8CA00610AD9 /* LiveBroadcastViewController.m */; };
 		E4AD15212471329B001B5848 /* PageContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AD15202471329B001B5848 /* PageContentView.m */; };
+		E4AF329F2485791300F16C87 /* headerView1st.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4AF329D2485791200F16C87 /* headerView1st.xib */; };
+		E4AF32A02485791300F16C87 /* headerView1st.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AF329E2485791300F16C87 /* headerView1st.m */; };
 		E4B903F5246D3ED7008025FA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E4B903F4246D3ED7008025FA /* AppDelegate.m */; };
 		E4B903F8246D3ED7008025FA /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E4B903F7246D3ED7008025FA /* SceneDelegate.m */; };
 		E4B903FE246D3ED7008025FA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E4B903FC246D3ED7008025FA /* Main.storyboard */; };
@@ -91,6 +93,9 @@
 		E4570D372479A8CA00610AD9 /* LiveBroadcastViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LiveBroadcastViewController.m; sourceTree = "<group>"; };
 		E4AD151F2471329B001B5848 /* PageContentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PageContentView.h; sourceTree = "<group>"; };
 		E4AD15202471329B001B5848 /* PageContentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PageContentView.m; sourceTree = "<group>"; };
+		E4AF329C2485791200F16C87 /* headerView1st.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = headerView1st.h; sourceTree = "<group>"; };
+		E4AF329D2485791200F16C87 /* headerView1st.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = headerView1st.xib; sourceTree = "<group>"; };
+		E4AF329E2485791300F16C87 /* headerView1st.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = headerView1st.m; sourceTree = "<group>"; };
 		E4B903F0246D3ED7008025FA /* RSLive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RSLive.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4B903F3246D3ED7008025FA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		E4B903F4246D3ED7008025FA /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -195,6 +200,9 @@
 			isa = PBXGroup;
 			children = (
 				E4B90462246FE3F6008025FA /* LiveStreaming.storyboard */,
+				E4AF329C2485791200F16C87 /* headerView1st.h */,
+				E4AF329E2485791300F16C87 /* headerView1st.m */,
+				E4AF329D2485791200F16C87 /* headerView1st.xib */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -411,6 +419,7 @@
 				E4B9046B246FE4CA008025FA /* MyFollow.storyboard in Resources */,
 				E4B90463246FE3F6008025FA /* LiveStreaming.storyboard in Resources */,
 				E4B9046D246FE4F2008025FA /* MainPage.storyboard in Resources */,
+				E4AF329F2485791300F16C87 /* headerView1st.xib in Resources */,
 				E4B90436246D6D01008025FA /* Assets.xcassets in Resources */,
 				E4B903FE246D3ED7008025FA /* Main.storyboard in Resources */,
 				E4B90466246FE465008025FA /* NearBy.storyboard in Resources */,
@@ -478,6 +487,7 @@
 				E4570D322479A87100610AD9 /* DynamicViewController.m in Sources */,
 				E4B903F5246D3ED7008025FA /* AppDelegate.m in Sources */,
 				E4570D382479A8CA00610AD9 /* LiveBroadcastViewController.m in Sources */,
+				E4AF32A02485791300F16C87 /* headerView1st.m in Sources */,
 				E4570D352479A88300610AD9 /* PeopleViewController.m in Sources */,
 				E4570D2F24796B2500610AD9 /* RSLiveHubCell.m in Sources */,
 				E443CCD8247C5220004304A1 /* RSNetworkTools.m in Sources */,

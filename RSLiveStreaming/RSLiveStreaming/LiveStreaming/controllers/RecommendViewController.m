@@ -14,15 +14,19 @@
 #import "LiveHub.h"
 #import "LiveAddr.h"
 #import "LiveRoomViewController.h"
+#import "headerView1st.h"
 
 
-@interface RecommendViewController () <UICollectionViewDataSource,UICollectionViewDelegate>
+
+
+@interface RecommendViewController () <UICollectionViewDataSource,UICollectionViewDelegate,headerView1stDelegate>
 
 @property (nonatomic,strong) NSMutableArray *liveList;             //保存返回的热门主播列表
 //@property (nonatomic,strong) LiveAddr *liveAddr;                    //保存点击的直播间拉流地址（flv,hls,rtmp）
 @property (nonatomic,strong) NSMutableDictionary *coverImageUrls;        //保存所有直播间背景图url
 @property (nonatomic,strong) NSMutableDictionary *liveAddrs;             //保存所有直播流url
 @property (nonatomic,strong) UICollectionView *collectionView;
+
 
 @end
 
@@ -62,11 +66,16 @@
     collection.showsVerticalScrollIndicator = NO;
     collection.dataSource = self;                                           //数据源和代理
     collection.delegate = self;
+    //注册
     [collection registerNib:[UINib nibWithNibName:@"RSLiveHubCell" bundle:nil] forCellWithReuseIdentifier:CellId];
     [collection registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:HeaderViewId];
+    [collection registerNib:[UINib nibWithNibName:@"headerView1st" bundle:nil] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"headerView1st"];
+    //    [self createHeaderViewSubViews];
     
     self.collectionView = collection;
     [self.view addSubview:self.collectionView];
+    
+    //刷新
     self.collectionView.refreshControl = [[UIRefreshControl alloc] init];
     self.collectionView.refreshControl.tintColor = [UIColor grayColor];
     self.collectionView.refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@"松手刷新"];
@@ -86,11 +95,7 @@
     return 3;
 }
 
-//- (NSInteger)collectionView:(nonnull UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-//    return self.liveList.count;
-//    //    return 100;
-//
-//}
+
 
 - (NSInteger)collectionView:(nonnull UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     NSInteger num = 4;
@@ -111,62 +116,62 @@
 //cell
 - (nonnull __kindof UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
     
-    //三个分组
-    NSLog(@"单元格序号：%ld",indexPath.item);
-    
-    //获取数据模型
-    NSInteger index = 0;
-    if (indexPath.section == 0) {
-        index = indexPath.item;
-        
-    } else if (indexPath.section == 1) {
-        index = indexPath.item + 4;
-    } else if (indexPath.section == 2) {
-        index = indexPath.item + 12;
-    }
-    LiveHub *liveHub = self.liveList[index];
-    
     //创建单元格
     RSLiveHubCell *cell = (RSLiveHubCell *)[collectionView dequeueReusableCellWithReuseIdentifier:CellId forIndexPath:indexPath];
-    
     cell.layer.cornerRadius = 10.0f;        //设置圆角和阴影
     cell.layer.borderWidth = 1.0f;
     cell.layer.borderColor = [UIColor clearColor].CGColor;
     cell.layer.masksToBounds = YES;
     
-    cell.liveHubModel = liveHub;        //把模型数据设置给单元格
+    //计算下标
+    //    NSLog(@"单元格序号：%ld",indexPath.item); //三个分组
+    NSInteger index = 0;
+    if (indexPath.section == 0) {
+        index = indexPath.item;
+    } else if (indexPath.section == 1) {
+        index = indexPath.item + 4;
+    } else if (indexPath.section == 2) {
+        index = indexPath.item + 12;
+    }
+    
+    
+    if (index < self.liveList.count) {
+        cell.liveHubModel = self.liveList[index];       //把模型数据设置给单元格
+    }
     return cell;                        //返回单元格
 }
 
 //headerView
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
     
-    UIView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:HeaderViewId forIndexPath:indexPath];
-    if (indexPath.section == 0) {
-        headerView.backgroundColor = [UIColor systemGrayColor];
-    } else if (indexPath.section ==1) {
-        headerView.backgroundColor = [UIColor systemRedColor];
-    } else {
-        headerView.backgroundColor = [UIColor systemBlueColor];
+    UICollectionReusableView *supplementaryView;
+    if ([kind isEqualToString:UICollectionElementKindSectionHeader]){
+        
+        if (indexPath.section == 0) {
+            headerView1st *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"headerView1st" forIndexPath:indexPath];
+            headerView.delegate = self;
+            supplementaryView = headerView;
+            
+        } else if (indexPath.section == 1) {
+            UICollectionReusableView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:HeaderViewId forIndexPath:indexPath];
+            headerView.backgroundColor = [UIColor systemRedColor];
+            supplementaryView = headerView;
+            
+        } else {
+            UICollectionReusableView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:HeaderViewId forIndexPath:indexPath];
+            headerView.backgroundColor = [UIColor systemBlueColor];
+            supplementaryView = headerView;
+            
+        }
     }
-    
-    return (UICollectionReusableView *)headerView;
-    /*
-     UICollectionReusableView *supplementaryView;
-     if ([kind isEqualToString:UICollectionElementKindSectionHeader]){
-     RSHeaderView *view = (RSHeaderView *)[collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:reuseIdentifierHeader forIndexPath:indexPath];
-     view.headerLabel.text = [NSString stringWithFormat:@"这是header:%ld",indexPath.section];
-     supplementaryView = view;
-     }
-     return supplementaryView;
-     */
+    return supplementaryView;
 }
 
 //header尺寸
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
     
     if (section == 0) {
-        return CGSizeMake(cellWidth * 2, 100);
+        return CGSizeMake(cellWidth * 2, 80);
     } else if (section == 1) {
         return CGSizeMake(cellWidth * 2, 50);
     } else {
@@ -174,6 +179,9 @@
     }
     
 }
+
+
+
 #pragma mark - CollectionView Delegate
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -196,6 +204,7 @@
 
 #pragma mark - Get/Refresh Data
 - (void)refreshData {
+    
     [self getData];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         //        [self getData];
@@ -222,13 +231,14 @@
             return;
         }
         NSArray *dataDicts = [responseJSON valueForKey:@"data"];    //获取第三个key的value
-        //先清空已有的数据(获取到数据后再再清空，否则下拉会崩溃，'index 10 beyond bounds for empty array')
-        [self.liveList removeAllObjects];
+        
         NSMutableArray *arrayModels = [NSMutableArray array];
         for (NSDictionary *dict in dataDicts) {
             LiveHub *model = [LiveHub liveHubWithDict:dict];
             [arrayModels addObject:model];
         }
+        //先清空已有的数据(获取到数据后再再清空，否则下拉会崩溃，'index 10 beyond bounds for empty array')
+        [self.liveList removeAllObjects];
         self.liveList = arrayModels;                    //将获取到的数据转成模型
         [self.collectionView reloadData];               //更新UI
         
@@ -244,9 +254,9 @@
         }
         
         
-        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            //failure process
-        }];
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        //failure process
+    }];
     
     
     
@@ -308,14 +318,48 @@
 #pragma mark - Life Circle
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    
+    self.tabBarController.tabBar.hidden = NO;       //tabbar：跳转页面willAppear设置隐藏
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    self.tabBarController.tabBar.hidden = NO;       //tabbar：跳转页面willAppear设置隐藏
-
+    
+    
 }
+
+
+#pragma mark - HeaderView1st Delegate
+- (void)pushMusicView {
+    NSLog(@"点击了音乐");
+    UIViewController *newView = [[UIViewController alloc] init];
+    newView.view.backgroundColor = [UIColor blueColor];
+    
+    
+    //push新的viewController
+    self.tabBarController.tabBar.hidden = YES;                          //跳转后隐藏bottomBar
+    [self.navigationController pushViewController:newView animated:YES];
+    
+}
+
+- (void)pushShoppingView {
+    NSLog(@"点击了嗨购");
+}
+
+- (void)pushPartyView {
+    NSLog(@"点击了派对");
+}
+
+- (void)pushFunView {
+    NSLog(@"点击了童趣大作战");
+}
+
+- (void)pushMoreChannelView {
+    NSLog(@"点击了更多频道");
+}
+
+
+
+
 
 @end
 
