@@ -29,6 +29,13 @@
 
 
 #pragma mark - LazyLoad
+- (NSMutableArray *)liveList {
+    if (_liveList == nil) {
+        _liveList = [[NSMutableArray alloc] initWithCapacity:30];
+    }
+    return _liveList;
+}
+
 - (NSMutableDictionary *)coverImageUrls {
     if (_coverImageUrls == nil) {
         _coverImageUrls = [[NSMutableDictionary alloc] initWithCapacity:30];

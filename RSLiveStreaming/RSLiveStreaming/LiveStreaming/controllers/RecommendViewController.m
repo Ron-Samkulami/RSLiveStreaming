@@ -35,6 +35,13 @@
 
 
 #pragma mark - LazyLoad
+- (NSMutableArray *)liveList {
+    if (_liveList == nil) {
+        _liveList = [[NSMutableArray alloc] initWithCapacity:30];
+    }
+    return _liveList;
+}               //需要懒加载，否则当第一次从NSMutableArray中取值，而获取数据的过程还没完成，会导致崩溃
+
 - (NSMutableDictionary *)coverImageUrls {
     if (_coverImageUrls == nil) {
         _coverImageUrls = [[NSMutableDictionary alloc] initWithCapacity:30];
