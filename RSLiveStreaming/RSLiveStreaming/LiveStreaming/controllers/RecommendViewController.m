@@ -114,7 +114,9 @@
             num = 8;
             break;
         case 2:
-            num = self.liveList.count - 12;
+            if (self.liveList != nil && ![self.liveList isKindOfClass:[NSNull class]] && self.liveList.count != 0){
+                num = self.liveList.count - 12;
+            }
             break;
     }
     return num;
@@ -152,7 +154,7 @@
     return cell;                        //返回单元格
 }
 
-//headerView
+//header
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
     
     UICollectionReusableView *supplementaryView;
@@ -165,20 +167,30 @@
             
         } else if (indexPath.section == 1) {
             UICollectionReusableView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:HeaderViewId forIndexPath:indexPath];
-            headerView.backgroundColor = [UIColor systemRedColor];
+//            headerView.backgroundColor = [UIColor systemRedColor];
+            UIView *pinView1 = [[UIView alloc] initWithFrame:CGRectMake(5, 0, cellWidth * 2 + 5, 50)];
+            pinView1.backgroundColor = [UIColor orangeColor];
+            pinView1.layer.cornerRadius = 10.0f;        //设置圆角
+            pinView1.layer.masksToBounds = YES;
+            [headerView addSubview:pinView1];
+            
             supplementaryView = headerView;
             
-        } else {
+        } else if (indexPath.section == 2){
             UICollectionReusableView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:HeaderViewId forIndexPath:indexPath];
-            headerView.backgroundColor = [UIColor systemBlueColor];
-            supplementaryView = headerView;
+//            headerView.backgroundColor = [UIColor systemBlueColor];
+            UIView *pinView2 = [[UIView alloc] initWithFrame:CGRectMake(5, 0, cellWidth * 2 + 5, 150)];
+            pinView2.backgroundColor = [UIColor colorWithRed:129 * 1.0 / 255 green:216 * 1.0 / 255 blue:209 * 1.0 /255 alpha:1];
+            pinView2.layer.cornerRadius = 10.0f;        //设置圆角
+            pinView2.layer.masksToBounds = YES;
+            [headerView addSubview:pinView2];
             
+            supplementaryView = headerView;
         }
     }
     return supplementaryView;
 }
 
-//header尺寸
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
     
     if (section == 0) {
@@ -205,6 +217,7 @@
     } else if (indexPath.section == 2) {
         index = indexPath.item + 12;
     }
+    //越界判断
     if (self.liveList != nil && ![self.liveList isKindOfClass:[NSNull class]] && self.liveList.count != 0){
         if (index < self.liveList.count) {
             LiveHub *liveHub = self.liveList[index];

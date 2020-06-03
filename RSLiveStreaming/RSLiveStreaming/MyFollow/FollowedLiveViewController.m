@@ -21,6 +21,7 @@
 @property (nonatomic,strong) NSMutableDictionary *liveAddrs;             //保存所有直播流url
 @property (nonatomic,strong) UICollectionView *collectionView;
 
+
 @end
 
 @implementation FollowedLiveViewController
@@ -50,6 +51,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
     
     //创建collectionView
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
@@ -65,9 +67,11 @@
     collection.showsVerticalScrollIndicator = NO;
     collection.dataSource = self;                                           //数据源和代理
     collection.delegate = self;
+    
     //注册
     [collection registerNib:[UINib nibWithNibName:@"RSLiveHubCell" bundle:nil] forCellWithReuseIdentifier:CellId];
-   
+    //[collection registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"myFollow"];
+    //[collection registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"recommend"];
     
     self.collectionView = collection;
     [self.view addSubview:self.collectionView];
@@ -85,6 +89,8 @@
     //    dispatch_async(dispatch_get_global_queue(0,0), ^{
     [self getData];
     //    });
+    
+    
 }
 
 #pragma mark - CollectionView DataSource
@@ -101,7 +107,9 @@
             num = 4;
             break;
         case 1:
-            num = self.liveList.count - 4;
+            if (self.liveList != nil && ![self.liveList isKindOfClass:[NSNull class]] && self.liveList.count != 0){
+                num = self.liveList.count - 4;
+            }
             break;
     }
     return num;
@@ -110,21 +118,23 @@
 //cell
 - (nonnull __kindof UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
     
+
+    //计算下标
+    //    NSLog(@"单元格序号：%ld",indexPath.item); //三个分组
+    NSInteger index = 0;
+    if (indexPath.section == 0) {
+        index = indexPath.item;
+        //第一组为“个人关注”，使用大cell
+    } else if (indexPath.section == 1) {
+        index = indexPath.item + 4;
+    }
+    
     //创建单元格
     RSLiveHubCell *cell = (RSLiveHubCell *)[collectionView dequeueReusableCellWithReuseIdentifier:CellId forIndexPath:indexPath];
     cell.layer.cornerRadius = 10.0f;        //设置圆角和阴影
     cell.layer.borderWidth = 1.0f;
     cell.layer.borderColor = [UIColor clearColor].CGColor;
     cell.layer.masksToBounds = YES;
-    
-    //计算下标
-    //    NSLog(@"单元格序号：%ld",indexPath.item); //三个分组
-    NSInteger index = 0;
-    if (indexPath.section == 0) {
-        index = indexPath.item;
-    } else if (indexPath.section == 1) {
-        index = indexPath.item + 4;
-    }
     
     if (self.liveList != nil && ![self.liveList isKindOfClass:[NSNull class]] && self.liveList.count != 0){
         if (index < self.liveList.count) {
@@ -135,8 +145,35 @@
     return cell;                        //返回单元格
 }
 
-
-
+//header
+//- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
+//    UICollectionReusableView *supplementaryView;
+//       if ([kind isEqualToString:UICollectionElementKindSectionHeader]){
+//
+//           if (indexPath.section == 0) {
+//               UICollectionReusableView  *myFollowHeaderView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"myFollow" forIndexPath:indexPath];
+//               //此处使用自定义header
+//               supplementaryView = myFollowHeaderView;
+//
+//           } else {
+//               UICollectionReusableView  *recommendHeaderView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"recommend" forIndexPath:indexPath];
+//               //此处使用自定义header
+//
+//               supplementaryView = recommendHeaderView;
+//           }
+//       }
+//       return supplementaryView;
+//}
+//
+//- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
+//
+//    if (section == 0) {
+//        return CGSizeMake(cellWidth * 2, 40);
+//    } else {
+//        return CGSizeMake(cellWidth * 2, 40);
+//    }
+//
+//}
 
 #pragma mark - CollectionView Delegate
 
@@ -148,11 +185,17 @@
     } else if (indexPath.section == 1) {
         index = indexPath.item + 4;
     }
-    LiveHub *liveHub = self.liveList[index];
     
-    NSNumber *uid = [NSNumber numberWithInt:[liveHub.uid intValue]];        //获取uid
-    [self pushLivePageWithUid:uid];
-    
+    //越界判断
+    if (self.liveList != nil && ![self.liveList isKindOfClass:[NSNull class]] && self.liveList.count != 0){
+        if (index < self.liveList.count) {
+            LiveHub *liveHub = self.liveList[index];
+            NSNumber *uid = [NSNumber numberWithInt:[liveHub.uid intValue]];        //获取uid
+            [self pushLivePageWithUid:uid];
+        }
+    } else {
+        return;
+    }
     
 }
 
