@@ -158,11 +158,11 @@
             [arrayModels addObject:model];
         }
         
-        if ([self.collectionView.refreshControl isRefreshing]) {
-            //刷新时候才清空数组
-             self.liveList = nil;               //先清空已有的数据
-        }
-        
+//        if ([self.collectionView.refreshControl isRefreshing]) {
+//            //刷新时候才清空数组
+//             self.liveList = nil;               //先清空已有的数据
+//        }
+//        
         self.liveList = arrayModels;                    //将获取到的数据转成模型
         [self.collectionView reloadData];               //更新UI
         

@@ -11,7 +11,7 @@
 
 
 
-@interface MessagesViewController ()
+@interface MessagesViewController () <UITableViewDelegate,UITableViewDataSource>
 
 @end
 
@@ -21,6 +21,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    //页面标题
     UILabel *titleView = [self labelWithFrame:CGRectMake(0, 0, 80, 44) andText:@"消息"];
     UIBarButtonItem *titleItem = [[UIBarButtonItem alloc] initWithCustomView:titleView];
     self.navigationItem.leftBarButtonItem = titleItem;
@@ -28,6 +29,15 @@
     //覆盖navigationBar的分割线，并使navigationBar的背景显示为白色
     [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
     [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
+    
+    //页面内容tableView
+    UITableView *tableView = [[UITableView alloc] initWithFrame:self.view.frame style:UITableViewStylePlain];
+    tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
+    tableView.rowHeight = 60;
+    tableView.delegate = self;
+    tableView.dataSource = self;
+    [self.view addSubview:tableView];
+    
 
 }
 
@@ -43,6 +53,27 @@
 
     return label;
 }
+
+
+#pragma mark - UItableView DataSource
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 4;
+}
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    static NSString *ID = @"people_cell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:ID];
+    }
+    cell.textLabel.text = @"message";
+    return cell;
+}
+
 /*
  #pragma mark - Navigation
  
