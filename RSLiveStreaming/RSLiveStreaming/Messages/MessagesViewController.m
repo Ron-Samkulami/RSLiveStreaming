@@ -17,6 +17,17 @@
 
 @implementation MessagesViewController
 
+- (IBAction)showContacts:(id)sender {
+    UIViewController *newView = [[UIViewController alloc] init];
+    newView.view.backgroundColor = [UIColor whiteColor];
+    newView.title = @"联系人";
+    
+    
+    //push新的viewController
+    self.tabBarController.tabBar.hidden = YES;                          //跳转后隐藏bottomBar
+    [self.navigationController pushViewController:newView animated:YES];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -33,9 +44,15 @@
     //页面内容tableView
     UITableView *tableView = [[UITableView alloc] initWithFrame:self.view.frame style:UITableViewStylePlain];
     tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
-    tableView.rowHeight = 60;
+    tableView.rowHeight = 80;
     tableView.delegate = self;
     tableView.dataSource = self;
+    
+    
+    [tableView setTableFooterView:[[UIView alloc] initWithFrame:CGRectZero]];
+    tableView.separatorStyle = UITableViewCellEditingStyleNone;
+    
+    
     [self.view addSubview:tableView];
     
 
@@ -55,10 +72,7 @@
 }
 
 
-#pragma mark - UItableView DataSource
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
-}
+#pragma mark - UITableView DataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 4;
@@ -70,10 +84,36 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:ID];
     }
-    cell.textLabel.text = @"message";
+    cell.textLabel.text = @"妲己";
+    cell.detailTextLabel.text = @"你好呀！小正太";
+    
+//    cell.imageView.layer.cornerRadius = 25;
+//    cell.imageView.layer.masksToBounds = YES;
+    cell.imageView.image = [UIImage imageNamed:@"photo01"];
+    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+    
     return cell;
 }
+#pragma mark - UITableView Delegate
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    
+    
+    UIViewController *newView = [[UIViewController alloc] init];
+    newView.view.backgroundColor = [UIColor whiteColor];
+    newView.title = @"互动消息";
+    
+    
+    //push新的viewController
+    self.tabBarController.tabBar.hidden = YES;                          //跳转后隐藏bottomBar
+    [self.navigationController pushViewController:newView animated:YES];
+}
 
+#pragma mark - LifeCircle
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.tabBarController.tabBar.hidden = NO;       //tabbar：跳转页面willAppear设置隐藏
+}
 /*
  #pragma mark - Navigation
  

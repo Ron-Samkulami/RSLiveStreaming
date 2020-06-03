@@ -20,6 +20,16 @@
 @end
 
 @implementation NearByViewController
+- (IBAction)addActivity:(id)sender {
+    UIViewController *newView = [[UIViewController alloc] init];
+    newView.view.backgroundColor = [UIColor whiteColor];
+    newView.title = @"发布动态";
+    
+    
+    //push新的viewController
+    self.tabBarController.tabBar.hidden = YES;                          //跳转后隐藏bottomBar
+    [self.navigationController pushViewController:newView animated:YES];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -76,14 +86,11 @@
 }
 
 
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
+#pragma mark - LifeCircle
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.tabBarController.tabBar.hidden = NO;       //tabbar：跳转页面willAppear设置隐藏
+}
+
 
 @end

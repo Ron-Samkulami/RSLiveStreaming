@@ -30,6 +30,9 @@
 		E4570D352479A88300610AD9 /* PeopleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4570D342479A88300610AD9 /* PeopleViewController.m */; };
 		E4570D382479A8CA00610AD9 /* LiveBroadcastViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4570D372479A8CA00610AD9 /* LiveBroadcastViewController.m */; };
 		E4AD15212471329B001B5848 /* PageContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AD15202471329B001B5848 /* PageContentView.m */; };
+		E4AEDCFC2487C8290011149D /* FollowedLiveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AEDCFB2487C8290011149D /* FollowedLiveViewController.m */; };
+		E4AEDD032487DBC30011149D /* MomentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AEDD012487DBC30011149D /* MomentCell.m */; };
+		E4AEDD042487DBC30011149D /* MomentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4AEDD022487DBC30011149D /* MomentCell.xib */; };
 		E4AF329F2485791300F16C87 /* headerView1st.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4AF329D2485791200F16C87 /* headerView1st.xib */; };
 		E4AF32A02485791300F16C87 /* headerView1st.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AF329E2485791300F16C87 /* headerView1st.m */; };
 		E4B903F5246D3ED7008025FA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E4B903F4246D3ED7008025FA /* AppDelegate.m */; };
@@ -93,6 +96,11 @@
 		E4570D372479A8CA00610AD9 /* LiveBroadcastViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LiveBroadcastViewController.m; sourceTree = "<group>"; };
 		E4AD151F2471329B001B5848 /* PageContentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PageContentView.h; sourceTree = "<group>"; };
 		E4AD15202471329B001B5848 /* PageContentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PageContentView.m; sourceTree = "<group>"; };
+		E4AEDCFA2487C8290011149D /* FollowedLiveViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FollowedLiveViewController.h; sourceTree = "<group>"; };
+		E4AEDCFB2487C8290011149D /* FollowedLiveViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FollowedLiveViewController.m; sourceTree = "<group>"; };
+		E4AEDD002487DBC30011149D /* MomentCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MomentCell.h; sourceTree = "<group>"; };
+		E4AEDD012487DBC30011149D /* MomentCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MomentCell.m; sourceTree = "<group>"; };
+		E4AEDD022487DBC30011149D /* MomentCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MomentCell.xib; sourceTree = "<group>"; };
 		E4AF329C2485791200F16C87 /* headerView1st.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = headerView1st.h; sourceTree = "<group>"; };
 		E4AF329D2485791200F16C87 /* headerView1st.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = headerView1st.xib; sourceTree = "<group>"; };
 		E4AF329E2485791300F16C87 /* headerView1st.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = headerView1st.m; sourceTree = "<group>"; };
@@ -317,6 +325,9 @@
 				E4570D372479A8CA00610AD9 /* LiveBroadcastViewController.m */,
 				E4570D302479A87100610AD9 /* DynamicViewController.h */,
 				E4570D312479A87100610AD9 /* DynamicViewController.m */,
+				E4AEDD002487DBC30011149D /* MomentCell.h */,
+				E4AEDD012487DBC30011149D /* MomentCell.m */,
+				E4AEDD022487DBC30011149D /* MomentCell.xib */,
 			);
 			path = NearBy;
 			sourceTree = "<group>";
@@ -327,6 +338,8 @@
 				E4B90469246FE4CA008025FA /* MyFollow.storyboard */,
 				E4B9041B246D4F6D008025FA /* MyFollowViewController.h */,
 				E4B9041C246D4F6D008025FA /* MyFollowViewController.m */,
+				E4AEDCFA2487C8290011149D /* FollowedLiveViewController.h */,
+				E4AEDCFB2487C8290011149D /* FollowedLiveViewController.m */,
 			);
 			path = MyFollow;
 			sourceTree = "<group>";
@@ -419,6 +432,7 @@
 				E4B9046B246FE4CA008025FA /* MyFollow.storyboard in Resources */,
 				E4B90463246FE3F6008025FA /* LiveStreaming.storyboard in Resources */,
 				E4B9046D246FE4F2008025FA /* MainPage.storyboard in Resources */,
+				E4AEDD042487DBC30011149D /* MomentCell.xib in Resources */,
 				E4AF329F2485791300F16C87 /* headerView1st.xib in Resources */,
 				E4B90436246D6D01008025FA /* Assets.xcassets in Resources */,
 				E4B903FE246D3ED7008025FA /* Main.storyboard in Resources */,
@@ -499,8 +513,10 @@
 				E4B90401246D3ED7008025FA /* RSLiveStreaming.xcdatamodeld in Sources */,
 				E443CCE0247D57DD004304A1 /* LiveAddr.m in Sources */,
 				E4B90414246D4E80008025FA /* NearByViewController.m in Sources */,
+				E4AEDCFC2487C8290011149D /* FollowedLiveViewController.m in Sources */,
 				E443CCD5247C51CC004304A1 /* NSArray+NSDictionary+Ex.m in Sources */,
 				E4B90470246FF1B5008025FA /* MainController.m in Sources */,
+				E4AEDD032487DBC30011149D /* MomentCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

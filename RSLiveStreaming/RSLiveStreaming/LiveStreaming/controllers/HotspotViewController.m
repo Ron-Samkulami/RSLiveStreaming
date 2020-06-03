@@ -16,7 +16,7 @@
 
 @interface HotspotViewController () <UICollectionViewDataSource,UICollectionViewDelegate>
 
-@property (nonatomic,strong) NSMutableArray *liveList;             //保存返回的热门主播列表
+@property (nonatomic,strong) NSArray *liveList;             //保存返回的热门主播列表
 //@property (nonatomic,strong) LiveAddr *liveAddr;                    //保存点击的直播间拉流地址（flv,hls,rtmp）
 @property (nonatomic,strong) NSMutableDictionary *coverImageUrls;        //保存所有直播间背景图url
 @property (nonatomic,strong) NSMutableDictionary *liveAddrs;             //保存所有直播流url
@@ -29,12 +29,12 @@
 
 
 #pragma mark - LazyLoad
-- (NSMutableArray *)liveList {
-    if (_liveList == nil) {
-        _liveList = [[NSMutableArray alloc] initWithCapacity:30];
-    }
-    return _liveList;
-}
+//- (NSMutableArray *)liveList {
+//    if (_liveList == nil) {
+//        _liveList = [[NSMutableArray alloc] initWithCapacity:30];
+//    }
+//    return _liveList;
+//}
 
 - (NSMutableDictionary *)coverImageUrls {
     if (_coverImageUrls == nil) {
@@ -113,14 +113,13 @@
 #pragma mark - CollectionView Delegate
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.item < self.liveList.count) {
-        LiveHub *liveHub = self.liveList[self.liveList.count - indexPath.item - 1];                       //获取数据模型
-        NSNumber *uid = [NSNumber numberWithInt:[liveHub.uid intValue]];        //获取uid
-        [self pushLivePageWithUid:uid];
+    if (self.liveList != nil && ![self.liveList isKindOfClass:[NSNull class]] && self.liveList.count != 0){
+        if (indexPath.item < self.liveList.count) {
+            LiveHub *liveHub = self.liveList[self.liveList.count - indexPath.item - 1];                       //获取数据模型
+            NSNumber *uid = [NSNumber numberWithInt:[liveHub.uid intValue]];        //获取uid
+            [self pushLivePageWithUid:uid];
+        }
     }
-    
-    
-    
 }
 
 #pragma mark - Get/Refresh Data
@@ -163,7 +162,7 @@
 //             self.liveList = nil;               //先清空已有的数据
 //        }
 //        
-        self.liveList = arrayModels;                    //将获取到的数据转成模型
+        self.liveList = [arrayModels copy];                    //将获取到的数据转成模型
         [self.collectionView reloadData];               //更新UI
         
         //获取直播间地址

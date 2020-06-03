@@ -17,7 +17,15 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="FFP-UJ-6T5"/>
                     </view>
-                    <navigationItem key="navigationItem" id="aL3-SR-cT1"/>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="aL3-SR-cT1">
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="photo" catalog="system" id="jfF-L8-jJk">
+                            <connections>
+                                <action selector="addActivity:" destination="8ed-JR-2R9" id="57M-y2-Ftb"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y6e-Tc-8sP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -46,5 +54,6 @@
     </scenes>
     <resources>
         <image name="location" width="30" height="30"/>
+        <image name="photo" catalog="system" width="128" height="93"/>
     </resources>
 </document>

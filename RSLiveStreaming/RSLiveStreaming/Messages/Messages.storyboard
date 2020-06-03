@@ -17,7 +17,13 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="VLV-KZ-jqq"/>
                     </view>
-                    <navigationItem key="navigationItem" id="Zc4-UU-L4D"/>
+                    <navigationItem key="navigationItem" id="Zc4-UU-L4D">
+                        <barButtonItem key="rightBarButtonItem" image="me" style="plain" id="eFe-9y-f7t" userLabel="contacts">
+                            <connections>
+                                <action selector="showContacts:" destination="TWI-Iv-31i" id="Vtf-wU-Q8S"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mlt-16-iIw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -45,6 +51,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="me" width="30" height="30"/>
         <image name="message_blue" width="30" height="30"/>
     </resources>
 </document>

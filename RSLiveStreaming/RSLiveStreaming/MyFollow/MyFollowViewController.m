@@ -9,6 +9,8 @@
 #import "MyFollowViewController.h"
 #import "PageTitleView.h"
 #import "PageContentView.h"
+#import "FollowedLiveViewController.h"
+#import "DynamicViewController.h"
 
 @interface MyFollowViewController () <PageTitleViewDelegate,PageContentViewDelegate>
 @property (nonatomic,strong) NSArray *childVCS;
@@ -25,7 +27,7 @@
     /*
     set titleView
     */
-    NSArray *titleArray = @[@"消息",@"动态"];
+    NSArray *titleArray = @[@"直播",@"动态"];
     PageTitleView *titleView = [[PageTitleView alloc] initWithFrame:CGRectMake(0, 0, 250, 44) andTitles:titleArray labelWidth:50];
     titleView.delegate = self;
     UIBarButtonItem *titleItem = [[UIBarButtonItem alloc] initWithCustomView:titleView];
@@ -46,11 +48,11 @@
     
     //创建collectionView的子页面
     NSMutableArray *VCS = [[NSMutableArray alloc] init];
-    for (int i = 0; i < titleArray.count; i++) {
-        UIViewController *vc = [[UIViewController alloc] init];
-        vc.view.backgroundColor = [UIColor colorWithRed:arc4random_uniform(255) * 1.0 / 255 green:arc4random_uniform(255) * 1.0 / 255 blue:arc4random_uniform(255) * 1.0 / 255 alpha:1];
-        [VCS addObject:vc];
-    }
+//    UIViewController *vc = [[UIViewController alloc] init];
+//    vc.view.backgroundColor = [UIColor colorWithRed:arc4random_uniform(255) * 1.0 / 255 green:arc4random_uniform(255) * 1.0 / 255 blue:arc4random_uniform(255) * 1.0 / 255 alpha:1];
+    [VCS addObject:[[FollowedLiveViewController alloc] init]];
+    [VCS addObject:[[DynamicViewController alloc] init]];
+    
     
     
     //创建collectionView

@@ -1,14 +1,12 @@
-
 //
-//  RecommendViewController.m
+//  FollowedLiveViewController.m
 //  RSLiveStreaming
 //
-//  Created by Ron_Samkulami on 2020/5/22.
+//  Created by Ron_Samkulami on 2020/6/3.
 //  Copyright © 2020 Ron_Samkulami. All rights reserved.
 //
 
-
-#import "RecommendViewController.h"
+#import "FollowedLiveViewController.h"
 #import "RSNetworkTools.h"
 #import "RSLiveHubCell.h"
 #import "LiveHub.h"
@@ -16,22 +14,16 @@
 #import "LiveRoomViewController.h"
 #import "headerView1st.h"
 
-
-
-
-@interface RecommendViewController () <UICollectionViewDataSource,UICollectionViewDelegate,headerView1stDelegate>
+@interface FollowedLiveViewController () <UICollectionViewDataSource,UICollectionViewDelegate>
 
 @property (nonatomic,strong) NSArray *liveList;             //保存返回的热门主播列表
-//@property (nonatomic,strong) LiveAddr *liveAddr;                    //保存点击的直播间拉流地址（flv,hls,rtmp）
 @property (nonatomic,strong) NSMutableDictionary *coverImageUrls;        //保存所有直播间背景图url
 @property (nonatomic,strong) NSMutableDictionary *liveAddrs;             //保存所有直播流url
 @property (nonatomic,strong) UICollectionView *collectionView;
 
-
 @end
 
-
-@implementation RecommendViewController
+@implementation FollowedLiveViewController
 
 
 #pragma mark - LazyLoad
@@ -75,9 +67,7 @@
     collection.delegate = self;
     //注册
     [collection registerNib:[UINib nibWithNibName:@"RSLiveHubCell" bundle:nil] forCellWithReuseIdentifier:CellId];
-    [collection registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:HeaderViewId];
-    [collection registerNib:[UINib nibWithNibName:@"headerView1st" bundle:nil] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"headerView1st"];
-    //    [self createHeaderViewSubViews];
+   
     
     self.collectionView = collection;
     [self.view addSubview:self.collectionView];
@@ -111,10 +101,7 @@
             num = 4;
             break;
         case 1:
-            num = 8;
-            break;
-        case 2:
-            num = self.liveList.count - 12;
+            num = self.liveList.count - 4;
             break;
     }
     return num;
@@ -137,8 +124,6 @@
         index = indexPath.item;
     } else if (indexPath.section == 1) {
         index = indexPath.item + 4;
-    } else if (indexPath.section == 2) {
-        index = indexPath.item + 12;
     }
     
     if (self.liveList != nil && ![self.liveList isKindOfClass:[NSNull class]] && self.liveList.count != 0){
@@ -146,50 +131,10 @@
                 cell.liveHubModel = self.liveList[index];       //把模型数据设置给单元格
         //        NSLog(@"%zd",index);
             }
-
     }
-    
     return cell;                        //返回单元格
 }
 
-//headerView
-- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
-    
-    UICollectionReusableView *supplementaryView;
-    if ([kind isEqualToString:UICollectionElementKindSectionHeader]){
-        
-        if (indexPath.section == 0) {
-            headerView1st *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"headerView1st" forIndexPath:indexPath];
-            headerView.delegate = self;
-            supplementaryView = headerView;
-            
-        } else if (indexPath.section == 1) {
-            UICollectionReusableView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:HeaderViewId forIndexPath:indexPath];
-            headerView.backgroundColor = [UIColor systemRedColor];
-            supplementaryView = headerView;
-            
-        } else {
-            UICollectionReusableView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:HeaderViewId forIndexPath:indexPath];
-            headerView.backgroundColor = [UIColor systemBlueColor];
-            supplementaryView = headerView;
-            
-        }
-    }
-    return supplementaryView;
-}
-
-//header尺寸
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
-    
-    if (section == 0) {
-        return CGSizeMake(cellWidth * 2, 80);
-    } else if (section == 1) {
-        return CGSizeMake(cellWidth * 2, 50);
-    } else {
-        return CGSizeMake(cellWidth * 2, 150);
-    }
-    
-}
 
 
 
@@ -202,18 +147,13 @@
         index = indexPath.item;
     } else if (indexPath.section == 1) {
         index = indexPath.item + 4;
-    } else if (indexPath.section == 2) {
-        index = indexPath.item + 12;
     }
-    if (self.liveList != nil && ![self.liveList isKindOfClass:[NSNull class]] && self.liveList.count != 0){
-        if (index < self.liveList.count) {
-            LiveHub *liveHub = self.liveList[index];
-            NSNumber *uid = [NSNumber numberWithInt:[liveHub.uid intValue]];        //获取uid
-            [self pushLivePageWithUid:uid];
-        }
-    } else {
-        return;
-    }
+    LiveHub *liveHub = self.liveList[index];
+    
+    NSNumber *uid = [NSNumber numberWithInt:[liveHub.uid intValue]];        //获取uid
+    [self pushLivePageWithUid:uid];
+    
+    
 }
 
 #pragma mark - Get/Refresh Data
@@ -252,11 +192,6 @@
             [arrayModels addObject:model];
         }
         
-//        if ([self.collectionView.refreshControl isRefreshing]) {
-//            //先清空已有的数据(获取到数据后再再清空，否则下拉会崩溃，'index 10 beyond bounds for empty array')
-//            //刷新时候才清空数组
-//            self.liveList = nil;
-//        }
         
         self.liveList = [arrayModels copy];                    //将获取到的数据转成模型
         [self.collectionView reloadData];               //更新UI
@@ -347,34 +282,7 @@
 }
 
 
-#pragma mark - HeaderView1st Delegate
-- (void)pushMusicView {
-    NSLog(@"点击了音乐");
-    UIViewController *newView = [[UIViewController alloc] init];
-    newView.view.backgroundColor = [UIColor blueColor];
-    
-    
-    //push新的viewController
-    self.tabBarController.tabBar.hidden = YES;                          //跳转后隐藏bottomBar
-    [self.navigationController pushViewController:newView animated:YES];
-    
-}
 
-- (void)pushShoppingView {
-    NSLog(@"点击了嗨购");
-}
-
-- (void)pushPartyView {
-    NSLog(@"点击了派对");
-}
-
-- (void)pushFunView {
-    NSLog(@"点击了童趣大作战");
-}
-
-- (void)pushMoreChannelView {
-    NSLog(@"点击了更多频道");
-}
 
 
 

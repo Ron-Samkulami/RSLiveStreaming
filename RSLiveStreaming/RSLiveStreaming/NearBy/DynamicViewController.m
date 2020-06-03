@@ -7,6 +7,7 @@
 //
 
 #import "DynamicViewController.h"
+#import "MomentCell.h"
 
 @interface DynamicViewController () <UITableViewDelegate,UITableViewDataSource>
 
@@ -19,9 +20,10 @@
     // Do any additional setup after loading the view.
     UITableView *tableView = [[UITableView alloc] initWithFrame:self.view.frame style:UITableViewStylePlain];
     tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
-    tableView.rowHeight = 88;
+    tableView.rowHeight = 400;
     tableView.delegate = self;
     tableView.dataSource = self;
+    [tableView registerNib:[UINib nibWithNibName:@"MomentCell" bundle:nil] forCellReuseIdentifier:@"people_cell"];
     [self.view addSubview:tableView];
 }
 
@@ -31,10 +33,16 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     static NSString *ID = @"people_cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
+    MomentCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:ID];
+        cell = [[MomentCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ID];
     }
+//    cell.model赋值
+//    cell.textLabel.text = [NSString stringWithFormat:@"动态%zd",indexPath.row];
+//    cell.detailTextLabel.text = @"正文";
+//    cell.imageView.image = [UIImage imageNamed:@"placeHolder"];
+    [cell setSelectionStyle:UITableViewCellSelectionStyleNone]; //取消点击后的高亮效果
+    
     return cell;
 }
 

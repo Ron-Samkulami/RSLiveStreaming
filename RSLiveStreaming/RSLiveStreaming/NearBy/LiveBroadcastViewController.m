@@ -20,9 +20,11 @@
     
     UITableView *tableView = [[UITableView alloc] initWithFrame:self.view.frame style:UITableViewStylePlain];
     tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
-    tableView.rowHeight = 88;
+    tableView.rowHeight = 120;
     tableView.delegate = self;
     tableView.dataSource = self;
+    tableView.separatorStyle = UITableViewCellEditingStyleNone; //不显示分割线
+    
     [self.view addSubview:tableView];
 }
 
@@ -36,16 +38,29 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:ID];
     }
+    
+    cell.textLabel.text = [NSString stringWithFormat:@"妲己%zd",indexPath.row];
+    cell.detailTextLabel.text = @"tags";
+    cell.imageView.image = [UIImage imageNamed:@"photo01"];
+    [cell setSelectionStyle:UITableViewCellSelectionStyleNone]; //取消点击后的高亮效果
+  
+    
     return cell;
 }
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
+
+#pragma mark - UITableView Delegate
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    
+    
+    UIViewController *newView = [[UIViewController alloc] init];
+    newView.view.backgroundColor = [UIColor whiteColor];
+    newView.title = @"附近直播-直播页面";
+    
+    
+    //push新的viewController
+    self.tabBarController.tabBar.hidden = YES;                          //跳转后隐藏bottomBar
+    [self.navigationController pushViewController:newView animated:YES];
+}
 
 @end

@@ -39,6 +39,7 @@
     [switchBtn setTitle:@"switchSence" forState:UIControlStateNormal];
     [switchBtn addTarget:self action:@selector(switchSence) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:switchBtn];
+    [self startCapture];
     
 }
 
