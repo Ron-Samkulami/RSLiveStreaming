@@ -249,7 +249,7 @@
         if ([self.collectionView.refreshControl isRefreshing]) {
             //先清空已有的数据(获取到数据后再再清空，否则下拉会崩溃，'index 10 beyond bounds for empty array')
             //刷新时候才清空数组
-            [self.liveList removeAllObjects];
+            self.liveList = nil;
         }
         
         self.liveList = arrayModels;                    //将获取到的数据转成模型

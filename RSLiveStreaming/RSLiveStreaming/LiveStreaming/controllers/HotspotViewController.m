@@ -99,19 +99,26 @@
     cell.layer.borderWidth = 1.0f;
     cell.layer.borderColor = [UIColor clearColor].CGColor;
     cell.layer.masksToBounds = YES;             //子view不出格
-    if (indexPath.item < self.liveList.count) {
-        cell.liveHubModel = self.liveList[self.liveList.count - indexPath.item - 1];      //获取数据模型并赋值
-//        NSLog(@"%zd",self.liveList.count - indexPath.item - 1);
+    
+    if (self.liveList != nil && ![self.liveList isKindOfClass:[NSNull class]] && self.liveList.count != 0) {
+        if (indexPath.item < self.liveList.count ) {
+                cell.liveHubModel = self.liveList[self.liveList.count - indexPath.item - 1];      //获取数据模型并赋值
+        //        NSLog(@"%zd",self.liveList.count - indexPath.item - 1);
+            }
     }
+    
     return cell;
 }
 
 #pragma mark - CollectionView Delegate
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    LiveHub *liveHub = self.liveList[indexPath.item];                       //获取数据模型
-    NSNumber *uid = [NSNumber numberWithInt:[liveHub.uid intValue]];        //获取uid
-    [self pushLivePageWithUid:uid];
+    if (indexPath.item < self.liveList.count) {
+        LiveHub *liveHub = self.liveList[self.liveList.count - indexPath.item - 1];                       //获取数据模型
+        NSNumber *uid = [NSNumber numberWithInt:[liveHub.uid intValue]];        //获取uid
+        [self pushLivePageWithUid:uid];
+    }
+    
     
     
 }
@@ -153,7 +160,7 @@
         
         if ([self.collectionView.refreshControl isRefreshing]) {
             //刷新时候才清空数组
-             [self.liveList removeAllObjects];               //先清空已有的数据
+             self.liveList = nil;               //先清空已有的数据
         }
         
         self.liveList = arrayModels;                    //将获取到的数据转成模型
