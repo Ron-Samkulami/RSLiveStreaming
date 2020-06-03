@@ -75,9 +75,10 @@
     collection.delegate = self;
     //注册
     [collection registerNib:[UINib nibWithNibName:@"RSLiveHubCell" bundle:nil] forCellWithReuseIdentifier:CellId];
-    [collection registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:HeaderViewId];
     [collection registerNib:[UINib nibWithNibName:@"headerView1st" bundle:nil] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"headerView1st"];
-    //    [self createHeaderViewSubViews];
+    [collection registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"headerView2"];
+    [collection registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"headerView3"];
+    
     
     self.collectionView = collection;
     [self.view addSubview:self.collectionView];
@@ -166,24 +167,26 @@
             supplementaryView = headerView;
             
         } else if (indexPath.section == 1) {
-            UICollectionReusableView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:HeaderViewId forIndexPath:indexPath];
+            UICollectionReusableView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"headerView2" forIndexPath:indexPath];
 //            headerView.backgroundColor = [UIColor systemRedColor];
             UIView *pinView1 = [[UIView alloc] initWithFrame:CGRectMake(5, 0, cellWidth * 2 + 5, 50)];
             pinView1.backgroundColor = [UIColor orangeColor];
             pinView1.layer.cornerRadius = 10.0f;        //设置圆角
             pinView1.layer.masksToBounds = YES;
             [headerView addSubview:pinView1];
+//            NSLog(@"设置第二个headerView");
             
             supplementaryView = headerView;
             
-        } else if (indexPath.section == 2){
-            UICollectionReusableView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:HeaderViewId forIndexPath:indexPath];
+        } else {
+            UICollectionReusableView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"headerView3" forIndexPath:indexPath];
 //            headerView.backgroundColor = [UIColor systemBlueColor];
             UIView *pinView2 = [[UIView alloc] initWithFrame:CGRectMake(5, 0, cellWidth * 2 + 5, 150)];
             pinView2.backgroundColor = [UIColor colorWithRed:129 * 1.0 / 255 green:216 * 1.0 / 255 blue:209 * 1.0 /255 alpha:1];
             pinView2.layer.cornerRadius = 10.0f;        //设置圆角
             pinView2.layer.masksToBounds = YES;
             [headerView addSubview:pinView2];
+//            NSLog(@"设置第三个headerView");
             
             supplementaryView = headerView;
         }

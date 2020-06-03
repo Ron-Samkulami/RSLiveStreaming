@@ -226,6 +226,8 @@
 				E44421EC2476FC6C0056098A /* HotspotViewController.m */,
 				E443CCE7247D8D4D004304A1 /* LiveRoomViewController.h */,
 				E443CCE8247D8D4D004304A1 /* LiveRoomViewController.m */,
+				E443CD0F247E3C57004304A1 /* AVCaptreViewController.h */,
+				E443CD10247E3C57004304A1 /* AVCaptreViewController.m */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -350,8 +352,6 @@
 				E4B9046C246FE4F2008025FA /* MainPage.storyboard */,
 				E4B9040F246D4E2B008025FA /* MainPageViewController.h */,
 				E4B90410246D4E2B008025FA /* MainPageViewController.m */,
-				E443CD0F247E3C57004304A1 /* AVCaptreViewController.h */,
-				E443CD10247E3C57004304A1 /* AVCaptreViewController.m */,
 			);
 			path = MainPage;
 			sourceTree = "<group>";
