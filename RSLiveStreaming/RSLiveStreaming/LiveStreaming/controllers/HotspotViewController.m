@@ -101,6 +101,7 @@
     cell.layer.masksToBounds = YES;             //子view不出格
     if (indexPath.item < self.liveList.count) {
         cell.liveHubModel = self.liveList[self.liveList.count - indexPath.item - 1];      //获取数据模型并赋值
+//        NSLog(@"%zd",self.liveList.count - indexPath.item - 1);
     }
     return cell;
 }
@@ -150,7 +151,11 @@
             [arrayModels addObject:model];
         }
         
-        [self.liveList removeAllObjects];               //先清空已有的数据
+        if ([self.collectionView.refreshControl isRefreshing]) {
+            //刷新时候才清空数组
+             [self.liveList removeAllObjects];               //先清空已有的数据
+        }
+        
         self.liveList = arrayModels;                    //将获取到的数据转成模型
         [self.collectionView reloadData];               //更新UI
         

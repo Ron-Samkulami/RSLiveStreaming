@@ -144,6 +144,7 @@
     
     if (index < self.liveList.count) {
         cell.liveHubModel = self.liveList[index];       //把模型数据设置给单元格
+//        NSLog(@"%zd",index);
     }
     return cell;                        //返回单元格
 }
@@ -244,8 +245,13 @@
             LiveHub *model = [LiveHub liveHubWithDict:dict];
             [arrayModels addObject:model];
         }
-        //先清空已有的数据(获取到数据后再再清空，否则下拉会崩溃，'index 10 beyond bounds for empty array')
-        [self.liveList removeAllObjects];
+        
+        if ([self.collectionView.refreshControl isRefreshing]) {
+            //先清空已有的数据(获取到数据后再再清空，否则下拉会崩溃，'index 10 beyond bounds for empty array')
+            //刷新时候才清空数组
+            [self.liveList removeAllObjects];
+        }
+        
         self.liveList = arrayModels;                    //将获取到的数据转成模型
         [self.collectionView reloadData];               //更新UI
         
