@@ -301,10 +301,10 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E2m-UK-V4B" userLabel="tableViewContainer">
-                                <rect key="frame" x="5" y="415" width="404" height="800"/>
+                                <rect key="frame" x="5" y="415" width="404" height="300"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="800" id="UGl-T8-oGa"/>
+                                    <constraint firstAttribute="height" constant="300" id="UGl-T8-oGa"/>
                                 </constraints>
                             </view>
                         </subviews>

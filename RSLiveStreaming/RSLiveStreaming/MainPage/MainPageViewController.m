@@ -47,7 +47,7 @@
     UIStoryboard *tableViewSB = [UIStoryboard storyboardWithName:@"tableView" bundle:nil];
     UITableViewController *tableViewVC = [tableViewSB instantiateViewControllerWithIdentifier:@"tableViewID"];
     self.tableViewContainer.autoresizingMask = UIViewAutoresizingFlexibleHeight;
-    tableViewVC.view.autoresizingMask = UIViewAutoresizingFlexibleHeight;
+    tableViewVC.tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
     [self addChildViewController:tableViewVC];
     [self.tableViewContainer addSubview:tableViewVC.view];
     
