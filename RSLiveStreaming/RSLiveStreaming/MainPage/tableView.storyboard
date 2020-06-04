@@ -10,7 +10,7 @@
         <scene sceneID="rCg-If-8HM">
             <objects>
                 <tableViewController storyboardIdentifier="tableViewID" id="Fcg-HX-PVj" customClass="MainPageTableVC" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="50" sectionHeaderHeight="1" sectionFooterHeight="5" contentViewInsetsToSafeArea="NO" id="QMd-Gg-PO2">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="50" sectionHeaderHeight="1" sectionFooterHeight="5" contentViewInsetsToSafeArea="NO" id="QMd-Gg-PO2">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
