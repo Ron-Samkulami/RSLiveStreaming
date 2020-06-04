@@ -173,6 +173,19 @@
             pinView1.backgroundColor = [UIColor orangeColor];
             pinView1.layer.cornerRadius = 10.0f;        //设置圆角
             pinView1.layer.masksToBounds = YES;
+            
+            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 50, 50)];
+            label.text = @"直播头条";
+            label.textColor = [UIColor whiteColor];
+            label.numberOfLines = 2;
+            
+            UILabel *contentLabel = [[UILabel alloc]  initWithFrame:CGRectMake(70, 0, 280, 50)];
+            contentLabel.text = @"敖丙妲己连线PK 谁才是天使吻过的嗓音";
+            contentLabel.font = [UIFont systemFontOfSize:14];
+            contentLabel.textColor = [UIColor whiteColor];
+            
+            [pinView1 addSubview:contentLabel];
+            [pinView1 addSubview:label];
             [headerView addSubview:pinView1];
 //            NSLog(@"设置第二个headerView");
             
@@ -181,10 +194,18 @@
         } else {
             UICollectionReusableView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"headerView3" forIndexPath:indexPath];
 //            headerView.backgroundColor = [UIColor systemBlueColor];
-            UIView *pinView2 = [[UIView alloc] initWithFrame:CGRectMake(5, 0, cellWidth * 2 + 5, 150)];
+            UIView *pinView2 = [[UIView alloc] initWithFrame:CGRectMake(5, 0, cellWidth * 2 + 5, 140)];
             pinView2.backgroundColor = [UIColor colorWithRed:129 * 1.0 / 255 green:216 * 1.0 / 255 blue:209 * 1.0 /255 alpha:1];
             pinView2.layer.cornerRadius = 10.0f;        //设置圆角
             pinView2.layer.masksToBounds = YES;
+            
+            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(70, 10, 250, 120)];
+            label.text = @"绿色直播\r\t\t今夜谁当红";
+            label.textColor = [UIColor whiteColor];
+            label.font = [UIFont monospacedDigitSystemFontOfSize:34 weight:3.0];
+            
+            label.numberOfLines = 2;
+            [pinView2 addSubview:label];
             [headerView addSubview:pinView2];
 //            NSLog(@"设置第三个headerView");
             
@@ -201,7 +222,7 @@
     } else if (section == 1) {
         return CGSizeMake(cellWidth * 2, 50);
     } else {
-        return CGSizeMake(cellWidth * 2, 150);
+        return CGSizeMake(cellWidth * 2, 140);
     }
     
 }
