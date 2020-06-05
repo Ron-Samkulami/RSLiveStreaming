@@ -17,10 +17,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,copy) NSString *uid;       //主播ID
 @property (nonatomic,copy) NSString *nick;      //昵称
 @property (nonatomic,assign) BOOL gender;
-@property (nonatomic,assign) NSString *level;
+@property (nonatomic,copy) NSString *level;
 @property (nonatomic,copy) NSString *portrait;  //头像小图
 @property (nonatomic,copy) NSString *name;      //直播件标题
-@property (nonatomic,assign) NSString *online_users;    //观看人数
+@property (nonatomic,copy) NSString *online_users;    //观看人数
 
 + (instancetype)liveHubWithDict:(NSDictionary *)dict;
 - (instancetype)initWithDict:(NSDictionary *)dict;
