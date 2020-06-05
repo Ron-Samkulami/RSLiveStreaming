@@ -1,0 +1,51 @@
+PODS:
+  - AFNetworking (4.0.1):
+    - AFNetworking/NSURLSession (= 4.0.1)
+    - AFNetworking/Reachability (= 4.0.1)
+    - AFNetworking/Security (= 4.0.1)
+    - AFNetworking/Serialization (= 4.0.1)
+    - AFNetworking/UIKit (= 4.0.1)
+  - AFNetworking/NSURLSession (4.0.1):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (4.0.1)
+  - AFNetworking/Security (4.0.1)
+  - AFNetworking/Serialization (4.0.1)
+  - AFNetworking/UIKit (4.0.1):
+    - AFNetworking/NSURLSession
+  - SDWebImage (5.8.0):
+    - SDWebImage/Core (= 5.8.0)
+  - SDWebImage/Core (5.8.0)
+  - Toast-Swift (5.0.1)
+  - TXIMSDK_iOS (4.8.10)
+  - TXLiteAVSDK_Professional (7.2.8940)
+
+DEPENDENCIES:
+  - AFNetworking (~> 4.0)
+  - SDWebImage (~> 5.0)
+  - Toast-Swift
+  - TXIMSDK_iOS
+  - TXLiteAVSDK_Professional (from `http://pod-1252463788.cosgz.myqcloud.com/liteavsdkspec/TXLiteAVSDK_Professional.podspec`)
+
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - AFNetworking
+    - SDWebImage
+    - Toast-Swift
+    - TXIMSDK_iOS
+
+EXTERNAL SOURCES:
+  TXLiteAVSDK_Professional:
+    :podspec: http://pod-1252463788.cosgz.myqcloud.com/liteavsdkspec/TXLiteAVSDK_Professional.podspec
+
+SPEC CHECKSUMS:
+  AFNetworking: 7864c38297c79aaca1500c33288e429c3451fdce
+  SDWebImage: 84000f962cbfa70c07f19d2234cbfcf5d779b5dc
+  Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
+  TXIMSDK_iOS: 17de2fef786f78843687cc7bd9592759edd2ec0b
+  TXLiteAVSDK_Professional: 4afe0775eeff059219964472fd4fa0f1ea4ca860
+
+PODFILE CHECKSUM: f1fd780ff50b1b4ad896320da38cc4f1237537e3
+
+COCOAPODS: 1.9.2
