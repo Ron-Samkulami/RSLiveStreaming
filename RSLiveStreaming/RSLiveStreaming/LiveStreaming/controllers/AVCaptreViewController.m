@@ -26,7 +26,7 @@
 
 
 - (void)viewDidLoad {
-    
+    [super viewDidLoad];
     UIButton *startBtn = [[UIButton alloc] initWithFrame:CGRectMake(20, 150, 120, 30)];
     [startBtn setTitle:@"startCapture" forState:UIControlStateNormal];
     [startBtn addTarget:self action:@selector(startCapture) forControlEvents:UIControlEventTouchUpInside];
@@ -192,14 +192,6 @@
     
     [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

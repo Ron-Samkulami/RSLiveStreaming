@@ -19,14 +19,6 @@
 
 @implementation MainPageViewController
 
-//- (instancetype)init{
-//    self = [super init];
-//    if (self) {
-//
-//    }
-//    return self;
-//}
-
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -35,13 +27,6 @@
     //覆盖navigationBar的分割线，并使navigationBar的背景显示为白色
     [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
     [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
-    
-    self.navigationItem.title = @"";
-    //先隐藏title，页面向上滚动时才显示出来，滚动到顶还是要隐藏！！！！！！！！！！！！！！
-    
-//    //测试:title显隐
-//    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showTitle)];
-//    [self.navigationController.navigationBar addGestureRecognizer:tapGesture];
     
     
     UIStoryboard *tableViewSB = [UIStoryboard storyboardWithName:@"tableView" bundle:nil];
@@ -54,25 +39,6 @@
     
 }
 
-
-//- (void)showTitle {
-//    //换成开始滚动的方法，还需要些 scrollToTop时再次隐藏！！！！！！！！
-//    self.navigationItem.title = @"Ron";
-//}
-
-//测试:push页面跳转
-//- (void)pushController{
-//
-//    //push新的viewController
-//    self.tabBarController.tabBar.hidden = YES;                      //跳转后隐藏bottomBar
-//    [self.navigationController pushViewController:newView animated:YES];
-//
-//    //以下写在newView的viewWillAppear方法中，隐藏导航栏并保持返回手势pop
-////    [newView.navigationController setNavigationBarHidden:YES animated:YES];
-////    newView.navigationController.interactivePopGestureRecognizer.delegate = newView;
-////    newView.navigationController.interactivePopGestureRecognizer.enabled = YES;
-//
-//}
 
 #pragma mark - Life Circle
 - (void)viewWillAppear:(BOOL)animated{
@@ -93,14 +59,6 @@
 }
 
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

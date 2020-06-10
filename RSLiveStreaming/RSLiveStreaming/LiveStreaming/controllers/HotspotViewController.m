@@ -80,9 +80,9 @@
     
     
     //获取网络数据
-//    dispatch_async(dispatch_get_global_queue(0,0), ^{
-    [self getData];
-//    });
+    dispatch_async(dispatch_get_global_queue(0,0), ^{
+        [self getData];
+    });
 }
 
 #pragma mark - CollectionView DataSource
@@ -103,7 +103,6 @@
     if (self.liveList != nil && ![self.liveList isKindOfClass:[NSNull class]] && self.liveList.count != 0) {
         if (indexPath.item < self.liveList.count ) {
                 cell.liveHubModel = self.liveList[self.liveList.count - indexPath.item - 1];      //获取数据模型并赋值
-        //        NSLog(@"%zd",self.liveList.count - indexPath.item - 1);
             }
     }
     
@@ -134,7 +133,6 @@
 
 - (void)getData {
     
-    
     //获取热门主播列表：http://baseapi.busi.inke.cn/live/LiveHotList
     AFHTTPSessionManager *manager = [RSNetworkTools sharedManager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
@@ -157,17 +155,10 @@
             [arrayModels addObject:model];
         }
         
-//        if ([self.collectionView.refreshControl isRefreshing]) {
-//            //刷新时候才清空数组
-//             self.liveList = nil;               //先清空已有的数据
-//        }
-//        
         self.liveList = [arrayModels copy];                    //将获取到的数据转成模型
         [self.collectionView reloadData];               //更新UI
         
-        //获取直播间地址
         //根据每个uid ,获取图片及直播间地址
-        //先清空已有的数据
         [self.coverImageUrls removeAllObjects];
         [self.liveAddrs removeAllObjects];
         
@@ -180,8 +171,6 @@
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             //failure process
         }];
-    
-    
     
     
 }
@@ -214,8 +203,6 @@
         LiveAddr *addrModel = [LiveAddr liveAddrWithDict:liveAddrDicts[0]];         //单元素数组，获取第一个元素（包含三个地址的字典）
         [self.liveAddrs setValue:addrModel forKey:[NSString stringWithFormat:@"%@",uid]];
         
-        
-        
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         //
     }];
@@ -233,7 +220,6 @@
     LiveRoomViewController *liveRoomVC = [[LiveRoomViewController alloc] init];
     liveRoomVC.liveUrl = liveAddr.stream_addr;
     liveRoomVC.imageUrl = imageUrl;
-    //        self.tabBarController.tabBar.hidden = YES;                                   //跳转后隐藏bottomBar
     [self.navigationController pushViewController:liveRoomVC animated:NO];
     
 }

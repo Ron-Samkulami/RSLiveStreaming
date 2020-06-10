@@ -93,9 +93,9 @@
     
     
     //获取网络数据
-    //    dispatch_async(dispatch_get_global_queue(0,0), ^{
-    [self getData];
-    //    });
+    dispatch_async(dispatch_get_global_queue(0,0), ^{
+        [self getData];
+    });
 }
 
 #pragma mark - CollectionView DataSource
@@ -134,7 +134,6 @@
     cell.layer.masksToBounds = YES;
     
     //计算下标
-    //    NSLog(@"单元格序号：%ld",indexPath.item); //三个分组
     NSInteger index = 0;
     if (indexPath.section == 0) {
         index = indexPath.item;
@@ -147,9 +146,8 @@
     if (self.liveList != nil && ![self.liveList isKindOfClass:[NSNull class]] && self.liveList.count != 0){
         if (index < self.liveList.count) {
                 cell.liveHubModel = self.liveList[index];       //把模型数据设置给单元格
-        //        NSLog(@"%zd",index);
+                NSLog(@"获取第%zd个模型数据",index);
             }
-
     }
     
     return cell;                        //返回单元格
@@ -158,17 +156,13 @@
 //header
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
     
-    UICollectionReusableView *supplementaryView;
-    if ([kind isEqualToString:UICollectionElementKindSectionHeader]){
-        
         if (indexPath.section == 0) {
             headerView1st *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"headerView1st" forIndexPath:indexPath];
             headerView.delegate = self;
-            supplementaryView = headerView;
+            return headerView;
             
         } else if (indexPath.section == 1) {
             UICollectionReusableView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"headerView2" forIndexPath:indexPath];
-//            headerView.backgroundColor = [UIColor systemRedColor];
             UIView *pinView1 = [[UIView alloc] initWithFrame:CGRectMake(5, 0, cellWidth * 2 + 5, 50)];
             pinView1.backgroundColor = [UIColor orangeColor];
             pinView1.layer.cornerRadius = 10.0f;        //设置圆角
@@ -187,13 +181,10 @@
             [pinView1 addSubview:contentLabel];
             [pinView1 addSubview:label];
             [headerView addSubview:pinView1];
-//            NSLog(@"设置第二个headerView");
-            
-            supplementaryView = headerView;
+            return headerView;
             
         } else {
             UICollectionReusableView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"headerView3" forIndexPath:indexPath];
-//            headerView.backgroundColor = [UIColor systemBlueColor];
             UIView *pinView2 = [[UIView alloc] initWithFrame:CGRectMake(5, 0, cellWidth * 2 + 5, 140)];
             pinView2.backgroundColor = [UIColor colorWithRed:129 * 1.0 / 255 green:216 * 1.0 / 255 blue:209 * 1.0 /255 alpha:1];
             pinView2.layer.cornerRadius = 10.0f;        //设置圆角
@@ -207,12 +198,8 @@
             label.numberOfLines = 2;
             [pinView2 addSubview:label];
             [headerView addSubview:pinView2];
-//            NSLog(@"设置第三个headerView");
-            
-            supplementaryView = headerView;
+            return headerView;
         }
-    }
-    return supplementaryView;
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
@@ -233,18 +220,18 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     //获取数据模型
-    NSInteger index = 0;
+    NSInteger idx = 0;
     if (indexPath.section == 0) {
-        index = indexPath.item;
+        idx = indexPath.item;
     } else if (indexPath.section == 1) {
-        index = indexPath.item + 4;
+        idx = indexPath.item + 4;
     } else if (indexPath.section == 2) {
-        index = indexPath.item + 12;
+        idx = indexPath.item + 12;
     }
     //越界判断
     if (self.liveList != nil && ![self.liveList isKindOfClass:[NSNull class]] && self.liveList.count != 0){
-        if (index < self.liveList.count) {
-            LiveHub *liveHub = self.liveList[index];
+        if (idx < self.liveList.count) {
+            LiveHub *liveHub = self.liveList[idx];
             NSNumber *uid = [NSNumber numberWithInt:[liveHub.uid intValue]];        //获取uid
             [self pushLivePageWithUid:uid];
         }
@@ -272,51 +259,39 @@
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     
     NSString *URLString = @"http://baseapi.busi.inke.cn/live/LiveHotList";
-    [manager GET:URLString parameters:nil headers:nil progress:^(NSProgress * _Nonnull downloadProgress) {
-        //progress process
-    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSError *myError;
-        id responseJSON = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingAllowFragments error:&myError];
-        if (myError) {
-            NSLog(@"解析JSON出错");
-            return;
-        }
-        NSArray *dataDicts = [responseJSON valueForKey:@"data"];    //获取第三个key的value
-        
-        NSMutableArray *arrayModels = [NSMutableArray array];
-        for (NSDictionary *dict in dataDicts) {
-            LiveHub *model = [LiveHub liveHubWithDict:dict];
-            [arrayModels addObject:model];
-        }
-        
-//        if ([self.collectionView.refreshControl isRefreshing]) {
-//            //先清空已有的数据(获取到数据后再再清空，否则下拉会崩溃，'index 10 beyond bounds for empty array')
-//            //刷新时候才清空数组
-//            self.liveList = nil;
-//        }
-        
-        self.liveList = [arrayModels copy];                    //将获取到的数据转成模型
-        [self.collectionView reloadData];               //更新UI
-        
-        //获取直播间地址
-        //根据每个uid ,获取图片及直播间地址
-        //先清空已有的数据
-        [self.coverImageUrls removeAllObjects];
-        [self.liveAddrs removeAllObjects];
-        
-        for ( LiveHub *liveHub in self.liveList) {
-            NSNumber *uid = [NSNumber numberWithInt:[liveHub.uid intValue]];
-            [self getLiveAddrAndCoverImageWithUid:uid];
-        }
-        
-        
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        //failure process
-    }];
-    
-    
-    
-    
+        [manager GET:URLString parameters:nil headers:nil progress:^(NSProgress * _Nonnull downloadProgress) {
+            //progress process
+        } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            NSError *myError;
+            id responseJSON = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingAllowFragments error:&myError];
+            if (myError) {
+                NSLog(@"解析JSON出错");
+                return;
+            }
+            NSArray *dataDicts = [responseJSON valueForKey:@"data"];    //获取第三个key的value
+            
+            NSMutableArray *arrayModels = [NSMutableArray array];
+            for (NSDictionary *dict in dataDicts) {
+                LiveHub *model = [LiveHub liveHubWithDict:dict];
+                [arrayModels addObject:model];
+                
+            }
+            self.liveList = [arrayModels copy];                    //将获取到的数据转成模型
+            if (self.liveList) {
+                
+                [self.collectionView reloadData];               //更新UI
+            }
+            //根据每个uid ,获取图片及直播间地址
+            [self.coverImageUrls removeAllObjects];         //先清空已有的数据
+            [self.liveAddrs removeAllObjects];
+            for ( LiveHub *liveHub in self.liveList) {
+                NSNumber *uid = [NSNumber numberWithInt:[liveHub.uid intValue]];
+                [self getLiveAddrAndCoverImageWithUid:uid];
+            }
+            
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            //failure process
+        }];
 }
 
 - (void)getLiveAddrAndCoverImageWithUid:(NSNumber *)uid {

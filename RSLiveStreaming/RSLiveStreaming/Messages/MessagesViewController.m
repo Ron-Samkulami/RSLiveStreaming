@@ -86,9 +86,6 @@
     }
     cell.textLabel.text = @"妲己";
     cell.detailTextLabel.text = @"你好呀！小正太";
-    
-//    cell.imageView.layer.cornerRadius = 25;
-//    cell.imageView.layer.masksToBounds = YES;
     cell.imageView.image = [UIImage imageNamed:@"photo01"];
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     
@@ -114,14 +111,6 @@
     [super viewWillAppear:animated];
     self.tabBarController.tabBar.hidden = NO;       //tabbar：跳转页面willAppear设置隐藏
 }
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
+
 
 @end

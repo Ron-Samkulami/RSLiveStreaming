@@ -35,9 +35,13 @@
     [self.view addSubview:_videoParentView];
     _txLivePlayer = [[TXLivePlayer alloc] init];
     [_txLivePlayer setupVideoWidget:CGRectZero containView:_videoParentView insertIndex:0];
-//    [_txLivePlayer startPlay:self.liveUrl type:PLAY_TYPE_LIVE_FLV];
-    
     _txLivePlayer.delegate = self;
+
+//    UIButton *closeBtn = [[UIButton alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width - 60, [UIScreen mainScreen].bounds.size.height - 60, 20, 20)];
+//    closeBtn.titleLabel.text = @"关闭";
+//    [closeBtn addTarget:self action:@selector(closeVC) forControlEvents:UIControlEventTouchUpInside];
+//    [self.view insertSubview:closeBtn atIndex:2];
+    
     
     
 
@@ -45,7 +49,10 @@
 }
 
 #pragma mark --------
-
+//- (void)closeVC {
+//    NSLog(@"关闭直播间");
+//    [self.navigationController popViewControllerAnimated:NO];
+//}
 // 加载图
 - (void)loadingView
 {
@@ -93,10 +100,7 @@
 
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
-    
-//    [self.cdnPlayer stopPlay];
 
-    
     // 停止播放
     [_txLivePlayer stopPlay];
     [_txLivePlayer removeVideoWidget]; // 记得销毁view控件
@@ -126,60 +130,5 @@
     //
 }
 
-
-
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
-
-//- (void)encodeWithCoder:(nonnull NSCoder *)coder {
-//    //
-//}
-//
-//- (void)traitCollectionDidChange:(nullable UITraitCollection *)previousTraitCollection {
-//    //
-//}
-//
-//- (void)preferredContentSizeDidChangeForChildContentContainer:(nonnull id<UIContentContainer>)container {
-//    //
-//}
-//
-//- (CGSize)sizeForChildContentContainer:(nonnull id<UIContentContainer>)container withParentContainerSize:(CGSize)parentSize {
-//    return parentSize;
-//}
-//
-//- (void)systemLayoutFittingSizeDidChangeForChildContentContainer:(nonnull id<UIContentContainer>)container {
-//    //
-//}
-//
-//- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(nonnull id<UIViewControllerTransitionCoordinator>)coordinator {
-//    //
-//}
-//
-//- (void)willTransitionToTraitCollection:(nonnull UITraitCollection *)newCollection withTransitionCoordinator:(nonnull id<UIViewControllerTransitionCoordinator>)coordinator {
-//    //
-//}
-//
-//- (void)didUpdateFocusInContext:(nonnull UIFocusUpdateContext *)context withAnimationCoordinator:(nonnull UIFocusAnimationCoordinator *)coordinator {
-//    //
-//}
-//
-//- (void)setNeedsFocusUpdate {
-//    //
-//}
-//
-//- (BOOL)shouldUpdateFocusInContext:(nonnull UIFocusUpdateContext *)context {
-//    return NO;
-//}
-//
-//- (void)updateFocusIfNeeded {
-//    //
-//}
 
 @end

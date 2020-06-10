@@ -78,7 +78,6 @@ RSRGBVlaues hilightRGB = {129,216,209};         //高亮样式RGB值
         UIView *scrollLine = [[UIView alloc] init];
         //设置scrollLine的颜色，与UITabBar.appearance.tintColor（AppDelegate中）相同
         scrollLine.backgroundColor = [UIColor colorWithRed:129 * 1.0 / 255 green:216 * 1.0 / 255 blue:209 * 1.0 /255 alpha:1];
-//        scrollLine.backgroundColor = [UIColor colorWithRed:hilightRGB.RValue / 255 green:hilightRGB.GValue /255 blue:hilightRGB.BValue /255 alpha:1];
         scrollLine.frame = CGRectMake(firstLabel.frame.origin.x, scrollView.frame.origin.y + scrollView.frame.size.height  - kScrollLineH, labelWidth, kScrollLineH);
         [scrollLine setTag:300];
         [self addSubview:scrollLine];
@@ -152,13 +151,6 @@ RSRGBVlaues hilightRGB = {129,216,209};         //高亮样式RGB值
 }
     
 
-   
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
+
 
 @end

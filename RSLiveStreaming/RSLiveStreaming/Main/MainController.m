@@ -20,9 +20,8 @@
     NSInteger index = [self.tabBar.items indexOfObject:item];
     if (index == self.currentSelectedItem) {
         if (index != 4) {       //“我的”页面不用刷新数据
-            NSLog(@"mainController: 重复点击,执行刷新数据任务");
-            NSLog(@"%@",self.childViewControllers[index].childViewControllers[0].childViewControllers);
-            
+//            NSLog(@"mainController: 重复点击,执行刷新数据任务");
+//            NSLog(@"%@",self.childViewControllers[index].childViewControllers[0].childViewControllers);
             
             //设置代理，刷新数据
         }
@@ -56,15 +55,7 @@
     // Do any additional setup after loading the view.
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 
 @end

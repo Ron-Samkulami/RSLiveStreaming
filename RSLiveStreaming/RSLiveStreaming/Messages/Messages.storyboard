@@ -18,7 +18,7 @@
                         <viewLayoutGuide key="safeArea" id="VLV-KZ-jqq"/>
                     </view>
                     <navigationItem key="navigationItem" id="Zc4-UU-L4D">
-                        <barButtonItem key="rightBarButtonItem" image="me" style="plain" id="eFe-9y-f7t" userLabel="contacts">
+                        <barButtonItem key="rightBarButtonItem" image="me" id="eFe-9y-f7t" userLabel="contacts">
                             <connections>
                                 <action selector="showContacts:" destination="TWI-Iv-31i" id="Vtf-wU-Q8S"/>
                             </connections>

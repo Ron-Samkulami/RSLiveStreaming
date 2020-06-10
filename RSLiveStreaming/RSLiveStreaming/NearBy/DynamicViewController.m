@@ -18,6 +18,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
     UITableView *tableView = [[UITableView alloc] initWithFrame:self.view.frame style:UITableViewStylePlain];
     tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
     tableView.rowHeight = 400;
@@ -37,25 +38,10 @@
     if (cell == nil) {
         cell = [[MomentCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ID];
     }
-//    cell.model赋值
-//    cell.textLabel.text = [NSString stringWithFormat:@"动态%zd",indexPath.row];
-//    cell.detailTextLabel.text = @"正文";
-//    cell.imageView.image = [UIImage imageNamed:@"placeHolder"];
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone]; //取消点击后的高亮效果
     
     return cell;
 }
 
-
-
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
 
 @end

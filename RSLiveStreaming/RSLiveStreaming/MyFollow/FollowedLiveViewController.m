@@ -86,9 +86,9 @@
     
     
     //获取网络数据
-    //    dispatch_async(dispatch_get_global_queue(0,0), ^{
-    [self getData];
-    //    });
+    dispatch_async(dispatch_get_global_queue(0,0), ^{
+        [self getData];
+    });
     
     
 }
@@ -238,10 +238,8 @@
         
         self.liveList = [arrayModels copy];                    //将获取到的数据转成模型
         [self.collectionView reloadData];               //更新UI
-        
-        //获取直播间地址
+
         //根据每个uid ,获取图片及直播间地址
-        //先清空已有的数据
         [self.coverImageUrls removeAllObjects];
         [self.liveAddrs removeAllObjects];
         
@@ -323,12 +321,6 @@
     
     
 }
-
-
-
-
-
-
 
 
 @end

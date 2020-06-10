@@ -62,13 +62,6 @@
 }
 
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
 
 #pragma mark - CollectionView DataSource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -133,7 +126,7 @@
             sourceIndex = self.childVCS.count - 1;
         }
     }
-    //NSLog(@"--%lf--%ld--%ld--",progress,sourceIndex,targetIndex);
+
     //调用代理方法，滚动title
     if ([self.delegate respondsToSelector:@selector(titleViewScrollWithContentView:progress:sourceIndex:targetIndex:)]) {
         [self.delegate titleViewScrollWithContentView:self progress:progress sourceIndex:sourceIndex targetIndex:targetIndex];
@@ -152,7 +145,6 @@
     self.isForbidScrollDelegate = YES;
     
     UICollectionView *collectionView = [self viewWithTag:200];
-    //NSLog(@"PageContentView中viewWithTag：%@",collectionView);
     CGFloat offsetX = index * collectionView.frame.size.width;
     [collectionView setContentOffset:CGPointMake(offsetX, 0) animated:YES];
    

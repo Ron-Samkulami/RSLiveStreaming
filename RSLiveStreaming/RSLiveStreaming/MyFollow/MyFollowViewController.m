@@ -48,8 +48,6 @@
     
     //创建collectionView的子页面
     NSMutableArray *VCS = [[NSMutableArray alloc] init];
-//    UIViewController *vc = [[UIViewController alloc] init];
-//    vc.view.backgroundColor = [UIColor colorWithRed:arc4random_uniform(255) * 1.0 / 255 green:arc4random_uniform(255) * 1.0 / 255 blue:arc4random_uniform(255) * 1.0 / 255 alpha:1];
     [VCS addObject:[[FollowedLiveViewController alloc] init]];
     [VCS addObject:[[DynamicViewController alloc] init]];
     
@@ -76,14 +74,6 @@
 }
 
 
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
+
 
 @end
