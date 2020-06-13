@@ -22,19 +22,20 @@
 
 // Swizzling交换方法
 + (void)load {
-    Method fromMethod = class_getInstanceMethod(objc_getClass("__NSArray0"), @selector(objectAtIndex:));
-    Method toMethod = class_getInstanceMethod(objc_getClass("__NSArray0"), @selector(cm_objectAtIndex:));
+    Method fromMethod = class_getInstanceMethod(self, @selector(objectAtIndex:));
+    Method toMethod = class_getInstanceMethod(self, @selector(cm_objectAtIndex:));
     method_exchangeImplementations(fromMethod, toMethod);
 }
 
 - (id)cm_objectAtIndex:(NSUInteger)index {
     // 判断下标是否越界，如果越界就进入异常拦截
-    if (self.count-1 < index) {
+    if (index > self.count - 1) {
         @try {
+            NSLog(@"越界，trycatch");
             return [self cm_objectAtIndex:index];
         }
         @catch (NSException *exception) {
-            // 在崩溃后会打印崩溃信息。如果是线上，可以在这里将崩溃信息发送到服务器
+            // 在崩溃后会打印崩溃信息
             NSLog(@"---------- %s Crash Because Method %s  ----------\n", class_getName(self.class), __func__);
             NSLog(@"%@", [exception callStackSymbols]);
             return nil;
@@ -42,6 +43,7 @@
         @finally {}
     } // 如果没有问题，则正常进行方法调用
     else {
+        NSLog(@"未越界，调用原生方法");
         return [self cm_objectAtIndex:index];
     }
 }

@@ -17,14 +17,23 @@
     
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-//        NSURL *baseURL = [NSURL URLWithString:@"http://c.m.163.com/nc/"];
         NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
 //        config.requestCachePolicy = NSURLRequestUseProtocolCachePolicy;
         config.requestCachePolicy = NSURLRequestReloadIgnoringCacheData;
-//        config.timeoutIntervalForRequest = 15;                          //配置超时时长
+//        config.timeoutIntervalForRequest = 15;                          //超时时长
         instance = [[self alloc] initWithBaseURL:nil sessionConfiguration:config];
     });
     return instance;
 }
 
++ (instancetype)sharedManager1 {
+    static id instance = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
+        config.requestCachePolicy = NSURLRequestUseProtocolCachePolicy;
+        instance = [[self alloc] initWithBaseURL:nil sessionConfiguration:config];
+    });
+    return instance;
+}
 @end

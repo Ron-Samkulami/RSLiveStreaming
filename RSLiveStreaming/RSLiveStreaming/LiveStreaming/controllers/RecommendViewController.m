@@ -40,7 +40,7 @@
         _liveList = [[NSArray alloc] init];
     }
     return _liveList;
-}               //需要懒加载，否则当第一次从NSMutableArray中取值，而获取数据的过程还没完成，会导致崩溃
+}
 
 - (NSMutableDictionary *)coverImageUrls {
     if (_coverImageUrls == nil) {
@@ -146,7 +146,7 @@
     if (self.liveList != nil && ![self.liveList isKindOfClass:[NSNull class]] && self.liveList.count != 0){
         if (index < self.liveList.count) {
                 cell.liveHubModel = self.liveList[index];       //把模型数据设置给单元格
-                NSLog(@"获取第%zd个模型数据",index);
+//                NSLog(@"获取第%zd个模型数据",index);
             }
     }
     
@@ -253,45 +253,48 @@
 }
 
 - (void)getData {
-    
+    __weak typeof(self) weakSelf = self;
     //获取热门主播列表：http://baseapi.busi.inke.cn/live/LiveHotList
     AFHTTPSessionManager *manager = [RSNetworkTools sharedManager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     
     NSString *URLString = @"http://baseapi.busi.inke.cn/live/LiveHotList";
-        [manager GET:URLString parameters:nil headers:nil progress:^(NSProgress * _Nonnull downloadProgress) {
-            //progress process
-        } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-            NSError *myError;
-            id responseJSON = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingAllowFragments error:&myError];
-            if (myError) {
-                NSLog(@"解析JSON出错");
-                return;
-            }
-            NSArray *dataDicts = [responseJSON valueForKey:@"data"];    //获取第三个key的value
+    [manager GET:URLString parameters:nil headers:nil progress:^(NSProgress * _Nonnull downloadProgress) {
+        //progress process
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        typeof(weakSelf) strongSelf = weakSelf;
+        NSError *myError;
+        id responseJSON = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingAllowFragments error:&myError];
+        if (myError) {
+            NSLog(@"解析JSON出错");
+            return;
+        }
+        NSArray *dataDicts = [responseJSON valueForKey:@"data"];    //获取第三个key的value
+        
+        NSMutableArray *arrayModels = [NSMutableArray array];
+        for (NSDictionary *dict in dataDicts) {
+            LiveHub *model = [LiveHub liveHubWithDict:dict];
+            [arrayModels addObject:model];
+        
             
-            NSMutableArray *arrayModels = [NSMutableArray array];
-            for (NSDictionary *dict in dataDicts) {
-                LiveHub *model = [LiveHub liveHubWithDict:dict];
-                [arrayModels addObject:model];
-                
-            }
-            self.liveList = [arrayModels copy];                    //将获取到的数据转成模型
-            if (self.liveList) {
-                
-                [self.collectionView reloadData];               //更新UI
-            }
-            //根据每个uid ,获取图片及直播间地址
-            [self.coverImageUrls removeAllObjects];         //先清空已有的数据
-            [self.liveAddrs removeAllObjects];
-            for ( LiveHub *liveHub in self.liveList) {
-                NSNumber *uid = [NSNumber numberWithInt:[liveHub.uid intValue]];
-                [self getLiveAddrAndCoverImageWithUid:uid];
-            }
+        }
+        strongSelf.liveList = [arrayModels copy];                    //将获取到的数据转成模型
+        if (strongSelf.liveList) {
             
-        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            //failure process
-        }];
+            [strongSelf.collectionView reloadData];               //更新UI
+
+        }
+        //根据每个uid ,获取图片及直播间地址
+        [strongSelf.coverImageUrls removeAllObjects];         //先清空已有的数据
+        [strongSelf.liveAddrs removeAllObjects];
+        for ( LiveHub *liveHub in strongSelf.liveList) {
+            NSNumber *uid = [NSNumber numberWithInt:[liveHub.uid intValue]];
+            [strongSelf getLiveAddrAndCoverImageWithUid:uid];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        //failure process
+    }];
 }
 
 - (void)getLiveAddrAndCoverImageWithUid:(NSNumber *)uid {
@@ -319,9 +322,11 @@
         [self.coverImageUrls setValue:coverImageUrl forKey:[NSString stringWithFormat:@"%@",uid]];      //根据uid增加键值对
         //获取直播间拉流地址
         NSArray *liveAddrDicts = [dataDicts valueForKey:@"live_addr"];
-        LiveAddr *addrModel = [LiveAddr liveAddrWithDict:liveAddrDicts[0]];         //单元素数组，获取第一个元素（包含三个地址的字典）
-        [self.liveAddrs setValue:addrModel forKey:[NSString stringWithFormat:@"%@",uid]];
-        
+        //判断是否为空数组
+        if (liveAddrDicts != nil && ![liveAddrDicts isKindOfClass:[NSNull class]] && liveAddrDicts.count != 0){
+            LiveAddr *addrModel = [LiveAddr liveAddrWithDict:liveAddrDicts[0]];         //单元素数组，获取第一个元素（包含三个地址的字典）
+            [self.liveAddrs setValue:addrModel forKey:[NSString stringWithFormat:@"%@",uid]];
+        }
         
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
