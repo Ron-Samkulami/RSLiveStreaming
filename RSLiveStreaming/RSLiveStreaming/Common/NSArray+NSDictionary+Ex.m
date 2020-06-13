@@ -22,16 +22,27 @@
 
 // Swizzling交换方法
 + (void)load {
-    Method fromMethod = class_getInstanceMethod(self, @selector(objectAtIndex:));
-    Method toMethod = class_getInstanceMethod(self, @selector(cm_objectAtIndex:));
-    method_exchangeImplementations(fromMethod, toMethod);
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        Method fromMethod = class_getInstanceMethod(self, @selector(objectAtIndex:));
+        Method toMethod = class_getInstanceMethod(self, @selector(cm_objectAtIndex:));
+        //如果已经实现该方法，则返回NO
+        BOOL addResult = class_addMethod(self.class, @selector(objectAtIndex:), method_getImplementation(toMethod), method_getTypeEncoding(toMethod));
+        if (addResult) {
+            //如果添加成功，则此时objectAtIndex：已经指向了新的方法实现，要让cm_objectAtIndex:指向旧的方法实现
+            class_replaceMethod(self.class, @selector(cm_objectAtIndex:), method_getImplementation(fromMethod), method_getTypeEncoding(fromMethod));
+        }else{
+            method_exchangeImplementations(fromMethod, toMethod);
+        }
+    });
+    
 }
 
 - (id)cm_objectAtIndex:(NSUInteger)index {
     // 判断下标是否越界，如果越界就进入异常拦截
     if (index > self.count - 1) {
         @try {
-            NSLog(@"越界，trycatch");
+            NSLog(@"越界，tryCatch");
             return [self cm_objectAtIndex:index];
         }
         @catch (NSException *exception) {
