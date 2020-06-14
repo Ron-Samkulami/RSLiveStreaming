@@ -102,7 +102,12 @@
     
     if (self.liveList != nil && ![self.liveList isKindOfClass:[NSNull class]] && self.liveList.count != 0) {
         if (indexPath.item < self.liveList.count ) {
-                cell.liveHubModel = self.liveList[self.liveList.count - indexPath.item - 1];      //获取数据模型并赋值
+            if (indexPath.item > 91) {
+                cell.liveHubModel = self.liveList[indexPath.item - 92];
+            } else {
+                cell.liveHubModel = self.liveList[indexPath.item + 8];      //获取数据模型并赋值
+            }
+//                cell.liveHubModel = self.liveList[self.liveList.count - indexPath.item - 1];      //获取数据模型并赋值
             }
     }
     
@@ -114,7 +119,13 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     if (self.liveList != nil && ![self.liveList isKindOfClass:[NSNull class]] && self.liveList.count != 0){
         if (indexPath.item < self.liveList.count) {
-            LiveHub *liveHub = self.liveList[self.liveList.count - indexPath.item - 1];                       //获取数据模型
+            LiveHub *liveHub = [[LiveHub alloc] init];
+            if (indexPath.item > 91) {
+                liveHub = self.liveList[indexPath.item - 92];
+            } else {
+                liveHub = self.liveList[indexPath.item + 8];      //获取数据模型并赋值
+            }
+//            LiveHub *liveHub = self.liveList[self.liveList.count - indexPath.item - 1];                       //获取数据模型
             NSNumber *uid = [NSNumber numberWithInt:[liveHub.uid intValue]];        //获取uid
             [self pushLivePageWithUid:uid];
         }

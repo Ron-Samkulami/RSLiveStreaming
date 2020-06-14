@@ -8,5 +8,5 @@ pod 'AFNetworking','~> 4.0'
 pod 'SDWebImage','~> 5.0'
 pod 'TXLiteAVSDK_Professional', :podspec => 'http://pod-1252463788.cosgz.myqcloud.com/liteavsdkspec/TXLiteAVSDK_Professional.podspec'
 pod 'TXIMSDK_iOS'
-pod 'Toast-Swift'
+#pod 'Toast-Swift'
 end
