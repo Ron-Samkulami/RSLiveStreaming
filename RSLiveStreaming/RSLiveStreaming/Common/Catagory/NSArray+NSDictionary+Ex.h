@@ -1,6 +1,5 @@
 //
 //  NSArray+NSDictionary+Ex.h
-//  网络请求功能
 //
 //  Created by Ron_Samkulami on 2020/5/25.
 //  Copyright © 2020 Ron_Samkulami. All rights reserved.

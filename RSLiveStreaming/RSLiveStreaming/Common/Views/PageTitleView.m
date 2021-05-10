@@ -8,15 +8,8 @@
 
 //
 #import "PageTitleView.h"
-
-typedef struct {
-    CGFloat RValue;
-    CGFloat GValue;
-    CGFloat BValue;
-} RSRGBVlaues;
-
-RSRGBVlaues normalRGB = {192,192,170};          //普通样式RGB值
-RSRGBVlaues hilightRGB = {129,216,209};         //高亮样式RGB值
+#import "RSStyleConfig.h"
+#define kScrollLineTag 300
 
 @interface PageTitleView ()
 
@@ -37,49 +30,41 @@ RSRGBVlaues hilightRGB = {129,216,209};         //高亮样式RGB值
 }
 
 - (instancetype)initWithFrame:(CGRect)frame andTitles:(NSArray *)titles labelWidth:(CGFloat)labelWidth {
-    
-    self = [super initWithFrame:frame];
-    if (self) {
+    if (self = [super initWithFrame:frame]) {
         self.titles = titles;
         
-        //add scrollView
         UIScrollView *scrollView = [self scrollViewWithFrame:self.frame];
         [self addSubview:scrollView];
         
         //add title labels
         for (NSString * title in self.titles) {
-            UILabel *label = [[UILabel alloc] init];        //创建label
-            
-            NSInteger index = [titles indexOfObject:title]; //设置label属性
-            label.tag = index;                              //设置tag
-            label.font = [UIFont systemFontOfSize:14];
+            NSInteger index = [titles indexOfObject:title];
+            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(labelWidth * index, 0, labelWidth, frame.size.height - kScrollLineH)];
+            label.tag = index;                              //set tag
+            label.font = kNormalTitleFont;
             label.text = title;
-            label.textColor = [UIColor colorWithRed:normalRGB.RValue / 255 green:normalRGB.GValue /255 blue:normalRGB.BValue /255 alpha:1];
+            label.textColor = kNormalColor;
             label.textAlignment = NSTextAlignmentCenter;
-            label.frame = CGRectMake(labelWidth * index, 0, labelWidth, frame.size.height - kScrollLineH);
             
             [scrollView addSubview:label];
             [self.titleLabels addObject:label];
-//            NSLog(@"PageTitleView:创建第%ld个label",(long)index);
-            
             
             label.userInteractionEnabled = YES;
-            UITapGestureRecognizer *tapGes = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(titleLabelClick:)];
+            UITapGestureRecognizer *tapGes = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTitleLabelClick:)];
             [label addGestureRecognizer:tapGes];
             
         }
         
-        UILabel *firstLabel = [self.titleLabels firstObject];       //页面加载完毕第一个label突出显示
-        firstLabel.textColor = [UIColor colorWithRed:hilightRGB.RValue / 255 green:hilightRGB.GValue /255 blue:hilightRGB.BValue /255 alpha:1];
-        [firstLabel setFont:[UIFont systemFontOfSize:20]];
-        
+        //highlight first label
+        UILabel *firstLabel = [self.titleLabels firstObject];
+        [firstLabel setFont:kHighlightTitleFont];
+        [firstLabel setTextColor:kHighlightColor];
         
         //add scrollLine
         UIView *scrollLine = [[UIView alloc] init];
-        //设置scrollLine的颜色，与UITabBar.appearance.tintColor（AppDelegate中）相同
-        scrollLine.backgroundColor = [UIColor colorWithRed:129 * 1.0 / 255 green:216 * 1.0 / 255 blue:209 * 1.0 /255 alpha:1];
+        scrollLine.backgroundColor = kHighlightColor;
         scrollLine.frame = CGRectMake(firstLabel.frame.origin.x, scrollView.frame.origin.y + scrollView.frame.size.height  - kScrollLineH, labelWidth, kScrollLineH);
-        [scrollLine setTag:300];
+        [scrollLine setTag:kScrollLineTag];
         [self addSubview:scrollLine];
     }
     return self;
@@ -94,63 +79,58 @@ RSRGBVlaues hilightRGB = {129,216,209};         //高亮样式RGB值
     return scrollView;
 }
 
-- (void)titleLabelClick:(UITapGestureRecognizer *)tapGes {
-    if (![tapGes.view isKindOfClass:NSClassFromString(@"UILabel")]) {
+#pragma mark - Action
+- (void)onTitleLabelClick:(UITapGestureRecognizer *)tapGes {
+    if (![tapGes.view isKindOfClass:NSClassFromString(@"UILabel")]){
         return;
-    }
-    UILabel *currentLabel = (UILabel *)tapGes.view;                         //获取当前label
-    if (currentLabel.tag == self.currentLabelIndex) {
-        return;                                                             //重复点击不做任何操作
-    }
-    UILabel *preLabel = self.titleLabels[self.currentLabelIndex];           //获取之前的label
-    
-    [currentLabel setFont:[UIFont systemFontOfSize:20]];                    //切换label的字体大小和颜色
-    currentLabel.textColor = [UIColor colorWithRed:hilightRGB.RValue / 255 green:hilightRGB.GValue /255 blue:hilightRGB.BValue /255 alpha:1];
-    [preLabel setFont:[UIFont systemFontOfSize:14]];
-    preLabel.textColor = [UIColor colorWithRed:normalRGB.RValue / 255 green:normalRGB.GValue /255 blue:normalRGB.BValue /255 alpha:1];
-    
-    self.currentLabelIndex = currentLabel.tag;                              //保存最新label的下标值
         
-    [UIView animateWithDuration:0.15 animations:^{
-        CGRect tmpFrame = [self viewWithTag:300].frame;                     //滚动scrollLine
-        tmpFrame.origin.x = currentLabel.frame.origin.x;
-        [self viewWithTag:300].frame = tmpFrame;
-    }];
-    
-    //contentView随titleView滚动
-    if ([self.delegate respondsToSelector:@selector(contentViewScrollWithTitleView:selectedIndex:)]) {
-        [self.delegate contentViewScrollWithTitleView:self selectedIndex:self.currentLabelIndex];
+    } else {
+        UILabel *currentLabel = (UILabel *)tapGes.view;
+        if (currentLabel.tag == self.currentLabelIndex) {
+            return; //ignore duplicate tapGes
+        } else {
+            UILabel *preLabel = self.titleLabels[self.currentLabelIndex];
+            // change font and color
+            [currentLabel setFont:kHighlightTitleFont];
+            [currentLabel setTextColor:kHighlightColor];
+            [preLabel setFont:kNormalTitleFont];
+            [preLabel setTextColor:kNormalColor];
+            
+            self.currentLabelIndex = currentLabel.tag;
+            //scroll the scrollLine
+            [UIView animateWithDuration:0.15 animations:^{
+                CGRect tmpFrame = [self viewWithTag:kScrollLineTag].frame;
+                tmpFrame.origin.x = currentLabel.frame.origin.x;
+                [self viewWithTag:kScrollLineTag].frame = tmpFrame;
+            }];
+            
+            if ([self.delegate respondsToSelector:@selector(pageTitleView:didScrollToIndex:)]) {
+                [self.delegate pageTitleView:self didScrollToIndex:self.currentLabelIndex];
+            }
+        }
     }
 }
 
-#pragma mark - PageTitle随PageContent滚动
-/*
-    暴露给controller调用的方法（controller中实现pageContentView的代理方法调用此方法设置title）
- */
+
 - (void)scrollTitleWithProgress:(CGFloat)progress sourceIndex:(NSInteger)sourceIndex targetIndex:(NSInteger)targetIndex {
     
-    //scrollLine随contentPage而滚动
+    //scrollLine scroll with progress
     UILabel *sourceLabel = self.titleLabels[sourceIndex];
     UILabel *targetLabel = self.titleLabels[targetIndex];
     CGFloat moveX = (targetLabel.frame.origin.x - sourceLabel.frame.origin.x) * progress;
-    CGRect tmpFrame = [self viewWithTag:300].frame;
+    CGRect tmpFrame = [self viewWithTag:kScrollLineTag].frame;
     tmpFrame.origin.x = sourceLabel.frame.origin.x + moveX;
-    [self viewWithTag:300].frame = tmpFrame;
+    [self viewWithTag:kScrollLineTag].frame = tmpFrame;
     
-    //先设置所有label样式为normal，再单独设置targetLabel为亮高
-    for (UILabel * everyLabel in self.titleLabels) {
-        [everyLabel setFont:[UIFont systemFontOfSize:14]];
-        everyLabel.textColor = [UIColor colorWithRed:normalRGB.RValue / 255 green:normalRGB.GValue /255 blue:normalRGB.BValue /255 alpha:1];
-    }
-    [targetLabel setFont:[UIFont systemFontOfSize:20]];
-    targetLabel.textColor = [UIColor colorWithRed:hilightRGB.RValue / 255 green:hilightRGB.GValue /255 blue:hilightRGB.BValue /255 alpha:1];
-    
-    //屏幕滑动时，记录最新的currentLabelindex
+    //change font and color with progress
+    [sourceLabel setFont:[UIFont boldSystemFontOfSize:kBigFontSize-(kBigFontSize-kNormalFontSize)*progress]];
+    [sourceLabel setTextColor:[UIColor colorWithRed:(129+(192-129)*progress)*1.0/255 green:(216+(192-216)*progress)*1.0/255 blue:(209+(170-209)*progress)*1.0/255 alpha:1]];
+    [targetLabel setFont:[UIFont boldSystemFontOfSize:kNormalFontSize+(kBigFontSize-kNormalFontSize)*progress]];
+    [targetLabel setTextColor:[UIColor colorWithRed:(192+(129-192)*progress)*1.0/255 green:(192+(216-192)*progress)*1.0/255 blue:(170+(209-170)*progress)*1.0/255 alpha:1]];
+ 
+    //record currentIndex
     self.currentLabelIndex = targetIndex;
-
 }
-    
-
 
 
 @end

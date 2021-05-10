@@ -11,16 +11,27 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface LiveHub : NSObject
-@property (nonatomic,copy) NSString *liveid;    //房间ID
-@property (nonatomic,copy) NSString *image2;    //封面图片
+///liveRoomID
+@property (nonatomic,copy) NSString *liveid;
+///cover image
+@property (nonatomic,copy) NSString *image2;
+///location city
 @property (nonatomic,copy) NSString *city;
-@property (nonatomic,copy) NSString *uid;       //主播ID
-@property (nonatomic,copy) NSString *nick;      //昵称
+///userID
+@property (nonatomic,copy) NSString *uid;
+///nickName
+@property (nonatomic,copy) NSString *nick;
+///gender
 @property (nonatomic,assign) BOOL gender;
+///level
 @property (nonatomic,copy) NSString *level;
-@property (nonatomic,copy) NSString *portrait;  //头像小图
-@property (nonatomic,copy) NSString *name;      //直播件标题
-@property (nonatomic,copy) NSString *online_users;    //观看人数
+///user icon
+@property (nonatomic,copy) NSString *portrait;
+///liveRoom title
+@property (nonatomic,copy) NSString *name;
+///audience count
+@property (nonatomic,copy) NSString *online_users;
+
 
 + (instancetype)liveHubWithDict:(NSDictionary *)dict;
 - (instancetype)initWithDict:(NSDictionary *)dict;

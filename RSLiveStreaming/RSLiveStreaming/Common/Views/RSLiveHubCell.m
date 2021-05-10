@@ -25,13 +25,9 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
-    
-//    NSLog(@"从xib中");
 }
 
-#pragma mark - 引入模型并赋值显示
-
-//引入数据模型，并把模型数据赋值到子控件上
+#pragma mark - setter
 - (void)setLiveHubModel:(LiveHub *)liveHubModel {
     _liveHubModel = liveHubModel;
     [self.imgView sd_setImageWithURL:[NSURL URLWithString:liveHubModel.image2]];
@@ -43,7 +39,6 @@
     } else {
        self.onlineCountLabel.text = [NSString stringWithFormat:@"%d",count];
     }
-    
 }
 
 @end

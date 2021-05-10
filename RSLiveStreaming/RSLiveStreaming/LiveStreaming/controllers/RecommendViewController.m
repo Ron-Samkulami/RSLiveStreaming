@@ -16,9 +16,6 @@
 #import "LiveRoomViewController.h"
 #import "headerView1st.h"
 
-
-
-
 @interface RecommendViewController () <UICollectionViewDataSource,UICollectionViewDelegate,headerView1stDelegate>
 
 @property (nonatomic,strong) NSArray *liveList;             //保存返回的热门主播列表
@@ -27,12 +24,10 @@
 @property (nonatomic,strong) NSMutableDictionary *liveAddrs;             //保存所有直播流url
 @property (nonatomic,strong) UICollectionView *collectionView;
 
-
 @end
 
 
 @implementation RecommendViewController
-
 
 #pragma mark - LazyLoad
 - (NSArray *)liveList {
@@ -59,40 +54,41 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    //创建collectionView
+    //collectionLayout
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
     layout.scrollDirection = UICollectionViewScrollDirectionVertical;
-    layout.itemSize = CGSizeMake(cellWidth,cellWidth * 7 / 6);                                      //item尺寸
-    layout.minimumLineSpacing = 5;                                                                  //行间距
-    layout.minimumInteritemSpacing = ItemMargin;                                                    //item间距
-    layout.sectionInset = UIEdgeInsetsMake(ItemMargin, ItemMargin, ItemMargin, ItemMargin);         //section四周边距
+    layout.itemSize = CGSizeMake(cellWidth,cellWidth * 7 / 6);
+    layout.minimumLineSpacing = 5;
+    layout.minimumInteritemSpacing = ItemMargin;
+    layout.sectionInset = UIEdgeInsetsMake(ItemMargin, ItemMargin, ItemMargin, ItemMargin);
     
+    //collectionView
     UICollectionView *collection = [[UICollectionView alloc] initWithFrame:self.view.frame collectionViewLayout:layout];
-    collection.autoresizingMask = UIViewAutoresizingFlexibleHeight;         //collectionView高度适配父视图
+    collection.autoresizingMask = UIViewAutoresizingFlexibleHeight;
     collection.backgroundColor = [UIColor whiteColor];
     collection.showsVerticalScrollIndicator = NO;
-    collection.dataSource = self;                                           //数据源和代理
+    collection.dataSource = self;
     collection.delegate = self;
-    //注册
+    
+    //register nib
     [collection registerNib:[UINib nibWithNibName:@"RSLiveHubCell" bundle:nil] forCellWithReuseIdentifier:CellId];
     [collection registerNib:[UINib nibWithNibName:@"headerView1st" bundle:nil] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"headerView1st"];
     [collection registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"headerView2"];
     [collection registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"headerView3"];
     
-    
     self.collectionView = collection;
     [self.view addSubview:self.collectionView];
     
-    //刷新
+    //add refreshControl
     self.collectionView.refreshControl = [[UIRefreshControl alloc] init];
     self.collectionView.refreshControl.tintColor = [UIColor grayColor];
     self.collectionView.refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@"松手刷新"];
     [self.collectionView.refreshControl addTarget:self action:@selector(refreshData) forControlEvents:UIControlEventValueChanged];
-    //self.collectionView.alwaysBounceVertical = YES;     //collectionView填不满屏幕时也可刷新
+    self.collectionView.alwaysBounceVertical = YES;     //can refresh when collectionView doesn't fill full screen
     [self.collectionView addSubview:self.collectionView.refreshControl];
     
     
-    //获取网络数据
+    //fectch data
     dispatch_async(dispatch_get_global_queue(0,0), ^{
         [self getData];
     });
@@ -102,8 +98,6 @@
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     return 3;
 }
-
-
 
 - (NSInteger)collectionView:(nonnull UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     NSInteger num = 4;
@@ -126,14 +120,13 @@
 //cell
 - (nonnull __kindof UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
     
-    //创建单元格
     RSLiveHubCell *cell = (RSLiveHubCell *)[collectionView dequeueReusableCellWithReuseIdentifier:CellId forIndexPath:indexPath];
-    cell.layer.cornerRadius = 10.0f;        //设置圆角和阴影
+    cell.layer.cornerRadius = 10.0f;
     cell.layer.borderWidth = 1.0f;
     cell.layer.borderColor = [UIColor clearColor].CGColor;
     cell.layer.masksToBounds = YES;
     
-    //计算下标
+    //calcuate index
     NSInteger index = 0;
     if (indexPath.section == 0) {
         index = indexPath.item;
@@ -145,61 +138,60 @@
     
     if (self.liveList != nil && ![self.liveList isKindOfClass:[NSNull class]] && self.liveList.count != 0){
         if (index < self.liveList.count) {
-                cell.liveHubModel = self.liveList[index];       //把模型数据设置给单元格
-//                NSLog(@"获取第%zd个模型数据",index);
+            cell.liveHubModel = self.liveList[index];
             }
     }
     
-    return cell;                        //返回单元格
+    return cell;
 }
 
-//header
+
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
     
-        if (indexPath.section == 0) {
-            headerView1st *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"headerView1st" forIndexPath:indexPath];
-            headerView.delegate = self;
-            return headerView;
-            
-        } else if (indexPath.section == 1) {
-            UICollectionReusableView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"headerView2" forIndexPath:indexPath];
-            UIView *pinView1 = [[UIView alloc] initWithFrame:CGRectMake(5, 0, cellWidth * 2 + 5, 50)];
-            pinView1.backgroundColor = [UIColor orangeColor];
-            pinView1.layer.cornerRadius = 10.0f;        //设置圆角
-            pinView1.layer.masksToBounds = YES;
-            
-            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 50, 50)];
-            label.text = @"直播头条";
-            label.textColor = [UIColor whiteColor];
-            label.numberOfLines = 2;
-            
-            UILabel *contentLabel = [[UILabel alloc]  initWithFrame:CGRectMake(70, 0, 280, 50)];
-            contentLabel.text = @"敖丙妲己连线PK 谁才是天使吻过的嗓音";
-            contentLabel.font = [UIFont systemFontOfSize:14];
-            contentLabel.textColor = [UIColor whiteColor];
-            
-            [pinView1 addSubview:contentLabel];
-            [pinView1 addSubview:label];
-            [headerView addSubview:pinView1];
-            return headerView;
-            
-        } else {
-            UICollectionReusableView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"headerView3" forIndexPath:indexPath];
-            UIView *pinView2 = [[UIView alloc] initWithFrame:CGRectMake(5, 0, cellWidth * 2 + 5, 140)];
-            pinView2.backgroundColor = [UIColor colorWithRed:129 * 1.0 / 255 green:216 * 1.0 / 255 blue:209 * 1.0 /255 alpha:1];
-            pinView2.layer.cornerRadius = 10.0f;        //设置圆角
-            pinView2.layer.masksToBounds = YES;
-            
-            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(70, 10, 250, 120)];
-            label.text = @"绿色直播\r\t\t今夜谁当红";
-            label.textColor = [UIColor whiteColor];
-            label.font = [UIFont monospacedDigitSystemFontOfSize:34 weight:3.0];
-            
-            label.numberOfLines = 2;
-            [pinView2 addSubview:label];
-            [headerView addSubview:pinView2];
-            return headerView;
-        }
+    if (indexPath.section == 0) {
+        headerView1st *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"headerView1st" forIndexPath:indexPath];
+        headerView.delegate = self;
+        return headerView;
+        
+    } else if (indexPath.section == 1) {
+        UICollectionReusableView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"headerView2" forIndexPath:indexPath];
+        UIView *pinView1 = [[UIView alloc] initWithFrame:CGRectMake(5, 0, cellWidth * 2 + 5, 50)];
+        pinView1.backgroundColor = [UIColor orangeColor];
+        pinView1.layer.cornerRadius = 10.0f;
+        pinView1.layer.masksToBounds = YES;
+        
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 50, 50)];
+        label.text = @"直播头条";
+        label.textColor = [UIColor whiteColor];
+        label.numberOfLines = 2;
+        
+        UILabel *contentLabel = [[UILabel alloc]  initWithFrame:CGRectMake(70, 0, 280, 50)];
+        contentLabel.text = @"敖丙妲己连线PK 谁才是天使吻过的嗓音";
+        contentLabel.font = [UIFont systemFontOfSize:14];
+        contentLabel.textColor = [UIColor whiteColor];
+        
+        [pinView1 addSubview:contentLabel];
+        [pinView1 addSubview:label];
+        [headerView addSubview:pinView1];
+        return headerView;
+        
+    } else {
+        UICollectionReusableView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"headerView3" forIndexPath:indexPath];
+        UIView *pinView2 = [[UIView alloc] initWithFrame:CGRectMake(5, 0, cellWidth * 2 + 5, 140)];
+        pinView2.backgroundColor = [UIColor colorWithRed:129 * 1.0 / 255 green:216 * 1.0 / 255 blue:209 * 1.0 /255 alpha:1];
+        pinView2.layer.cornerRadius = 10.0f;
+        pinView2.layer.masksToBounds = YES;
+        
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(70, 10, 250, 120)];
+        label.text = @"绿色直播\r\t\t今夜谁当红";
+        label.textColor = [UIColor whiteColor];
+        label.font = [UIFont monospacedDigitSystemFontOfSize:34 weight:3.0];
+        
+        label.numberOfLines = 2;
+        [pinView2 addSubview:label];
+        [headerView addSubview:pinView2];
+        return headerView;
+    }
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
@@ -215,11 +207,9 @@
 }
 
 
-
 #pragma mark - CollectionView Delegate
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    //获取数据模型
     NSInteger idx = 0;
     if (indexPath.section == 0) {
         idx = indexPath.item;
@@ -228,11 +218,13 @@
     } else if (indexPath.section == 2) {
         idx = indexPath.item + 12;
     }
-    //越界判断
+    
+    //avoid out of index
     if (self.liveList != nil && ![self.liveList isKindOfClass:[NSNull class]] && self.liveList.count != 0){
         if (idx < self.liveList.count) {
             LiveHub *liveHub = self.liveList[idx];
-            NSNumber *uid = [NSNumber numberWithInt:[liveHub.uid intValue]];        //获取uid
+            NSNumber *uid = [NSNumber numberWithInt:[liveHub.uid intValue]];
+            //skip into a liveRoom
             [self pushLivePageWithUid:uid];
         }
     } else {
@@ -242,10 +234,8 @@
 
 #pragma mark - Get/Refresh Data
 - (void)refreshData {
-    
     [self getData];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        //        [self getData];
         if ([self.collectionView.refreshControl isRefreshing]) {
             [self.collectionView.refreshControl endRefreshing];
         }
@@ -254,7 +244,7 @@
 
 - (void)getData {
     __weak typeof(self) weakSelf = self;
-    //获取热门主播列表：http://baseapi.busi.inke.cn/live/LiveHotList
+    //url：http://baseapi.busi.inke.cn/live/LiveHotList
     AFHTTPSessionManager *manager = [RSNetworkTools sharedManager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     
@@ -263,29 +253,30 @@
         //progress process
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         typeof(weakSelf) strongSelf = weakSelf;
+        //json serialization
         NSError *myError;
         id responseJSON = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingAllowFragments error:&myError];
         if (myError) {
-            NSLog(@"解析JSON出错");
+            NSLog(@"JSONSerialization error:%@",myError.domain);
             return;
         }
-        NSArray *dataDicts = [responseJSON valueForKey:@"data"];    //获取第三个key的value
         
+        //convert data to model
+        NSArray *dataDicts = [responseJSON valueForKey:@"data"];
         NSMutableArray *arrayModels = [NSMutableArray array];
         for (NSDictionary *dict in dataDicts) {
             LiveHub *model = [LiveHub liveHubWithDict:dict];
             [arrayModels addObject:model];
+        }
+        strongSelf.liveList = [arrayModels copy];
         
-            
-        }
-        strongSelf.liveList = [arrayModels copy];                    //将获取到的数据转成模型
+        //reload
         if (strongSelf.liveList) {
-            
-            [strongSelf.collectionView reloadData];               //更新UI
-
+            [strongSelf.collectionView reloadData];
         }
-        //根据每个uid ,获取图片及直播间地址
-        [strongSelf.coverImageUrls removeAllObjects];         //先清空已有的数据
+        
+        //get coverImageUrls and liveAddress
+        [strongSelf.coverImageUrls removeAllObjects];
         [strongSelf.liveAddrs removeAllObjects];
         for ( LiveHub *liveHub in strongSelf.liveList) {
             NSNumber *uid = [NSNumber numberWithInt:[liveHub.uid intValue]];
@@ -298,7 +289,7 @@
 }
 
 - (void)getLiveAddrAndCoverImageWithUid:(NSNumber *)uid {
-    //获取单个主播地址：http://baseapi.busi.inke.cn/live/LiveInfo?channel_id=&uid=71167152&liveid=&_t=
+    //single liveroom url：http://baseapi.busi.inke.cn/live/LiveInfo?channel_id=&uid=71167152&liveid=&_t=
     AFHTTPSessionManager *manager = [RSNetworkTools sharedManager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     NSString *URLString = @"http://baseapi.busi.inke.cn/live/LiveInfo";
@@ -312,19 +303,20 @@
         NSError *myError;
         id responseJSON = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingAllowFragments error:&myError];
         if (myError) {
-            NSLog(@"解析JSON出错");
+            NSLog(@"JSONSerialization error:%@",myError.domain);
             return;
         }
-        NSArray *dataDicts = [responseJSON valueForKey:@"data"];            //获取第三个key的value
-        //获取直播间主播信息
+        
+        //get liveInfo from data
+        NSArray *dataDicts = [responseJSON valueForKey:@"data"];
+        //cover image
         NSDictionary *liveInfoDicts = [dataDicts valueForKey:@"live_info"];
         NSString *coverImageUrl = [liveInfoDicts valueForKey:@"cover_img"];
-        [self.coverImageUrls setValue:coverImageUrl forKey:[NSString stringWithFormat:@"%@",uid]];      //根据uid增加键值对
-        //获取直播间拉流地址
+        [self.coverImageUrls setValue:coverImageUrl forKey:[NSString stringWithFormat:@"%@",uid]];
+        //live address
         NSArray *liveAddrDicts = [dataDicts valueForKey:@"live_addr"];
-        //判断是否为空数组
         if (liveAddrDicts != nil && ![liveAddrDicts isKindOfClass:[NSNull class]] && liveAddrDicts.count != 0){
-            LiveAddr *addrModel = [LiveAddr liveAddrWithDict:liveAddrDicts[0]];         //单元素数组，获取第一个元素（包含三个地址的字典）
+            LiveAddr *addrModel = [LiveAddr liveAddrWithDict:liveAddrDicts[0]];
             [self.liveAddrs setValue:addrModel forKey:[NSString stringWithFormat:@"%@",uid]];
         }
         
@@ -334,19 +326,18 @@
     }];
 }
 
-//跳转到直播页面
+//skip to a live room
 - (void)pushLivePageWithUid:(NSNumber *)uid{
     
     LiveAddr *liveAddr = [self.liveAddrs valueForKey:[NSString stringWithFormat:@"%@",uid]];
     NSString *imageUrl = [self.coverImageUrls valueForKey:[NSString stringWithFormat:@"%@",uid]];
     if (!(liveAddr && imageUrl)) {
-        NSLog(@"数据未获取到");
+        NSLog(@"NULL Data");
         return;
     }
     LiveRoomViewController *liveRoomVC = [[LiveRoomViewController alloc] init];
     liveRoomVC.liveUrl = liveAddr.stream_addr;
     liveRoomVC.imageUrl = imageUrl;
-    //        self.tabBarController.tabBar.hidden = YES;                                   //跳转后隐藏bottomBar
     [self.navigationController pushViewController:liveRoomVC animated:NO];
     
 }
@@ -354,13 +345,11 @@
 #pragma mark - Life Circle
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    self.tabBarController.tabBar.hidden = NO;       //tabbar：跳转页面willAppear设置隐藏
+    self.tabBarController.tabBar.hidden = NO;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    
-    
 }
 
 
@@ -370,9 +359,8 @@
     UIViewController *newView = [[UIViewController alloc] init];
     newView.view.backgroundColor = [UIColor blueColor];
     
-    
-    //push新的viewController
-    self.tabBarController.tabBar.hidden = YES;                          //跳转后隐藏bottomBar
+    //skiip to new page
+    self.tabBarController.tabBar.hidden = YES;
     [self.navigationController pushViewController:newView animated:YES];
     
 }
@@ -392,10 +380,6 @@
 - (void)pushMoreChannelView {
     NSLog(@"点击了更多频道");
 }
-
-
-
-
 
 @end
 

@@ -12,6 +12,7 @@
 #import "PeopleViewController.h"
 #import "LiveBroadcastViewController.h"
 #import "DynamicViewController.h"
+#import "RSBasicUITool.h"
 
 @interface NearByViewController () <PageTitleViewDelegate,PageContentViewDelegate>
 @property (nonatomic,strong) NSArray *childVCS;
@@ -75,14 +76,14 @@
 }
 
 #pragma mark - PageTitleViewDelegate
-- (void)contentViewScrollWithTitleView:(PageTitleView *)pageTitleView selectedIndex:(NSInteger)index {
+- (void)pageTitleView:(PageTitleView *)pageTitleView didScrollToIndex:(NSInteger)index {
     [self.contentView scrollToPageAtIndex:index];
+
 }
 
 #pragma mark - PageContentViewDelegate
-- (void)titleViewScrollWithContentView:(PageContentView *)pageContentView progress:(CGFloat)progress sourceIndex:(NSInteger)sourceIndex targetIndex:(NSInteger)targetIndex {
+- (void)pageContentView:(PageContentView *)pageContentView scrollProgress:(CGFloat)progress sourceIndex:(NSInteger)sourceIndex targetIndex:(NSInteger)targetIndex {
     [self.navigationItem.leftBarButtonItem.customView scrollTitleWithProgress:progress sourceIndex:sourceIndex targetIndex:targetIndex];
-    
 }
 
 

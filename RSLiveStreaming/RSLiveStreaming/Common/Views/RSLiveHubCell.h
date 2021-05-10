@@ -10,11 +10,8 @@
 
 #define ItemMargin 5
 #define cellWidth ([UIScreen mainScreen].bounds.size.width - ItemMargin * 3) / 2
-#define CellId @"cellId"
+#define CellId @"CellId"
  
-
-
-
 NS_ASSUME_NONNULL_BEGIN
 @class LiveHub;
 @interface RSLiveHubCell : UICollectionViewCell

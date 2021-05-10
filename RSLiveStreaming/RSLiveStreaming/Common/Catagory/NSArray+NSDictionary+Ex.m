@@ -1,6 +1,5 @@
 //
 //  NSArray+NSDictionary+Ex.m
-//  网络请求功能
 //
 //  Created by Ron_Samkulami on 2020/5/25.
 //  Copyright © 2020 Ron_Samkulami. All rights reserved.
@@ -20,7 +19,7 @@
     return tmpStr.copy;
 }
 
-// Swizzling交换方法
+// Swizzling
 + (void)load {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{

@@ -7,26 +7,24 @@
 //
 
 #import <UIKit/UIKit.h>
-#define kScrollLineH 2
-#define kScreenW [UIScreen mainScreen].bounds.size.width
-#define kScreenH [UIScreen mainScreen].bounds.size.height
 
 NS_ASSUME_NONNULL_BEGIN
-@class PageTitleView;
 
+@class PageTitleView;
 @protocol PageTitleViewDelegate <NSObject>
 
 @required
-- (void)contentViewScrollWithTitleView:(PageTitleView *)pageTitleView selectedIndex:(NSInteger)index;
+- (void)pageTitleView:(PageTitleView *)pageTitleView didScrollToIndex:(NSInteger)index;
 
 @end
 
 
 @interface PageTitleView : UIView
 
-
 @property (nonatomic,weak) id<PageTitleViewDelegate> delegate;
+
 - (instancetype)initWithFrame:(CGRect)frame andTitles:(NSArray *)titles labelWidth:(CGFloat)labelWidth;
+
 - (void)scrollTitleWithProgress:(CGFloat)progress sourceIndex:(NSInteger)sourceIndex targetIndex:(NSInteger)targetIndex;
 
 @end

@@ -15,17 +15,13 @@
 
 @implementation MainController
 
-- (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item
-{
+- (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item {
     NSInteger index = [self.tabBar.items indexOfObject:item];
     if (index == self.currentSelectedItem) {
-        if (index != 4) {       //“我的”页面不用刷新数据
-//            NSLog(@"mainController: 重复点击,执行刷新数据任务");
-//            NSLog(@"%@",self.childViewControllers[index].childViewControllers[0].childViewControllers);
-            
-            //设置代理，刷新数据
+        if (index != 4) {
+            //need to reload data
         }
-        return;                 //重复点击不执行动画
+        return;// ignore duplicate click on page 4
     }
     [self animationWithIndex:index];
     self.currentSelectedItem = index;
@@ -43,7 +39,7 @@
     CABasicAnimation *pulse = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
     pulse.timingFunction= [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
     pulse.duration = 0.1;
-    pulse.repeatCount= 2;
+    pulse.repeatCount= 1;
     pulse.autoreverses= YES;
     pulse.fromValue= [NSNumber numberWithFloat:0.7];
     pulse.toValue= [NSNumber numberWithFloat:1.3];

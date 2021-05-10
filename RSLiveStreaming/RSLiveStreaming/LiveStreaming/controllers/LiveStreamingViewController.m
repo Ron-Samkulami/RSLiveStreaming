@@ -12,9 +12,12 @@
 #import "RecommendViewController.h"
 #import "HotspotViewController.h"
 #import "AVCaptreViewController.h"
+#import "RSBasicUITool.h"
+#import "RSStyleConfig.h"
 
 @interface LiveStreamingViewController () <PageTitleViewDelegate,PageContentViewDelegate>
 @property (nonatomic,strong) NSArray *childVCS;
+@property (nonatomic,strong) PageTitleView *pageTitleView;
 @property (nonatomic,strong) PageContentView *contentView;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *startLiveBtn;
 
@@ -32,8 +35,8 @@
     AVCaptreViewController *newView = [[AVCaptreViewController alloc] init];
     newView.view.backgroundColor = [UIColor blueColor];
 
-    //push新的viewController
-    self.tabBarController.tabBar.hidden = YES;                          //跳转后隐藏bottomBar
+    
+    self.tabBarController.tabBar.hidden = YES;
     [self.navigationController pushViewController:newView animated:YES];
     
 }
@@ -45,49 +48,43 @@
     
     //set titleView
     NSArray *titleArray = @[@"推荐",@"热门"];
-    PageTitleView *titleView = [[PageTitleView alloc] initWithFrame:CGRectMake(0, 0, 250, 44) andTitles:titleArray labelWidth:50];
-    titleView.delegate = self;
-    UIBarButtonItem *titleItem = [[UIBarButtonItem alloc] initWithCustomView:titleView];
+    self.pageTitleView = [[PageTitleView alloc] initWithFrame:CGRectMake(0, 0, 250, 44) andTitles:titleArray labelWidth:50];
+    self.pageTitleView.delegate = self;
+    UIBarButtonItem *titleItem = [[UIBarButtonItem alloc] initWithCustomView:self.pageTitleView];
     self.navigationItem.leftBarButtonItem = titleItem;
-    [self.navigationController.navigationBar setShadowImage:[UIImage new]];     //去掉navigationBar的分割线
+    [self.navigationController.navigationBar setShadowImage:[UIImage new]];     // hide the separater below navigationBar
     
     //rightBarbuttonItem
-    self.searchBtn.tintColor = [UIColor colorWithRed:129 * 1.0 / 255 green:216 * 1.0 / 255 blue:209 * 1.0 /255 alpha:1];
-    self.startLiveBtn.tintColor = [UIColor colorWithRed:129 * 1.0 / 255 green:216 * 1.0 / 255 blue:209 * 1.0 /255 alpha:1];
+    self.searchBtn.tintColor = kHighlightColor;
+    self.startLiveBtn.tintColor = kHighlightColor;
 
-    
-    
     //set contentView
-    CGFloat contentH = kScreenH - kNavBarHeight - kTabBarHeight - kBottomSafeHeight;  //再减去 kStatusBarHeight会使iPhone8小屏幕底下出现空白
-    CGRect contentFrame = CGRectMake(0, kStatusBarHeight , kScreenW , contentH );     //若y值加上navigationBar的高度，会使页contentView面下移
-    //创建当前Tab页面的子控制器集合
+    CGFloat contentH = kScreenH - kNavBarHeight - kTabBarHeight - kBottomSafeHeight;
+    CGRect contentFrame = CGRectMake(0, kStatusBarHeight , kScreenW , contentH );
+    
+    //create
     NSMutableArray *VCS = [[NSMutableArray alloc] init];
     [VCS addObject:[[RecommendViewController alloc] init]];
     [VCS addObject:[[HotspotViewController alloc] init]];
     
-    //创建contentView
+    //contentView
     PageContentView *contentView = [[PageContentView alloc] initWithFrame:contentFrame withChildVCS:VCS withParentVC:self];   
     contentView.delegate = self;
     self.contentView = contentView;
     [self.view addSubview:self.contentView];
     
-
 }
 
 
 #pragma mark - PageTitleViewDelegate
-
-- (void)contentViewScrollWithTitleView:(PageTitleView *)pageTitleView selectedIndex:(NSInteger)index {
+- (void)pageTitleView:(PageTitleView *)pageTitleView didScrollToIndex:(NSInteger)index {
     [self.contentView scrollToPageAtIndex:index];
 }
 
 #pragma mark - PageContentViewDelegate
-
-- (void)titleViewScrollWithContentView:(PageContentView *)pageContentView progress:(CGFloat)progress sourceIndex:(NSInteger)sourceIndex targetIndex:(NSInteger)targetIndex {
+- (void)pageContentView:(PageContentView *)pageContentView scrollProgress:(CGFloat)progress sourceIndex:(NSInteger)sourceIndex targetIndex:(NSInteger)targetIndex {
     [self.navigationItem.leftBarButtonItem.customView scrollTitleWithProgress:progress sourceIndex:sourceIndex targetIndex:targetIndex];
 }
-
-
 
 
 @end

@@ -1,6 +1,6 @@
 //
 //  LiveAddr.m
-//  网络请求功能
+//  RSLiveStreaming
 //
 //  Created by Ron_Samkulami on 2020/5/26.
 //  Copyright © 2020 Ron_Samkulami. All rights reserved.

@@ -25,26 +25,28 @@
 @implementation LiveRoomViewController
 
 
-
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     [self loadingView];
     // Do any additional setup after loading the view.
     
     _videoParentView = [[UIView alloc] initWithFrame:self.view.frame];
     [self.view addSubview:_videoParentView];
     _txLivePlayer = [[TXLivePlayer alloc] init];
+    _txLivePlayer.enableHWAcceleration = YES;
+    TXLivePlayConfig *config = [[TXLivePlayConfig alloc] init];
+    config.maxCacheItems = 10;
+    config.minAutoAdjustCacheTime = 3;
+    _txLivePlayer.config = config;
     [_txLivePlayer setupVideoWidget:CGRectZero containView:_videoParentView insertIndex:0];
     _txLivePlayer.delegate = self;
+    [_txLivePlayer startPlay:self.liveUrl type:PLAY_TYPE_LIVE_FLV];
 
 //    UIButton *closeBtn = [[UIButton alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width - 60, [UIScreen mainScreen].bounds.size.height - 60, 20, 20)];
 //    closeBtn.titleLabel.text = @"关闭";
 //    [closeBtn addTarget:self action:@selector(closeVC) forControlEvents:UIControlEventTouchUpInside];
 //    [self.view insertSubview:closeBtn atIndex:2];
-    
-    
-    
-
     
 }
 
@@ -53,6 +55,7 @@
 //    NSLog(@"关闭直播间");
 //    [self.navigationController popViewControllerAnimated:NO];
 //}
+
 // 加载图
 - (void)loadingView
 {
@@ -66,8 +69,6 @@
     visualEffectView.frame = _backImage.bounds;
     [_backImage addSubview:visualEffectView];
     [self.view addSubview:_backImage];
-    
-
 }
 
 
@@ -78,9 +79,6 @@
 
 
 #pragma mark - Life Circle
-
-
-
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES];     //隐藏导航栏

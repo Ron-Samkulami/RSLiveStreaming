@@ -29,6 +29,7 @@
 		E4570D322479A87100610AD9 /* DynamicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4570D312479A87100610AD9 /* DynamicViewController.m */; };
 		E4570D352479A88300610AD9 /* PeopleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4570D342479A88300610AD9 /* PeopleViewController.m */; };
 		E4570D382479A8CA00610AD9 /* LiveBroadcastViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4570D372479A8CA00610AD9 /* LiveBroadcastViewController.m */; };
+		E46D5A47264989E400A964DF /* RSStyleConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = E46D5A46264989E400A964DF /* RSStyleConfig.m */; };
 		E4AD15212471329B001B5848 /* PageContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AD15202471329B001B5848 /* PageContentView.m */; };
 		E4AEDCFC2487C8290011149D /* FollowedLiveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AEDCFB2487C8290011149D /* FollowedLiveViewController.m */; };
 		E4AEDD032487DBC30011149D /* MomentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AEDD012487DBC30011149D /* MomentCell.m */; };
@@ -96,6 +97,9 @@
 		E4570D342479A88300610AD9 /* PeopleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PeopleViewController.m; sourceTree = "<group>"; };
 		E4570D362479A8CA00610AD9 /* LiveBroadcastViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LiveBroadcastViewController.h; sourceTree = "<group>"; };
 		E4570D372479A8CA00610AD9 /* LiveBroadcastViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LiveBroadcastViewController.m; sourceTree = "<group>"; };
+		E46D5A45264989E400A964DF /* RSStyleConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSStyleConfig.h; sourceTree = "<group>"; };
+		E46D5A46264989E400A964DF /* RSStyleConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSStyleConfig.m; sourceTree = "<group>"; };
+		E46D5A4926498B0100A964DF /* RSBasicUITool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSBasicUITool.h; sourceTree = "<group>"; };
 		E4AD151F2471329B001B5848 /* PageContentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PageContentView.h; sourceTree = "<group>"; };
 		E4AD15202471329B001B5848 /* PageContentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PageContentView.m; sourceTree = "<group>"; };
 		E4AEDCFA2487C8290011149D /* FollowedLiveViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FollowedLiveViewController.h; sourceTree = "<group>"; };
@@ -237,13 +241,32 @@
 			path = controllers;
 			sourceTree = "<group>";
 		};
-		E4AD166124742D06001B5848 /* Common */ = {
+		E46D5A442649893A00A964DF /* Catagory */ = {
 			isa = PBXGroup;
 			children = (
 				E443CCD6247C5220004304A1 /* RSNetworkTools.h */,
 				E443CCD7247C5220004304A1 /* RSNetworkTools.m */,
 				E443CCD3247C51CC004304A1 /* NSArray+NSDictionary+Ex.h */,
 				E443CCD4247C51CC004304A1 /* NSArray+NSDictionary+Ex.m */,
+			);
+			path = Catagory;
+			sourceTree = "<group>";
+		};
+		E46D5A4826498A7800A964DF /* UITool */ = {
+			isa = PBXGroup;
+			children = (
+				E46D5A4926498B0100A964DF /* RSBasicUITool.h */,
+				E46D5A45264989E400A964DF /* RSStyleConfig.h */,
+				E46D5A46264989E400A964DF /* RSStyleConfig.m */,
+			);
+			path = UITool;
+			sourceTree = "<group>";
+		};
+		E4AD166124742D06001B5848 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				E46D5A4826498A7800A964DF /* UITool */,
+				E46D5A442649893A00A964DF /* Catagory */,
 				E443CCDA247C56D4004304A1 /* Views */,
 			);
 			path = Common;
@@ -402,7 +425,7 @@
 		E4B903E8246D3ED7008025FA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1140;
+				LastUpgradeCheck = 1150;
 				ORGANIZATIONNAME = Ron_Samkulami;
 				TargetAttributes = {
 					E4B903EF246D3ED7008025FA = {
@@ -504,6 +527,7 @@
 				E4B90417246D4E8C008025FA /* MessagesViewController.m in Sources */,
 				E4B90411246D4E2B008025FA /* MainPageViewController.m in Sources */,
 				E4B9047A24700551008025FA /* PageTitleView.m in Sources */,
+				E46D5A47264989E400A964DF /* RSStyleConfig.m in Sources */,
 				E443CCE9247D8D4D004304A1 /* LiveRoomViewController.m in Sources */,
 				E443CCBE247C0610004304A1 /* LiveHub.m in Sources */,
 				E443D01324811662004304A1 /* File.swift in Sources */,
@@ -676,6 +700,7 @@
 				MTL_FAST_MATH = YES;
 				OTHER_LDFLAGS = "";
 				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
