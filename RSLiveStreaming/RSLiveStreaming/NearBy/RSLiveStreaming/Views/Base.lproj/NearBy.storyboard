@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Lty-Ml-v3K">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Lty-Ml-v3K">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -19,7 +19,7 @@
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="aL3-SR-cT1">
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="photo" catalog="system" id="jfF-L8-jJk">
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="plus" catalog="system" id="jfF-L8-jJk">
                             <connections>
                                 <action selector="addActivity:" destination="8ed-JR-2R9" id="57M-y2-Ftb"/>
                             </connections>
@@ -54,6 +54,6 @@
     </scenes>
     <resources>
         <image name="location" width="30" height="30"/>
-        <image name="photo" catalog="system" width="128" height="93"/>
+        <image name="plus" catalog="system" width="128" height="113"/>
     </resources>
 </document>

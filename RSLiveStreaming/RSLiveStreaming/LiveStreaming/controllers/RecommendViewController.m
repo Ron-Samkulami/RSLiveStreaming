@@ -23,6 +23,7 @@
 @property (nonatomic,strong) NSMutableDictionary *coverImageUrls;        //保存所有直播间背景图url
 @property (nonatomic,strong) NSMutableDictionary *liveAddrs;             //保存所有直播流url
 @property (nonatomic,strong) UICollectionView *collectionView;
+@property (nonatomic,strong) UILabel *contentLabel;
 
 @end
 
@@ -53,6 +54,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    // create a special view
+    self.contentLabel = [[UILabel alloc]  initWithFrame:CGRectMake(70, 0, 280, 50)];
+    self.contentLabel.text = @"敖丙妲己连线PK 谁才是天使吻过的嗓音";
+    self.contentLabel.font = [UIFont systemFontOfSize:14];
+    self.contentLabel.textColor = [UIColor whiteColor];
+    
     
     //collectionLayout
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
@@ -87,12 +94,12 @@
     self.collectionView.alwaysBounceVertical = YES;     //can refresh when collectionView doesn't fill full screen
     [self.collectionView addSubview:self.collectionView.refreshControl];
     
-    
     //fectch data
     dispatch_async(dispatch_get_global_queue(0,0), ^{
         [self getData];
     });
 }
+
 
 #pragma mark - CollectionView DataSource
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
@@ -164,15 +171,10 @@
         label.text = @"直播头条";
         label.textColor = [UIColor whiteColor];
         label.numberOfLines = 2;
-        
-        UILabel *contentLabel = [[UILabel alloc]  initWithFrame:CGRectMake(70, 0, 280, 50)];
-        contentLabel.text = @"敖丙妲己连线PK 谁才是天使吻过的嗓音";
-        contentLabel.font = [UIFont systemFontOfSize:14];
-        contentLabel.textColor = [UIColor whiteColor];
-        
-        [pinView1 addSubview:contentLabel];
         [pinView1 addSubview:label];
+        [pinView1 addSubview:self.contentLabel];
         [headerView addSubview:pinView1];
+
         return headerView;
         
     } else {
@@ -346,12 +348,17 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.tabBarController.tabBar.hidden = NO;
+    //添加动画
+    CABasicAnimation *moveAnimation = [CABasicAnimation animationWithKeyPath:@"position.y"];
+    moveAnimation.duration = 0.5;//动画时间
+    moveAnimation.fromValue = @(self.contentLabel.center.y-25);
+    moveAnimation.toValue = @(self.contentLabel.center.y);
+    moveAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    moveAnimation.repeatCount = 1;
+    moveAnimation.removedOnCompletion = YES;
+    moveAnimation.fillMode = kCAFillModeForwards;
+    [self.contentLabel.layer addAnimation:moveAnimation forKey:@"key"];
 }
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-}
-
 
 #pragma mark - HeaderView1st Delegate
 - (void)pushMusicView {
@@ -359,7 +366,7 @@
     UIViewController *newView = [[UIViewController alloc] init];
     newView.view.backgroundColor = [UIColor blueColor];
     
-    //skiip to new page
+    //skip to new page
     self.tabBarController.tabBar.hidden = YES;
     [self.navigationController pushViewController:newView animated:YES];
     

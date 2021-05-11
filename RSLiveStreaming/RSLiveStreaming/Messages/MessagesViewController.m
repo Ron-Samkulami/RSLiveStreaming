@@ -7,26 +7,13 @@
 //
 
 #import "MessagesViewController.h"
-
-
-
+#import "RSStyleConfig.h"
 
 @interface MessagesViewController () <UITableViewDelegate,UITableViewDataSource>
 
 @end
 
 @implementation MessagesViewController
-
-- (IBAction)showContacts:(id)sender {
-    UIViewController *newView = [[UIViewController alloc] init];
-    newView.view.backgroundColor = [UIColor whiteColor];
-    newView.title = @"联系人";
-    
-    
-    //push新的viewController
-    self.tabBarController.tabBar.hidden = YES;                          //跳转后隐藏bottomBar
-    [self.navigationController pushViewController:newView animated:YES];
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -52,20 +39,15 @@
     [tableView setTableFooterView:[[UIView alloc] initWithFrame:CGRectZero]];
     tableView.separatorStyle = UITableViewCellEditingStyleNone;
     
-    
     [self.view addSubview:tableView];
-    
 
 }
 
 - (UILabel *)labelWithFrame:(CGRect)frame andText:(NSString *)title {
-    
-    //add title labels
     UILabel *label = [[UILabel alloc] init];
-    label.font = [UIFont systemFontOfSize:20];
+    label.font = kHighlightTitleFont;
     label.text = title;
-    label.textColor = [UIColor colorWithRed:129 * 1.0 / 255 green:216 * 1.0 / 255 blue:209 * 1.0 / 255 alpha:1];
-    label.textAlignment = NSTextAlignmentCenter;
+    label.textColor = kHighlightColor;
     label.frame = frame;
 
     return label;
@@ -94,23 +76,28 @@
 #pragma mark - UITableView Delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    
-    
     UIViewController *newView = [[UIViewController alloc] init];
     newView.view.backgroundColor = [UIColor whiteColor];
-    newView.title = @"互动消息";
-    
-    
-    //push新的viewController
-    self.tabBarController.tabBar.hidden = YES;                          //跳转后隐藏bottomBar
+    newView.title = @"来自妲己的互动消息";
+    self.tabBarController.tabBar.hidden = YES;
     [self.navigationController pushViewController:newView animated:YES];
+}
+
+#pragma mark - Action
+
+- (IBAction)showContacts:(id)sender {
+    UIViewController *newView = [[UIViewController alloc] init];
+    newView.view.backgroundColor = [UIColor whiteColor];
+    newView.title = @"好友";
+    
+    [self.navigationController pushViewController:newView animated:YES];
+    self.tabBarController.tabBar.hidden = YES;
 }
 
 #pragma mark - LifeCircle
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    self.tabBarController.tabBar.hidden = NO;       //tabbar：跳转页面willAppear设置隐藏
+    self.tabBarController.tabBar.hidden = NO;
 }
-
 
 @end

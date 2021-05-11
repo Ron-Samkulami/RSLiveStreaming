@@ -7,6 +7,9 @@
 //
 
 #import "LiveBroadcastViewController.h"
+#import "RSStyleConfig.h"
+
+#define CellID @"CellID"
 
 @interface LiveBroadcastViewController () <UITableViewDelegate,UITableViewDataSource>
 
@@ -20,10 +23,10 @@
     
     UITableView *tableView = [[UITableView alloc] initWithFrame:self.view.frame style:UITableViewStylePlain];
     tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
-    tableView.rowHeight = 120;
     tableView.delegate = self;
     tableView.dataSource = self;
-    tableView.separatorStyle = UITableViewCellEditingStyleNone; //不显示分割线
+    tableView.separatorStyle = UITableViewCellEditingStyleNone;
+    [tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:CellID];
     
     [self.view addSubview:tableView];
 }
@@ -31,35 +34,41 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 20;
 }
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 100;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    static NSString *ID = @"people_cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:ID];
-    }
+    UITableViewCell *cell = [[UITableViewCell alloc] init];
     
     cell.textLabel.text = [NSString stringWithFormat:@"妲己%zd",indexPath.row];
     cell.detailTextLabel.text = @"tags";
     cell.imageView.image = [UIImage imageNamed:@"photo01"];
-    [cell setSelectionStyle:UITableViewCellSelectionStyleNone]; //取消点击后的高亮效果
-  
+    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+    
+    UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 400, 100)];
+    [bgView.layer.sublayers makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
+    UIColor *fadeMainColor = [kHighlightColor colorWithAlphaComponent:0.4];
+    CAGradientLayer *gradientLayer = [CAGradientLayer layer];
+    gradientLayer.colors = @[(__bridge id)fadeMainColor.CGColor,(__bridge id)[UIColor whiteColor].CGColor];
+    gradientLayer.startPoint = CGPointMake(1.0, 0);
+    gradientLayer.endPoint = CGPointMake(0.2, 0);
+    gradientLayer.frame = bgView.bounds;
+    [bgView.layer addSublayer:gradientLayer];
+    
+    [cell insertSubview:bgView atIndex:0];
     
     return cell;
 }
 
 #pragma mark - UITableView Delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    
-    
     UIViewController *newView = [[UIViewController alloc] init];
     newView.view.backgroundColor = [UIColor whiteColor];
-    newView.title = @"附近直播-直播页面";
-    
-    
-    //push新的viewController
-    self.tabBarController.tabBar.hidden = YES;                          //跳转后隐藏bottomBar
+    newView.title = @"附近直播间";
+    self.tabBarController.tabBar.hidden = YES;
     [self.navigationController pushViewController:newView animated:YES];
 }
 

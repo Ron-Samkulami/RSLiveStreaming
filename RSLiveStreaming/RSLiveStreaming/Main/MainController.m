@@ -18,10 +18,8 @@
 - (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item {
     NSInteger index = [self.tabBar.items indexOfObject:item];
     if (index == self.currentSelectedItem) {
-        if (index != 4) {
-            //need to reload data
-        }
-        return;// ignore duplicate click on page 4
+        //need to reload data
+        //return;// or ignore duplicate click
     }
     [self animationWithIndex:index];
     self.currentSelectedItem = index;
@@ -39,7 +37,7 @@
     CABasicAnimation *pulse = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
     pulse.timingFunction= [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
     pulse.duration = 0.1;
-    pulse.repeatCount= 1;
+    pulse.repeatCount= 2;
     pulse.autoreverses= YES;
     pulse.fromValue= [NSNumber numberWithFloat:0.7];
     pulse.toValue= [NSNumber numberWithFloat:1.3];
