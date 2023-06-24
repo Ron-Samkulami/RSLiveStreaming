@@ -17,31 +17,20 @@ PODS:
   - SDWebImage (5.8.1):
     - SDWebImage/Core (= 5.8.1)
   - SDWebImage/Core (5.8.1)
-  - TXIMSDK_iOS (4.8.10)
-  - TXLiteAVSDK_Professional (7.2.8940)
 
 DEPENDENCIES:
   - AFNetworking (~> 4.0)
   - SDWebImage (~> 5.0)
-  - TXIMSDK_iOS
-  - TXLiteAVSDK_Professional (from `http://pod-1252463788.cosgz.myqcloud.com/liteavsdkspec/TXLiteAVSDK_Professional.podspec`)
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
     - AFNetworking
     - SDWebImage
-    - TXIMSDK_iOS
-
-EXTERNAL SOURCES:
-  TXLiteAVSDK_Professional:
-    :podspec: http://pod-1252463788.cosgz.myqcloud.com/liteavsdkspec/TXLiteAVSDK_Professional.podspec
 
 SPEC CHECKSUMS:
-  AFNetworking: 7864c38297c79aaca1500c33288e429c3451fdce
+  AFNetworking: 3bd23d814e976cd148d7d44c3ab78017b744cd58
   SDWebImage: e3eae2eda88578db0685a0c88597fdadd9433f05
-  TXIMSDK_iOS: 17de2fef786f78843687cc7bd9592759edd2ec0b
-  TXLiteAVSDK_Professional: 4afe0775eeff059219964472fd4fa0f1ea4ca860
 
-PODFILE CHECKSUM: b6c46500eab9f33c97b25dcabba5d8edf3cd81ad
+PODFILE CHECKSUM: d2ab99b686bde2f9d6626ae3065cde84ca872a3f
 
-COCOAPODS: 1.9.2
+COCOAPODS: 1.11.3

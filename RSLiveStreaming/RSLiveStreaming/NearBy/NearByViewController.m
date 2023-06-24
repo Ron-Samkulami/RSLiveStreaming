@@ -88,8 +88,8 @@
 
 
 #pragma mark - LifeCircle
-- (void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
     self.tabBarController.tabBar.hidden = NO;       //tabbar：跳转页面willAppear设置隐藏
 }
 

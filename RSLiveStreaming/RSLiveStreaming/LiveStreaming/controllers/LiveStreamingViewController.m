@@ -19,8 +19,8 @@
 @property (nonatomic,strong) NSArray *childVCS;
 @property (nonatomic,strong) PageTitleView *pageTitleView;
 @property (nonatomic,strong) PageContentView *contentView;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *startLiveBtn;
 
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *startLiveBtn;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *searchBtn;
 
 @end

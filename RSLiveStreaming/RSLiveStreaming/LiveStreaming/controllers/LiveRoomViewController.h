@@ -21,10 +21,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong)NSString * liveUrl;
 @property (nonatomic, strong)NSString * imageUrl;
 
-
-
-
-
 @end
 
 NS_ASSUME_NONNULL_END

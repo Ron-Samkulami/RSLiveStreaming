@@ -338,16 +338,20 @@
         return;
     }
     LiveRoomViewController *liveRoomVC = [[LiveRoomViewController alloc] init];
-    liveRoomVC.liveUrl = liveAddr.stream_addr;
+    liveRoomVC.liveUrl = liveAddr.hls_stream_addr;
     liveRoomVC.imageUrl = imageUrl;
     [self.navigationController pushViewController:liveRoomVC animated:NO];
     
 }
 
 #pragma mark - Life Circle
-- (void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
+
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    
+    [self.navigationController setNavigationBarHidden:NO];
     self.tabBarController.tabBar.hidden = NO;
+    
     //添加动画
     CABasicAnimation *moveAnimation = [CABasicAnimation animationWithKeyPath:@"position.y"];
     moveAnimation.duration = 0.5;//动画时间
@@ -367,7 +371,6 @@
     newView.view.backgroundColor = [UIColor blueColor];
     
     //skip to new page
-    self.tabBarController.tabBar.hidden = YES;
     [self.navigationController pushViewController:newView animated:YES];
     
 }

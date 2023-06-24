@@ -3,11 +3,16 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7EB0AA7F4E2042653E2DC189 /* libPods-RSLiveStreaming.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BE1EDAE3DF595DDF3A22E3E1 /* libPods-RSLiveStreaming.a */; };
+		407C0C4A0001CE1DE0A6F7BF /* libPods-RSLiveStreaming.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A97B68B3AB0D8CE9D135431 /* libPods-RSLiveStreaming.a */; };
+		E41143B32A444CB90075500E /* RSLikesView.m in Sources */ = {isa = PBXBuildFile; fileRef = E41143B12A444CB90075500E /* RSLikesView.m */; };
+		E434A3992A460DB300D15A2D /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E434A3982A460DB200D15A2D /* AVFoundation.framework */; };
+		E434A39B2A460DC800D15A2D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E434A39A2A460DC700D15A2D /* QuartzCore.framework */; };
+		E434A39D2A460DCF00D15A2D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E434A39C2A460DCF00D15A2D /* UIKit.framework */; };
+		E434A39F2A460DD700D15A2D /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E434A39E2A460DD600D15A2D /* OpenGLES.framework */; };
 		E443CCBE247C0610004304A1 /* LiveHub.m in Sources */ = {isa = PBXBuildFile; fileRef = E443CCBD247C0610004304A1 /* LiveHub.m */; };
 		E443CCD2247C5100004304A1 /* RSLiveHubCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E443CCD1247C5100004304A1 /* RSLiveHubCell.xib */; };
 		E443CCD5247C51CC004304A1 /* NSArray+NSDictionary+Ex.m in Sources */ = {isa = PBXBuildFile; fileRef = E443CCD4247C51CC004304A1 /* NSArray+NSDictionary+Ex.m */; };
@@ -21,7 +26,6 @@
 		E443CF122480F0E2004304A1 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = E443CF112480F0E2004304A1 /* libsqlite3.0.tbd */; };
 		E443D00C248115A8004304A1 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E443D00B248115A8004304A1 /* Metal.framework */; };
 		E443D00E248115BD004304A1 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E443D00D248115BD004304A1 /* CoreMedia.framework */; };
-		E443D010248115DD004304A1 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E443D00F248115DD004304A1 /* AssetsLibrary.framework */; };
 		E443D01324811662004304A1 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = E443D01224811662004304A1 /* File.swift */; };
 		E44421E72476B3740056098A /* RecommendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E44421E62476B3740056098A /* RecommendViewController.m */; };
 		E44421ED2476FC6C0056098A /* HotspotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E44421EC2476FC6C0056098A /* HotspotViewController.m */; };
@@ -30,6 +34,14 @@
 		E4570D352479A88300610AD9 /* PeopleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4570D342479A88300610AD9 /* PeopleViewController.m */; };
 		E4570D382479A8CA00610AD9 /* LiveBroadcastViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4570D372479A8CA00610AD9 /* LiveBroadcastViewController.m */; };
 		E46D5A47264989E400A964DF /* RSStyleConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = E46D5A46264989E400A964DF /* RSStyleConfig.m */; };
+		E49FF5302A4609BC004B58E0 /* IJKMediaFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E49FF52F2A4609BC004B58E0 /* IJKMediaFramework.framework */; };
+		E49FF5322A460A45004B58E0 /* libbz2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = E49FF5312A460A2C004B58E0 /* libbz2.tbd */; };
+		E49FF5382A460AD2004B58E0 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = E49FF5372A460ABB004B58E0 /* libz.tbd */; };
+		E49FF5392A460B52004B58E0 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E49FF5332A460A85004B58E0 /* AudioToolbox.framework */; };
+		E49FF53A2A460B59004B58E0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E49FF5352A460AA1004B58E0 /* CoreGraphics.framework */; };
+		E49FF53C2A460B61004B58E0 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E49FF53B2A460B61004B58E0 /* CoreVideo.framework */; };
+		E49FF53E2A460B6B004B58E0 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E49FF53D2A460B6A004B58E0 /* MediaPlayer.framework */; };
+		E49FF5402A460B78004B58E0 /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E49FF53F2A460B78004B58E0 /* VideoToolbox.framework */; };
 		E4AD15212471329B001B5848 /* PageContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AD15202471329B001B5848 /* PageContentView.m */; };
 		E4AEDCFC2487C8290011149D /* FollowedLiveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AEDCFB2487C8290011149D /* FollowedLiveViewController.m */; };
 		E4AEDD032487DBC30011149D /* MomentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AEDD012487DBC30011149D /* MomentCell.m */; };
@@ -60,9 +72,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1A2037C2AE39CF015687F5BE /* Pods-RSLiveStreaming.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RSLiveStreaming.release.xcconfig"; path = "Target Support Files/Pods-RSLiveStreaming/Pods-RSLiveStreaming.release.xcconfig"; sourceTree = "<group>"; };
-		984A3DE5E8136943C00C4B2E /* Pods-RSLiveStreaming.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RSLiveStreaming.debug.xcconfig"; path = "Target Support Files/Pods-RSLiveStreaming/Pods-RSLiveStreaming.debug.xcconfig"; sourceTree = "<group>"; };
-		BE1EDAE3DF595DDF3A22E3E1 /* libPods-RSLiveStreaming.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RSLiveStreaming.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4A97B68B3AB0D8CE9D135431 /* libPods-RSLiveStreaming.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RSLiveStreaming.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		79F2CAB7CCA779FD756E92F2 /* Pods-RSLiveStreaming.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RSLiveStreaming.release.xcconfig"; path = "Target Support Files/Pods-RSLiveStreaming/Pods-RSLiveStreaming.release.xcconfig"; sourceTree = "<group>"; };
+		E41143B12A444CB90075500E /* RSLikesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSLikesView.m; sourceTree = "<group>"; };
+		E41143B22A444CB90075500E /* RSLikesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSLikesView.h; sourceTree = "<group>"; };
+		E434A3982A460DB200D15A2D /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		E434A39A2A460DC700D15A2D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		E434A39C2A460DCF00D15A2D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		E434A39E2A460DD600D15A2D /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		E443CCBC247C0610004304A1 /* LiveHub.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LiveHub.h; sourceTree = "<group>"; };
 		E443CCBD247C0610004304A1 /* LiveHub.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LiveHub.m; sourceTree = "<group>"; };
 		E443CCD1247C5100004304A1 /* RSLiveHubCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RSLiveHubCell.xib; sourceTree = "<group>"; };
@@ -100,6 +117,14 @@
 		E46D5A45264989E400A964DF /* RSStyleConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSStyleConfig.h; sourceTree = "<group>"; };
 		E46D5A46264989E400A964DF /* RSStyleConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSStyleConfig.m; sourceTree = "<group>"; };
 		E46D5A4926498B0100A964DF /* RSBasicUITool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSBasicUITool.h; sourceTree = "<group>"; };
+		E49FF52F2A4609BC004B58E0 /* IJKMediaFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = IJKMediaFramework.framework; sourceTree = "<group>"; };
+		E49FF5312A460A2C004B58E0 /* libbz2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libbz2.tbd; path = usr/lib/libbz2.tbd; sourceTree = SDKROOT; };
+		E49FF5332A460A85004B58E0 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		E49FF5352A460AA1004B58E0 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		E49FF5372A460ABB004B58E0 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		E49FF53B2A460B61004B58E0 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		E49FF53D2A460B6A004B58E0 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		E49FF53F2A460B78004B58E0 /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = System/Library/Frameworks/VideoToolbox.framework; sourceTree = SDKROOT; };
 		E4AD151F2471329B001B5848 /* PageContentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PageContentView.h; sourceTree = "<group>"; };
 		E4AD15202471329B001B5848 /* PageContentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PageContentView.m; sourceTree = "<group>"; };
 		E4AEDCFA2487C8290011149D /* FollowedLiveViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FollowedLiveViewController.h; sourceTree = "<group>"; };
@@ -143,6 +168,7 @@
 		E4B9046F246FF1B5008025FA /* MainController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainController.m; sourceTree = "<group>"; };
 		E4B9047824700551008025FA /* PageTitleView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PageTitleView.h; sourceTree = "<group>"; };
 		E4B9047924700551008025FA /* PageTitleView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PageTitleView.m; sourceTree = "<group>"; };
+		F3B50FF47BF7F302E0E4D93C /* Pods-RSLiveStreaming.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RSLiveStreaming.debug.xcconfig"; path = "Target Support Files/Pods-RSLiveStreaming/Pods-RSLiveStreaming.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,14 +176,25 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E443D010248115DD004304A1 /* AssetsLibrary.framework in Frameworks */,
+				E434A3992A460DB300D15A2D /* AVFoundation.framework in Frameworks */,
+				E434A39D2A460DCF00D15A2D /* UIKit.framework in Frameworks */,
+				E49FF5402A460B78004B58E0 /* VideoToolbox.framework in Frameworks */,
+				E434A39B2A460DC800D15A2D /* QuartzCore.framework in Frameworks */,
+				E49FF53A2A460B59004B58E0 /* CoreGraphics.framework in Frameworks */,
+				E49FF53E2A460B6B004B58E0 /* MediaPlayer.framework in Frameworks */,
+				E434A39F2A460DD700D15A2D /* OpenGLES.framework in Frameworks */,
+				E49FF5322A460A45004B58E0 /* libbz2.tbd in Frameworks */,
 				E443D00E248115BD004304A1 /* CoreMedia.framework in Frameworks */,
+				E49FF5382A460AD2004B58E0 /* libz.tbd in Frameworks */,
 				E443D00C248115A8004304A1 /* Metal.framework in Frameworks */,
 				E443CF122480F0E2004304A1 /* libsqlite3.0.tbd in Frameworks */,
+				E49FF53C2A460B61004B58E0 /* CoreVideo.framework in Frameworks */,
 				E443CF102480F0D2004304A1 /* libsqlite3.tbd in Frameworks */,
 				E443CF0E2480F0A9004304A1 /* libc++.tbd in Frameworks */,
+				E49FF5302A4609BC004B58E0 /* IJKMediaFramework.framework in Frameworks */,
 				E443CF0C2480F08F004304A1 /* libresolv.tbd in Frameworks */,
-				7EB0AA7F4E2042653E2DC189 /* libPods-RSLiveStreaming.a in Frameworks */,
+				407C0C4A0001CE1DE0A6F7BF /* libPods-RSLiveStreaming.a in Frameworks */,
+				E49FF5392A460B52004B58E0 /* AudioToolbox.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -167,8 +204,8 @@
 		B05E5E65B52D7C9CA43B6561 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				984A3DE5E8136943C00C4B2E /* Pods-RSLiveStreaming.debug.xcconfig */,
-				1A2037C2AE39CF015687F5BE /* Pods-RSLiveStreaming.release.xcconfig */,
+				F3B50FF47BF7F302E0E4D93C /* Pods-RSLiveStreaming.debug.xcconfig */,
+				79F2CAB7CCA779FD756E92F2 /* Pods-RSLiveStreaming.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -176,6 +213,17 @@
 		E443CC85247BA6C3004304A1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E434A39E2A460DD600D15A2D /* OpenGLES.framework */,
+				E434A39C2A460DCF00D15A2D /* UIKit.framework */,
+				E434A39A2A460DC700D15A2D /* QuartzCore.framework */,
+				E434A3982A460DB200D15A2D /* AVFoundation.framework */,
+				E49FF53F2A460B78004B58E0 /* VideoToolbox.framework */,
+				E49FF53D2A460B6A004B58E0 /* MediaPlayer.framework */,
+				E49FF53B2A460B61004B58E0 /* CoreVideo.framework */,
+				E49FF5372A460ABB004B58E0 /* libz.tbd */,
+				E49FF5352A460AA1004B58E0 /* CoreGraphics.framework */,
+				E49FF5332A460A85004B58E0 /* AudioToolbox.framework */,
+				E49FF5312A460A2C004B58E0 /* libbz2.tbd */,
 				E443D00F248115DD004304A1 /* AssetsLibrary.framework */,
 				E443D00D248115BD004304A1 /* CoreMedia.framework */,
 				E443D00B248115A8004304A1 /* Metal.framework */,
@@ -183,7 +231,7 @@
 				E443CF0F2480F0D2004304A1 /* libsqlite3.tbd */,
 				E443CF0D2480F0A9004304A1 /* libc++.tbd */,
 				E443CF0B2480F08F004304A1 /* libresolv.tbd */,
-				BE1EDAE3DF595DDF3A22E3E1 /* libPods-RSLiveStreaming.a */,
+				4A97B68B3AB0D8CE9D135431 /* libPods-RSLiveStreaming.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -220,6 +268,8 @@
 				E4AF329C2485791200F16C87 /* headerView1st.h */,
 				E4AF329E2485791300F16C87 /* headerView1st.m */,
 				E4AF329D2485791200F16C87 /* headerView1st.xib */,
+				E41143B22A444CB90075500E /* RSLikesView.h */,
+				E41143B12A444CB90075500E /* RSLikesView.m */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -293,6 +343,7 @@
 		E4B903F2246D3ED7008025FA /* RSLiveStreaming */ = {
 			isa = PBXGroup;
 			children = (
+				E49FF52F2A4609BC004B58E0 /* IJKMediaFramework.framework */,
 				E4AD166124742D06001B5848 /* Common */,
 				E4B90471247003CC008025FA /* Main */,
 				E4B90473247003F4008025FA /* LiveStreaming */,
@@ -300,7 +351,6 @@
 				E4B9047724700463008025FA /* Messages */,
 				E4B9047524700411008025FA /* MyFollow */,
 				E4B9047624700435008025FA /* MainPage */,
-				E4B90420246D5D1A008025FA /* SupportingFiles */,
 				E4B903F3246D3ED7008025FA /* AppDelegate.h */,
 				E4B903F4246D3ED7008025FA /* AppDelegate.m */,
 				E4B903F6246D3ED7008025FA /* SceneDelegate.h */,
@@ -314,13 +364,6 @@
 				E443D01124811661004304A1 /* RSLiveStreaming-Bridging-Header.h */,
 			);
 			path = RSLiveStreaming;
-			sourceTree = "<group>";
-		};
-		E4B90420246D5D1A008025FA /* SupportingFiles */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = SupportingFiles;
 			sourceTree = "<group>";
 		};
 		E4B90471247003CC008025FA /* Main */ = {
@@ -404,11 +447,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E4B9040C246D3ED9008025FA /* Build configuration list for PBXNativeTarget "RSLiveStreaming" */;
 			buildPhases = (
-				E462D643F99430EBF3410481 /* [CP] Check Pods Manifest.lock */,
+				F79CB804D49E24B88E49C386 /* [CP] Check Pods Manifest.lock */,
 				E4B903EC246D3ED7008025FA /* Sources */,
 				E4B903ED246D3ED7008025FA /* Frameworks */,
 				E4B903EE246D3ED7008025FA /* Resources */,
-				3246CE4EE57DAE3D72B3330E /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -475,24 +517,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		3246CE4EE57DAE3D72B3330E /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-RSLiveStreaming/Pods-RSLiveStreaming-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-RSLiveStreaming/Pods-RSLiveStreaming-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-RSLiveStreaming/Pods-RSLiveStreaming-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		E462D643F99430EBF3410481 /* [CP] Check Pods Manifest.lock */ = {
+		F79CB804D49E24B88E49C386 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -525,6 +550,7 @@
 				E44421ED2476FC6C0056098A /* HotspotViewController.m in Sources */,
 				E4AD15212471329B001B5848 /* PageContentView.m in Sources */,
 				E4B90417246D4E8C008025FA /* MessagesViewController.m in Sources */,
+				E41143B32A444CB90075500E /* RSLikesView.m in Sources */,
 				E4B90411246D4E2B008025FA /* MainPageViewController.m in Sources */,
 				E4B9047A24700551008025FA /* PageTitleView.m in Sources */,
 				E46D5A47264989E400A964DF /* RSStyleConfig.m in Sources */,
@@ -707,7 +733,7 @@
 		};
 		E4B9040D246D3ED9008025FA /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 984A3DE5E8136943C00C4B2E /* Pods-RSLiveStreaming.debug.xcconfig */;
+			baseConfigurationReference = F3B50FF47BF7F302E0E4D93C /* Pods-RSLiveStreaming.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -716,9 +742,11 @@
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = VB27T8S5Y8;
 				ENABLE_BITCODE = NO;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/RSLiveStreaming",
 				);
 				INFOPLIST_FILE = RSLiveStreaming/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -746,7 +774,7 @@
 		};
 		E4B9040E246D3ED9008025FA /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1A2037C2AE39CF015687F5BE /* Pods-RSLiveStreaming.release.xcconfig */;
+			baseConfigurationReference = 79F2CAB7CCA779FD756E92F2 /* Pods-RSLiveStreaming.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -755,9 +783,11 @@
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = VB27T8S5Y8;
 				ENABLE_BITCODE = NO;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/RSLiveStreaming",
 				);
 				INFOPLIST_FILE = RSLiveStreaming/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;

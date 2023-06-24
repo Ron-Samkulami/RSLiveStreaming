@@ -232,7 +232,8 @@
         return;
     }
     LiveRoomViewController *liveRoomVC = [[LiveRoomViewController alloc] init];
-    liveRoomVC.liveUrl = liveAddr.stream_addr;
+//    liveRoomVC.liveUrl = liveAddr.stream_addr;
+    liveRoomVC.liveUrl = liveAddr.hls_stream_addr;
     liveRoomVC.imageUrl = imageUrl;
     [self.navigationController pushViewController:liveRoomVC animated:NO];
     
@@ -240,8 +241,8 @@
 
 #pragma mark - Life Circle
 
-- (void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
     self.tabBarController.tabBar.hidden = NO;
 }
 

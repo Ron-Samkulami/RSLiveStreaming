@@ -1,12 +1,12 @@
 source 'https://github.com/CocoaPods/Specs.git'
 # Uncomment the next line to define a global platform for your project
-platform :ios, '9.0'
+platform :ios, '13.0'
 
 target 'RSLiveStreaming' do
 
 pod 'AFNetworking','~> 4.0'
 pod 'SDWebImage','~> 5.0'
-pod 'TXLiteAVSDK_Professional', :podspec => 'http://pod-1252463788.cosgz.myqcloud.com/liteavsdkspec/TXLiteAVSDK_Professional.podspec'
-pod 'TXIMSDK_iOS'
-#pod 'Toast-Swift'
+
+#pod 'TXLiteAVSDK_Player', :podspec => 'http://liteav.sdk.qcloud.com/pod/liteavsdkspec/TXLiteAVSDK_Player.podspec'
+
 end
