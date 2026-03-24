@@ -68,7 +68,7 @@
     UIViewController *newView = [[UIViewController alloc] init];
     newView.view.backgroundColor = [UIColor whiteColor];
     newView.title = @"附近直播间";
-    self.tabBarController.tabBar.hidden = YES;
+    newView.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:newView animated:YES];
 }
 

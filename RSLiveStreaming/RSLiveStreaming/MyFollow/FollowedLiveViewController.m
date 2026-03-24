@@ -12,7 +12,6 @@
 #import "LiveHub.h"
 #import "LiveAddr.h"
 #import "LiveRoomViewController.h"
-#import "headerView1st.h"
 
 @interface FollowedLiveViewController () <UICollectionViewDataSource,UICollectionViewDelegate>
 
@@ -306,7 +305,7 @@
     LiveRoomViewController *liveRoomVC = [[LiveRoomViewController alloc] init];
     liveRoomVC.liveUrl = liveAddr.hls_stream_addr;
     liveRoomVC.imageUrl = imageUrl;
-    //        self.tabBarController.tabBar.hidden = YES;                                   //跳转后隐藏bottomBar
+    liveRoomVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:liveRoomVC animated:NO];
     
 }

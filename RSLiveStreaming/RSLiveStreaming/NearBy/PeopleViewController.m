@@ -57,10 +57,7 @@
     UIViewController *newView = [[UIViewController alloc] init];
     newView.view.backgroundColor = [UIColor whiteColor];
     newView.title = @"附近的人详情页";
-    
-    
-    //push新的viewController
-    self.tabBarController.tabBar.hidden = YES;                          //跳转后隐藏bottomBar
+    newView.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:newView animated:YES];
 }
 

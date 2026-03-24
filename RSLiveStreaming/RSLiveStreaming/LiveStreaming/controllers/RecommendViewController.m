@@ -79,7 +79,7 @@
     
     //register nib
     [collection registerNib:[UINib nibWithNibName:@"RSLiveHubCell" bundle:nil] forCellWithReuseIdentifier:CellId];
-    [collection registerNib:[UINib nibWithNibName:@"headerView1st" bundle:nil] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"headerView1st"];
+    [collection registerClass:[headerView1st class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"headerView1st"];
     [collection registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"headerView2"];
     [collection registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"headerView3"];
     
@@ -340,6 +340,7 @@
     LiveRoomViewController *liveRoomVC = [[LiveRoomViewController alloc] init];
     liveRoomVC.liveUrl = liveAddr.hls_stream_addr;
     liveRoomVC.imageUrl = imageUrl;
+    liveRoomVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:liveRoomVC animated:NO];
     
 }
@@ -369,8 +370,7 @@
     NSLog(@"点击了音乐");
     UIViewController *newView = [[UIViewController alloc] init];
     newView.view.backgroundColor = [UIColor blueColor];
-    
-    //skip to new page
+    newView.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:newView animated:YES];
     
 }

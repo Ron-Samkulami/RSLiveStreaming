@@ -25,10 +25,7 @@
     UIViewController *newView = [[UIViewController alloc] init];
     newView.view.backgroundColor = [UIColor whiteColor];
     newView.title = @"发布动态";
-    
-    
-    //push新的viewController
-    self.tabBarController.tabBar.hidden = YES;                          //跳转后隐藏bottomBar
+    newView.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:newView animated:YES];
 }
 
@@ -44,7 +41,8 @@
     titleView.delegate = self;
     UIBarButtonItem *titleItem = [[UIBarButtonItem alloc] initWithCustomView:titleView];
     self.navigationItem.leftBarButtonItem = titleItem;
-    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage systemImageNamed:@"plus"] style:UIBarButtonItemStylePlain target:self action:@selector(addActivity:)];
+
     //覆盖navigationBar的分割线，并使navigationBar的背景显示为白色
     //隐藏tabbar分割线，在AppDelegate.m中设置
     [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];

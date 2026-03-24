@@ -235,6 +235,7 @@
 //    liveRoomVC.liveUrl = liveAddr.stream_addr;
     liveRoomVC.liveUrl = liveAddr.hls_stream_addr;
     liveRoomVC.imageUrl = imageUrl;
+    liveRoomVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:liveRoomVC animated:NO];
     
 }

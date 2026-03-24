@@ -291,7 +291,6 @@ CGFloat heartSize = 30;
     [super viewWillAppear:animated];
     
     [self.navigationController setNavigationBarHidden:YES];     //隐藏导航栏
-    self.tabBarController.tabBar.hidden = YES;
     
     self.navigationController.interactivePopGestureRecognizer.delegate = self;  //保持返回手势pop
     self.navigationController.interactivePopGestureRecognizer.enabled = YES;

@@ -16,13 +16,28 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
-    UITabBar.appearance.tintColor = [UIColor colorWithRed:129 * 1.0 / 255 green:216 * 1.0 / 255 blue:209 * 1.0 /255 alpha:1];
-    
-    //隐藏tabBar的分割线
-    [[UITabBar appearance] setBackgroundImage:[[UIImage alloc] init]];
-    [[UITabBar appearance] setShadowImage:[[UIImage alloc] init]];
-    
+    // TabBar：使用不透明背景。原先空 UIImage 会去掉顶部分割线，但在 UIDesignRequiresCompatibility
+    // 关闭液态玻璃后系统不再垫磨砂层，TabBar 会变成全透明；UITabBarAppearance 可同时做到实底 + 无顶部分割线。
+    UIColor *accent = [UIColor colorWithRed:129 / 255.0 green:216 / 255.0 blue:209 / 255.0 alpha:1.0];
+    UITabBar.appearance.tintColor = accent;
+
+    UITabBarAppearance *appearance = [[UITabBarAppearance alloc] init];
+    [appearance configureWithOpaqueBackground];
+    appearance.backgroundColor = [UIColor systemBackgroundColor];
+    appearance.shadowColor = [UIColor clearColor];
+
+    UITabBarItemAppearance *stacked = appearance.stackedLayoutAppearance;
+    UIColor *muted = [UIColor secondaryLabelColor];
+    stacked.normal.iconColor = muted;
+    stacked.normal.titleTextAttributes = @{ NSForegroundColorAttributeName: muted };
+    stacked.selected.iconColor = accent;
+    stacked.selected.titleTextAttributes = @{ NSForegroundColorAttributeName: accent };
+
+    UITabBar.appearance.standardAppearance = appearance;
+    if (@available(iOS 15.0, *)) {
+        UITabBar.appearance.scrollEdgeAppearance = appearance;
+    }
+
     return YES;
 }
 

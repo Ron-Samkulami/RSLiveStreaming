@@ -26,7 +26,6 @@
 		E443CF122480F0E2004304A1 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = E443CF112480F0E2004304A1 /* libsqlite3.0.tbd */; };
 		E443D00C248115A8004304A1 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E443D00B248115A8004304A1 /* Metal.framework */; };
 		E443D00E248115BD004304A1 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E443D00D248115BD004304A1 /* CoreMedia.framework */; };
-		E443D01324811662004304A1 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = E443D01224811662004304A1 /* File.swift */; };
 		E44421E72476B3740056098A /* RecommendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E44421E62476B3740056098A /* RecommendViewController.m */; };
 		E44421ED2476FC6C0056098A /* HotspotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E44421EC2476FC6C0056098A /* HotspotViewController.m */; };
 		E4570D2F24796B2500610AD9 /* RSLiveHubCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4570D2E24796B2500610AD9 /* RSLiveHubCell.m */; };
@@ -46,29 +45,20 @@
 		E4AEDCFC2487C8290011149D /* FollowedLiveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AEDCFB2487C8290011149D /* FollowedLiveViewController.m */; };
 		E4AEDD032487DBC30011149D /* MomentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AEDD012487DBC30011149D /* MomentCell.m */; };
 		E4AEDD042487DBC30011149D /* MomentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4AEDD022487DBC30011149D /* MomentCell.xib */; };
-		E4AEDD0B2488E6710011149D /* tableView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E4AEDD0A2488E6710011149D /* tableView.storyboard */; };
-		E4AEDD132488F8720011149D /* MainPageTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AEDD122488F8720011149D /* MainPageTableVC.m */; };
-		E4AF329F2485791300F16C87 /* headerView1st.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4AF329D2485791200F16C87 /* headerView1st.xib */; };
 		E4AF32A02485791300F16C87 /* headerView1st.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AF329E2485791300F16C87 /* headerView1st.m */; };
 		E4B903F5246D3ED7008025FA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E4B903F4246D3ED7008025FA /* AppDelegate.m */; };
-		E4B903F8246D3ED7008025FA /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E4B903F7246D3ED7008025FA /* SceneDelegate.m */; };
-		E4B903FE246D3ED7008025FA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E4B903FC246D3ED7008025FA /* Main.storyboard */; };
 		E4B90401246D3ED7008025FA /* RSLiveStreaming.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E4B903FF246D3ED7008025FA /* RSLiveStreaming.xcdatamodeld */; };
-		E4B90406246D3ED9008025FA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E4B90404246D3ED9008025FA /* LaunchScreen.storyboard */; };
-		E4B90409246D3ED9008025FA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E4B90408246D3ED9008025FA /* main.m */; };
-		E4B90411246D4E2B008025FA /* MainPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4B90410246D4E2B008025FA /* MainPageViewController.m */; };
 		E4B90414246D4E80008025FA /* NearByViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4B90413246D4E80008025FA /* NearByViewController.m */; };
 		E4B90417246D4E8C008025FA /* MessagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4B90416246D4E8C008025FA /* MessagesViewController.m */; };
 		E4B9041A246D4EB4008025FA /* LiveStreamingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4B90419246D4EB4008025FA /* LiveStreamingViewController.m */; };
 		E4B9041D246D4F6D008025FA /* MyFollowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4B9041C246D4F6D008025FA /* MyFollowViewController.m */; };
 		E4B90436246D6D01008025FA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E4B90435246D6D01008025FA /* Assets.xcassets */; };
-		E4B90463246FE3F6008025FA /* LiveStreaming.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E4B90462246FE3F6008025FA /* LiveStreaming.storyboard */; };
-		E4B90466246FE465008025FA /* NearBy.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E4B90464246FE465008025FA /* NearBy.storyboard */; };
-		E4B90468246FE4A1008025FA /* Messages.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E4B90467246FE4A1008025FA /* Messages.storyboard */; };
-		E4B9046B246FE4CA008025FA /* MyFollow.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E4B90469246FE4CA008025FA /* MyFollow.storyboard */; };
-		E4B9046D246FE4F2008025FA /* MainPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E4B9046C246FE4F2008025FA /* MainPage.storyboard */; };
 		E4B90470246FF1B5008025FA /* MainController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4B9046F246FF1B5008025FA /* MainController.m */; };
 		E4B9047A24700551008025FA /* PageTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = E4B9047924700551008025FA /* PageTitleView.m */; };
+		E4C10B11246D3ED9008025FA /* RSLiveStreamingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C10B01246D3ED9008025FA /* RSLiveStreamingApp.swift */; };
+		E4C10B12246D3ED9008025FA /* RootTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C10B02246D3ED9008025FA /* RootTabView.swift */; };
+		E4C10B13246D3ED9008025FA /* TabNavigationEmbed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C10B03246D3ED9008025FA /* TabNavigationEmbed.swift */; };
+		F1A10B11246D3ED9008025FC /* MainProfileScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A10B01246D3ED9008025FC /* MainProfileScreen.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -101,7 +91,6 @@
 		E443D00D248115BD004304A1 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		E443D00F248115DD004304A1 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		E443D01124811661004304A1 /* RSLiveStreaming-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RSLiveStreaming-Bridging-Header.h"; sourceTree = "<group>"; };
-		E443D01224811662004304A1 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		E44421E52476B3740056098A /* RecommendViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RecommendViewController.h; sourceTree = "<group>"; };
 		E44421E62476B3740056098A /* RecommendViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RecommendViewController.m; sourceTree = "<group>"; };
 		E44421EB2476FC6C0056098A /* HotspotViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HotspotViewController.h; sourceTree = "<group>"; };
@@ -132,20 +121,16 @@
 		E4AEDD002487DBC30011149D /* MomentCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MomentCell.h; sourceTree = "<group>"; };
 		E4AEDD012487DBC30011149D /* MomentCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MomentCell.m; sourceTree = "<group>"; };
 		E4AEDD022487DBC30011149D /* MomentCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MomentCell.xib; sourceTree = "<group>"; };
-		E4AEDD0A2488E6710011149D /* tableView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = tableView.storyboard; sourceTree = "<group>"; };
 		E4AEDD112488F8720011149D /* MainPageTableVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainPageTableVC.h; sourceTree = "<group>"; };
 		E4AEDD122488F8720011149D /* MainPageTableVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainPageTableVC.m; sourceTree = "<group>"; };
 		E4AF329C2485791200F16C87 /* headerView1st.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = headerView1st.h; sourceTree = "<group>"; };
-		E4AF329D2485791200F16C87 /* headerView1st.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = headerView1st.xib; sourceTree = "<group>"; };
 		E4AF329E2485791300F16C87 /* headerView1st.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = headerView1st.m; sourceTree = "<group>"; };
 		E4B903F0246D3ED7008025FA /* RSLive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RSLive.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4B903F3246D3ED7008025FA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		E4B903F4246D3ED7008025FA /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		E4B903F6246D3ED7008025FA /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
 		E4B903F7246D3ED7008025FA /* SceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
-		E4B903FD246D3ED7008025FA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E4B90400246D3ED7008025FA /* RSLiveStreaming.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = RSLiveStreaming.xcdatamodel; sourceTree = "<group>"; };
-		E4B90405246D3ED9008025FA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E4B90407246D3ED9008025FA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E4B90408246D3ED9008025FA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		E4B9040F246D4E2B008025FA /* MainPageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainPageViewController.h; sourceTree = "<group>"; };
@@ -159,15 +144,14 @@
 		E4B9041B246D4F6D008025FA /* MyFollowViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyFollowViewController.h; sourceTree = "<group>"; };
 		E4B9041C246D4F6D008025FA /* MyFollowViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyFollowViewController.m; sourceTree = "<group>"; };
 		E4B90435246D6D01008025FA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		E4B90462246FE3F6008025FA /* LiveStreaming.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LiveStreaming.storyboard; sourceTree = "<group>"; };
-		E4B90465246FE465008025FA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = RSLiveStreaming/Views/Base.lproj/NearBy.storyboard; sourceTree = "<group>"; };
-		E4B90467246FE4A1008025FA /* Messages.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Messages.storyboard; sourceTree = "<group>"; };
-		E4B9046A246FE4CA008025FA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = RSLiveStreaming/Views/Base.lproj/MyFollow.storyboard; sourceTree = "<group>"; };
-		E4B9046C246FE4F2008025FA /* MainPage.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainPage.storyboard; sourceTree = "<group>"; };
 		E4B9046E246FF1B5008025FA /* MainController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainController.h; sourceTree = "<group>"; };
 		E4B9046F246FF1B5008025FA /* MainController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainController.m; sourceTree = "<group>"; };
 		E4B9047824700551008025FA /* PageTitleView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PageTitleView.h; sourceTree = "<group>"; };
 		E4B9047924700551008025FA /* PageTitleView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PageTitleView.m; sourceTree = "<group>"; };
+		E4C10B01246D3ED9008025FA /* RSLiveStreamingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSLiveStreamingApp.swift; sourceTree = "<group>"; };
+		E4C10B02246D3ED9008025FA /* RootTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootTabView.swift; sourceTree = "<group>"; };
+		E4C10B03246D3ED9008025FA /* TabNavigationEmbed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabNavigationEmbed.swift; sourceTree = "<group>"; };
+		F1A10B01246D3ED9008025FC /* MainProfileScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainProfileScreen.swift; sourceTree = "<group>"; };
 		F3B50FF47BF7F302E0E4D93C /* Pods-RSLiveStreaming.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RSLiveStreaming.debug.xcconfig"; path = "Target Support Files/Pods-RSLiveStreaming/Pods-RSLiveStreaming.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -264,10 +248,8 @@
 		E443CCE5247D8A97004304A1 /* view */ = {
 			isa = PBXGroup;
 			children = (
-				E4B90462246FE3F6008025FA /* LiveStreaming.storyboard */,
 				E4AF329C2485791200F16C87 /* headerView1st.h */,
 				E4AF329E2485791300F16C87 /* headerView1st.m */,
-				E4AF329D2485791200F16C87 /* headerView1st.xib */,
 				E41143B22A444CB90075500E /* RSLikesView.h */,
 				E41143B12A444CB90075500E /* RSLikesView.m */,
 			);
@@ -344,6 +326,7 @@
 			isa = PBXGroup;
 			children = (
 				E49FF52F2A4609BC004B58E0 /* IJKMediaFramework.framework */,
+				E4C10B20246D3ED9008025FA /* SwiftUI */,
 				E4AD166124742D06001B5848 /* Common */,
 				E4B90471247003CC008025FA /* Main */,
 				E4B90473247003F4008025FA /* LiveStreaming */,
@@ -355,12 +338,10 @@
 				E4B903F4246D3ED7008025FA /* AppDelegate.m */,
 				E4B903F6246D3ED7008025FA /* SceneDelegate.h */,
 				E4B903F7246D3ED7008025FA /* SceneDelegate.m */,
-				E4B90404246D3ED9008025FA /* LaunchScreen.storyboard */,
 				E4B90435246D6D01008025FA /* Assets.xcassets */,
 				E4B90407246D3ED9008025FA /* Info.plist */,
 				E4B90408246D3ED9008025FA /* main.m */,
 				E4B903FF246D3ED7008025FA /* RSLiveStreaming.xcdatamodeld */,
-				E443D01224811662004304A1 /* File.swift */,
 				E443D01124811661004304A1 /* RSLiveStreaming-Bridging-Header.h */,
 			);
 			path = RSLiveStreaming;
@@ -369,7 +350,6 @@
 		E4B90471247003CC008025FA /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				E4B903FC246D3ED7008025FA /* Main.storyboard */,
 				E4B9046E246FF1B5008025FA /* MainController.h */,
 				E4B9046F246FF1B5008025FA /* MainController.m */,
 			);
@@ -389,7 +369,6 @@
 		E4B9047424700405008025FA /* NearBy */ = {
 			isa = PBXGroup;
 			children = (
-				E4B90464246FE465008025FA /* NearBy.storyboard */,
 				E4B90412246D4E80008025FA /* NearByViewController.h */,
 				E4B90413246D4E80008025FA /* NearByViewController.m */,
 				E4570D332479A88300610AD9 /* PeopleViewController.h */,
@@ -408,7 +387,6 @@
 		E4B9047524700411008025FA /* MyFollow */ = {
 			isa = PBXGroup;
 			children = (
-				E4B90469246FE4CA008025FA /* MyFollow.storyboard */,
 				E4B9041B246D4F6D008025FA /* MyFollowViewController.h */,
 				E4B9041C246D4F6D008025FA /* MyFollowViewController.m */,
 				E4AEDCFA2487C8290011149D /* FollowedLiveViewController.h */,
@@ -420,10 +398,8 @@
 		E4B9047624700435008025FA /* MainPage */ = {
 			isa = PBXGroup;
 			children = (
-				E4B9046C246FE4F2008025FA /* MainPage.storyboard */,
 				E4B9040F246D4E2B008025FA /* MainPageViewController.h */,
 				E4B90410246D4E2B008025FA /* MainPageViewController.m */,
-				E4AEDD0A2488E6710011149D /* tableView.storyboard */,
 				E4AEDD112488F8720011149D /* MainPageTableVC.h */,
 				E4AEDD122488F8720011149D /* MainPageTableVC.m */,
 			);
@@ -433,11 +409,21 @@
 		E4B9047724700463008025FA /* Messages */ = {
 			isa = PBXGroup;
 			children = (
-				E4B90467246FE4A1008025FA /* Messages.storyboard */,
 				E4B90415246D4E8C008025FA /* MessagesViewController.h */,
 				E4B90416246D4E8C008025FA /* MessagesViewController.m */,
 			);
 			path = Messages;
+			sourceTree = "<group>";
+		};
+		E4C10B20246D3ED9008025FA /* SwiftUI */ = {
+			isa = PBXGroup;
+			children = (
+				E4C10B01246D3ED9008025FA /* RSLiveStreamingApp.swift */,
+				E4C10B02246D3ED9008025FA /* RootTabView.swift */,
+				E4C10B03246D3ED9008025FA /* TabNavigationEmbed.swift */,
+				F1A10B01246D3ED9008025FC /* MainProfileScreen.swift */,
+			);
+			path = SwiftUI;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -499,18 +485,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E4B90468246FE4A1008025FA /* Messages.storyboard in Resources */,
-				E4B90406246D3ED9008025FA /* LaunchScreen.storyboard in Resources */,
-				E4AEDD0B2488E6710011149D /* tableView.storyboard in Resources */,
 				E443CCD2247C5100004304A1 /* RSLiveHubCell.xib in Resources */,
-				E4B9046B246FE4CA008025FA /* MyFollow.storyboard in Resources */,
-				E4B90463246FE3F6008025FA /* LiveStreaming.storyboard in Resources */,
-				E4B9046D246FE4F2008025FA /* MainPage.storyboard in Resources */,
 				E4AEDD042487DBC30011149D /* MomentCell.xib in Resources */,
-				E4AF329F2485791300F16C87 /* headerView1st.xib in Resources */,
 				E4B90436246D6D01008025FA /* Assets.xcassets in Resources */,
-				E4B903FE246D3ED7008025FA /* Main.storyboard in Resources */,
-				E4B90466246FE465008025FA /* NearBy.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -546,18 +523,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E4B90409246D3ED9008025FA /* main.m in Sources */,
 				E44421ED2476FC6C0056098A /* HotspotViewController.m in Sources */,
 				E4AD15212471329B001B5848 /* PageContentView.m in Sources */,
 				E4B90417246D4E8C008025FA /* MessagesViewController.m in Sources */,
 				E41143B32A444CB90075500E /* RSLikesView.m in Sources */,
-				E4B90411246D4E2B008025FA /* MainPageViewController.m in Sources */,
 				E4B9047A24700551008025FA /* PageTitleView.m in Sources */,
 				E46D5A47264989E400A964DF /* RSStyleConfig.m in Sources */,
 				E443CCE9247D8D4D004304A1 /* LiveRoomViewController.m in Sources */,
 				E443CCBE247C0610004304A1 /* LiveHub.m in Sources */,
-				E443D01324811662004304A1 /* File.swift in Sources */,
-				E4AEDD132488F8720011149D /* MainPageTableVC.m in Sources */,
+				E4C10B11246D3ED9008025FA /* RSLiveStreamingApp.swift in Sources */,
+				E4C10B12246D3ED9008025FA /* RootTabView.swift in Sources */,
+				E4C10B13246D3ED9008025FA /* TabNavigationEmbed.swift in Sources */,
+				F1A10B11246D3ED9008025FC /* MainProfileScreen.swift in Sources */,
 				E4570D322479A87100610AD9 /* DynamicViewController.m in Sources */,
 				E4B903F5246D3ED7008025FA /* AppDelegate.m in Sources */,
 				E4570D382479A8CA00610AD9 /* LiveBroadcastViewController.m in Sources */,
@@ -568,7 +545,6 @@
 				E4B9041D246D4F6D008025FA /* MyFollowViewController.m in Sources */,
 				E44421E72476B3740056098A /* RecommendViewController.m in Sources */,
 				E443CD12247E3C57004304A1 /* AVCaptreViewController.m in Sources */,
-				E4B903F8246D3ED7008025FA /* SceneDelegate.m in Sources */,
 				E4B9041A246D4EB4008025FA /* LiveStreamingViewController.m in Sources */,
 				E4B90401246D3ED7008025FA /* RSLiveStreaming.xcdatamodeld in Sources */,
 				E443CCE0247D57DD004304A1 /* LiveAddr.m in Sources */,
@@ -581,41 +557,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		E4B903FC246D3ED7008025FA /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				E4B903FD246D3ED7008025FA /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		E4B90404246D3ED9008025FA /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				E4B90405246D3ED9008025FA /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-		E4B90464246FE465008025FA /* NearBy.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				E4B90465246FE465008025FA /* Base */,
-			);
-			name = NearBy.storyboard;
-			sourceTree = "<group>";
-		};
-		E4B90469246FE4CA008025FA /* MyFollow.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				E4B9046A246FE4CA008025FA /* Base */,
-			);
-			name = MyFollow.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		E4B9040A246D3ED9008025FA /* Debug */ = {
@@ -668,7 +609,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -721,7 +662,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				OTHER_LDFLAGS = "";
@@ -738,9 +679,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = VB27T8S5Y8;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = YG56WXQ497;
 				ENABLE_BITCODE = NO;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -749,7 +692,7 @@
 					"$(PROJECT_DIR)/RSLiveStreaming",
 				);
 				INFOPLIST_FILE = RSLiveStreaming/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -762,9 +705,10 @@
 					"-framework",
 					"\"ImageIO\"",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ron.RSLive;
+				PRODUCT_BUNDLE_IDENTIFIER = com.global.ztmslg.ios;
 				PRODUCT_NAME = RSLive;
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = ztmslg_develop_251126;
 				SWIFT_OBJC_BRIDGING_HEADER = "RSLiveStreaming/RSLiveStreaming-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -779,9 +723,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = VB27T8S5Y8;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = YG56WXQ497;
 				ENABLE_BITCODE = NO;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -790,7 +736,7 @@
 					"$(PROJECT_DIR)/RSLiveStreaming",
 				);
 				INFOPLIST_FILE = RSLiveStreaming/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -803,9 +749,10 @@
 					"-framework",
 					"\"ImageIO\"",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ron.RSLive;
+				PRODUCT_BUNDLE_IDENTIFIER = com.global.ztmslg.ios;
 				PRODUCT_NAME = RSLive;
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = ztmslg_develop_251126;
 				SWIFT_OBJC_BRIDGING_HEADER = "RSLiveStreaming/RSLiveStreaming-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

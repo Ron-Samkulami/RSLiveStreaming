@@ -2,81 +2,114 @@
 //  headerView1st.m
 //  RSLiveStreaming
 //
-//  Created by Ron_Samkulami on 2020/6/1.
-//  Copyright © 2020 Ron_Samkulami. All rights reserved.
-//
 
-#define btnMargin 10
-#define superViewW [UIScreen mainScreen].bounds.size.width
 #import "headerView1st.h"
 
+static const CGFloat kBtnMargin = 10;
+
 @interface headerView1st ()
-@property (weak, nonatomic) IBOutlet UIButton *musicBtn;
-@property (weak, nonatomic) IBOutlet UIButton *shoppingBtn;
-@property (weak, nonatomic) IBOutlet UIButton *partyBtn;
-@property (weak, nonatomic) IBOutlet UIButton *funBtn;
-@property (weak, nonatomic) IBOutlet UIButton *moreBtn;
-
-@property (weak, nonatomic) IBOutlet UILabel *musicLabel;
-@property (weak, nonatomic) IBOutlet UILabel *shoppingLabel;
-@property (weak, nonatomic) IBOutlet UILabel *partyLabel;
-@property (weak, nonatomic) IBOutlet UILabel *funLabel;
-@property (weak, nonatomic) IBOutlet UILabel *moreChannelLabel;
-
-
-
+@property (nonatomic, copy) NSArray<UIButton *> *actionButtons;
+@property (nonatomic, copy) NSArray<UILabel *> *titleLabels;
 @end
-
 
 @implementation headerView1st
 
-- (IBAction)musicClicked:(id)sender {
+- (instancetype)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
+    if (self) {
+        [self rs_installSubviews];
+    }
+    return self;
+}
+
+- (instancetype)initWithCoder:(NSCoder *)coder {
+    self = [super initWithCoder:coder];
+    if (self) {
+        [self rs_installSubviews];
+    }
+    return self;
+}
+
+- (void)rs_installSubviews {
+    if (self.actionButtons.count > 0) {
+        return;
+    }
+    NSArray<NSString *> *images = @[@"microphone", @"shoppingCar", @"heart&+", @"people", @"collectionView"];
+    NSArray<NSString *> *titles = @[@"音乐", @"嗨购", @"派对", @"童趣大作战", @"更多频道"];
+    NSMutableArray<UIButton *> *btns = [NSMutableArray arrayWithCapacity:5];
+    NSMutableArray<UILabel *> *labs = [NSMutableArray arrayWithCapacity:5];
+    SEL actions[] = {
+        @selector(musicClicked),
+        @selector(shoppingClicked),
+        @selector(partyClicked),
+        @selector(funClicked),
+        @selector(moreChannelClicked),
+    };
+    for (NSInteger i = 0; i < 5; i++) {
+        UIButton *b = [UIButton buttonWithType:UIButtonTypeCustom];
+        [b setImage:[UIImage imageNamed:images[i]] forState:UIControlStateNormal];
+        b.imageView.contentMode = UIViewContentModeScaleAspectFit;
+        [b addTarget:self action:actions[i] forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:b];
+        [btns addObject:b];
+
+        UILabel *l = [[UILabel alloc] init];
+        l.text = titles[i];
+        l.font = [UIFont systemFontOfSize:12];
+        l.textColor = [UIColor colorWithWhite:0.6666666667 alpha:1];
+        l.textAlignment = NSTextAlignmentCenter;
+        l.numberOfLines = 1;
+        l.adjustsFontSizeToFitWidth = YES;
+        l.minimumScaleFactor = 0.8;
+        [self addSubview:l];
+        [labs addObject:l];
+    }
+    self.actionButtons = btns;
+    self.titleLabels = labs;
+}
+
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    CGFloat w = CGRectGetWidth(self.bounds);
+    if (w < 1 || self.actionButtons.count != 5) {
+        return;
+    }
+    CGFloat btnW = (w - kBtnMargin * 6) / 5.0;
+    for (NSInteger i = 0; i < 5; i++) {
+        CGFloat x = kBtnMargin + (btnW + kBtnMargin) * i;
+        self.actionButtons[i].frame = CGRectMake(x, 10, btnW, 44);
+        self.titleLabels[i].frame = CGRectMake(x, 54, btnW, 22);
+    }
+}
+
+- (void)musicClicked {
     if ([self.delegate respondsToSelector:@selector(pushMusicView)]) {
         [self.delegate pushMusicView];
     }
 }
 
-- (IBAction)shoppingClicked:(id)sender {
+- (void)shoppingClicked {
     if ([self.delegate respondsToSelector:@selector(pushShoppingView)]) {
         [self.delegate pushShoppingView];
     }
 }
-- (IBAction)partyClicked:(id)sender {
+
+- (void)partyClicked {
     if ([self.delegate respondsToSelector:@selector(pushPartyView)]) {
         [self.delegate pushPartyView];
     }
 }
-- (IBAction)funClicked:(id)sender {
+
+- (void)funClicked {
     if ([self.delegate respondsToSelector:@selector(pushFunView)]) {
         [self.delegate pushFunView];
     }
 }
-- (IBAction)moreChannelClicked:(id)sender {
+
+- (void)moreChannelClicked {
     if ([self.delegate respondsToSelector:@selector(pushMoreChannelView)]) {
         [self.delegate pushMoreChannelView];
     }
 }
-
-
-- (void)awakeFromNib {
-    [super awakeFromNib];
-    // Initialization code
-    CGFloat btnWidth = (superViewW - btnMargin * 6) / 5;
-    self.musicBtn.frame = CGRectMake(btnMargin, 10, btnWidth, 50);
-    self.shoppingBtn.frame = CGRectMake(btnMargin + (btnWidth + btnMargin) * 1, 10, btnWidth, 50);
-    self.partyBtn.frame = CGRectMake(btnMargin + (btnWidth + btnMargin) * 2, 10, btnWidth, 50);
-    self.funBtn.frame = CGRectMake(btnMargin + (btnWidth + btnMargin) * 3, 10, btnWidth, 50);
-    self.moreBtn.frame = CGRectMake(btnMargin + (btnWidth + btnMargin) * 4, 10, btnWidth, 50);
-    
-    self.musicLabel.frame = CGRectMake(btnMargin, 40, btnWidth, 50);
-    self.shoppingLabel.frame = CGRectMake(btnMargin + (btnWidth + btnMargin) * 1, 40, btnWidth, 50);
-    self.partyLabel.frame = CGRectMake(btnMargin + (btnWidth + btnMargin) * 2, 40, btnWidth, 50);
-    self.funLabel.frame = CGRectMake(btnMargin + (btnWidth + btnMargin) * 3, 40, btnWidth, 50);
-    self.moreChannelLabel.frame = CGRectMake(btnMargin + (btnWidth + btnMargin) * 4, 40, btnWidth, 50);
-    
-    
-}
-
-
 
 @end

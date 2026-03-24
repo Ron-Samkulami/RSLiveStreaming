@@ -20,25 +20,19 @@
 @property (nonatomic,strong) PageTitleView *pageTitleView;
 @property (nonatomic,strong) PageContentView *contentView;
 
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *startLiveBtn;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *searchBtn;
-
 @end
 
 @implementation LiveStreamingViewController
-- (IBAction)searchAnchor:(id)sender {
+- (void)searchAnchor:(id)sender {
     NSLog(@"查找主播");
 }
 
-- (IBAction)startLive:(id)sender {
+- (void)startLive:(id)sender {
     NSLog(@"开启直播");
     AVCaptreViewController *newView = [[AVCaptreViewController alloc] init];
     newView.view.backgroundColor = [UIColor blueColor];
-
-    
-    self.tabBarController.tabBar.hidden = YES;
+    newView.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:newView animated:YES];
-    
 }
 
 
@@ -53,10 +47,14 @@
     UIBarButtonItem *titleItem = [[UIBarButtonItem alloc] initWithCustomView:self.pageTitleView];
     self.navigationItem.leftBarButtonItem = titleItem;
     [self.navigationController.navigationBar setShadowImage:[UIImage new]];     // hide the separater below navigationBar
-    
-    //rightBarbuttonItem
-    self.searchBtn.tintColor = kHighlightColor;
-    self.startLiveBtn.tintColor = kHighlightColor;
+
+    UIImage *searchImg = [UIImage imageNamed:@"search"];
+    UIImage *startImg = [UIImage imageNamed:@"startLive"];
+    UIBarButtonItem *searchItem = [[UIBarButtonItem alloc] initWithImage:searchImg style:UIBarButtonItemStylePlain target:self action:@selector(searchAnchor:)];
+    UIBarButtonItem *startItem = [[UIBarButtonItem alloc] initWithImage:startImg style:UIBarButtonItemStylePlain target:self action:@selector(startLive:)];
+    self.navigationItem.rightBarButtonItems = @[startItem, searchItem];
+    searchItem.tintColor = kHighlightColor;
+    startItem.tintColor = kHighlightColor;
 
     //set contentView
     CGFloat contentH = kScreenH - kNavBarHeight - kTabBarHeight - kBottomSafeHeight;

@@ -2,96 +2,75 @@
 //  MainPageTableVC.m
 //  RSLiveStreaming
 //
-//  Created by Ron_Samkulami on 2020/6/4.
-//  Copyright © 2020 Ron_Samkulami. All rights reserved.
-//
 
 #import "MainPageTableVC.h"
 
 @interface MainPageTableVC ()
-
+@property (nonatomic, copy) NSArray<NSArray<NSDictionary *> *> *menuData;
 @end
 
 @implementation MainPageTableVC
 
+- (instancetype)init {
+    return [self initWithStyle:UITableViewStylePlain];
+}
+
+- (instancetype)initWithStyle:(UITableViewStyle)style {
+    self = [super initWithStyle:style];
+    if (self) {
+        _menuData = @[
+            @[
+                @{@"title": @"我的勋章", @"sys": @"tag"},
+                @{@"title": @"礼物贡献榜", @"sys": @"doc.text"},
+                @{@"title": @"我的特权", @"sys": @"bookmark"},
+                @{@"title": @"我的背包", @"sys": @"bag"},
+                @{@"title": @"购物助手", @"sys": @"cart"},
+            ],
+            @[
+                @{@"title": @"派对房间", @"asset": @"collectionView"},
+                @{@"title": @"主播中心", @"asset": @"me"},
+            ]
+        ];
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-
-    
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    self.tableView.tableFooterView = [[UIView alloc] init];
 }
 
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    return (NSInteger)self.menuData.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (section == 0) {
-        return 5;
-    } else {
-        return 2;
+    return (NSInteger)self.menuData[section].count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *ID = @"mainMenuCell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ID];
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
+    NSDictionary *item = self.menuData[indexPath.section][indexPath.row];
+    cell.textLabel.text = item[@"title"];
+    NSString *sys = item[@"sys"];
+    if (sys) {
+        cell.imageView.image = [UIImage systemImageNamed:sys];
+    } else {
+        cell.imageView.image = [UIImage imageNamed:item[@"asset"]];
+    }
+    return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 0) {
-        NSLog(@"点击了第一组");
-    }
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
-/*
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
-    
-    // Configure the cell...
-    
-    return cell;
-}
-*/
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

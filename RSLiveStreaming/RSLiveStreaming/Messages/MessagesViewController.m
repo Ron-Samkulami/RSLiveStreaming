@@ -23,7 +23,9 @@
     UILabel *titleView = [self labelWithFrame:CGRectMake(0, 0, 80, 44) andText:@"消息"];
     UIBarButtonItem *titleItem = [[UIBarButtonItem alloc] initWithCustomView:titleView];
     self.navigationItem.leftBarButtonItem = titleItem;
-    
+    UIBarButtonItem *contactsItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"me"] style:UIBarButtonItemStylePlain target:self action:@selector(showContacts:)];
+    self.navigationItem.rightBarButtonItem = contactsItem;
+
     //覆盖navigationBar的分割线，并使navigationBar的背景显示为白色
     [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
     [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
@@ -79,25 +81,18 @@
     UIViewController *newView = [[UIViewController alloc] init];
     newView.view.backgroundColor = [UIColor whiteColor];
     newView.title = @"来自妲己的互动消息";
-    self.tabBarController.tabBar.hidden = YES;
+    newView.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:newView animated:YES];
 }
 
 #pragma mark - Action
 
-- (IBAction)showContacts:(id)sender {
+- (void)showContacts:(id)sender {
     UIViewController *newView = [[UIViewController alloc] init];
     newView.view.backgroundColor = [UIColor whiteColor];
     newView.title = @"好友";
-    
+    newView.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:newView animated:YES];
-    self.tabBarController.tabBar.hidden = YES;
-}
-
-#pragma mark - LifeCircle
-- (void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    self.tabBarController.tabBar.hidden = NO;
 }
 
 @end
